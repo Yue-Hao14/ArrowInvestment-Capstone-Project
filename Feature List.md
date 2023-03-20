@@ -49,12 +49,12 @@
 * Logged in user can see their transaction history
 
 
-## 6. Bonus: Financial News (partial CRUD)
+## 7. Bonus: Financial News (partial CRUD)
 
 * User can see overall financial news in their portfolio page
 * Logged in user can see specific stock related news on each stock detail page
 
 
-## 7. Bonus: AI chat bot (partial CRUD)
+## 8. Bonus: AI chat bot (partial CRUD)
 
 * User can ask questions to chatbot

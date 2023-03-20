@@ -39,4 +39,59 @@
       * So that I can easily log out to keep my information secure.
 
 
-## 
+## Watchlist
+
+### Create a watchlist
+
+* As a logged in user, I want to be able to create a watchlist on '/dashboard' page
+  * When I'm on the '/dashboard' page:
+    * I would like to be able to easily create a new watchlist with a "+" icon
+    * I would name my new watchlist
+    * Once the form is submitted, I should see a new watchlist
+
+### Read a watchlist
+
+* As a logged in user, I want to be able to see all my watchlists on '/dashboard' page
+  * When I'm on the '/dashboard' page:
+    * I would like to see all of my watchlist(s) and stocks in it
+    * The stock will show its current price and daily % change
+
+### Update a watchlist
+
+* As a logged in user, I want to be able to add or remove stocks from any of my watchlist on '/stocks/:ticker' page
+  * When I'm on the '/stocks/:ticker' page:
+    * I would like to have a "Add to Lists" button
+    * Once I click on the button, a modal with all of my watchlists will show up so I can select which watchlist to add this stock to. A "Save Changes" button will allow me to finish adding this stock to certain watchlist(s)
+    * The "Add to Lists" button also works for removing a stock from watchlist by de-select certain watchlist on the modal and save changes
+    * Once changes are saved, watchlist will properly reflect recent changes
+
+### Delete a watchlist
+
+* As a logged in user, I want to be able to delete a watchlist on '/dashboard' page
+  * When I'm on the '/dashboard' page:
+    * I can click on "..." button next to each watchlist and a drop down menu will show up with a "Delete List" button
+    * When I click on "Delete List" button, a modal with confirmaiton message will show up and a "Delete" button
+    * Once the delete is confirmed, watchlist section will reflect the change accordingly
+
+
+## Asset/Stock
+
+### Read a stock
+
+* As a logged in user, I want to be able to view details of a stock on '/stocks/:ticker' page
+  * When I'm on the '/stocks/:ticker' page:
+    * I want to be able to see stock's current price, daily change in dollar and in percentage, a chart shows 1D, 1W, 1M, 3M, 1Y, 5Y price change view, about section, and key statistics of the company
+
+### Buy a stock
+
+* As a logged in user, I want to be able to buy the stock on '/stocks/:ticker' page
+  * When I'm on the '/stocks/:ticker' page:
+    * I want to be able to do a market order by inputting # of shares I want to purchase. An estimation of total cost will show up. Then I can buy stock by clicking on "purchase stock" button
+    * Once the purchase is done, my portfolio will be updated accordingly
+
+### Sell a stock
+
+* As a logged in user, I want to be able to sell the stock on '/stocks/:ticker' page
+  * When I'm on the '/stocks/:ticker' page:
+    * I want to be able to do a market order by inputting # of shares I want to sell. An estimation of total cost will show up. Then I can sell stock by clicking on "sell stock" button
+    * Once the sell is done, my portfolio will be updated accordingly
