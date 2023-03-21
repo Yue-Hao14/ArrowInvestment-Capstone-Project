@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     watchlists = db.relationship("Watchlist", back_populates="user")
     transactions = db.relationship("Transaction", back_populates="user")
     portfolios = db.relationship("Portfolio", back_populates="user")
+    cash_transfers = db.relationship("CashTransfer", back_populates="user")
 
     @property
     def password(self):
