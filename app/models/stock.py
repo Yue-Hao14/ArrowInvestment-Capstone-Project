@@ -10,6 +10,8 @@ class Stock(db.Model):
     ticker = db.Column(db.String(40), nullable=False, unique=True)
     company_name = db.Column(db.String(255), nullable=False)
 
+    transactions = db.relationship("Transaction", back_populates="stock")
+
     def to_dict(self):
         return {
             "id": self.id,
