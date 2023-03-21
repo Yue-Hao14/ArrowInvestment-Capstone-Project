@@ -32,12 +32,11 @@
 * Logged in user can delete any sub portfolio
 
 
-## 4. Note on Stock (full CRUD)
+## 4. Cash Transfer (full/partial CRUD)
+* Logged in user can create a cash balance
+* Logged in user can view their cash balance on either their profile page or their portfolio/dashboard page
+* Logged in user can update their cash balance by deposit or withdraw their money
 
-* Add a note
-* See your own notes
-* Update your notes
-* Delete your notes
 
 ## 5. Bonus: Asset/Stock Search (partial CRUD)
 
@@ -58,3 +57,11 @@
 ## 8. Bonus: AI chat bot (partial CRUD)
 
 * User can ask questions to chatbot
+
+
+## 9. Note on Stock (full CRUD)
+
+* Add a note
+* See your own notes
+* Update your notes
+* Delete your notes
