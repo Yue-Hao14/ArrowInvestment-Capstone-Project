@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: d9f1cf36fcc3
-Revises:
-Create Date: 2023-03-21 14:50:27.989994
+Revision ID: cea4e65fdd0e
+Revises: 
+Create Date: 2023-03-21 15:53:49.581199
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'd9f1cf36fcc3'
+revision = 'cea4e65fdd0e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,11 +48,11 @@ def upgrade():
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('stock_id', sa.String(), nullable=False),
+    sa.Column('stock_ticker', sa.String(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('settled_price', sa.Float(), nullable=False),
     sa.Column('date', sa.Date(), nullable=False),
-    sa.ForeignKeyConstraint(['stock_id'], ['stocks.ticker'], ),
+    sa.ForeignKeyConstraint(['stock_ticker'], ['stocks.ticker'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -80,10 +77,10 @@ def upgrade():
     op.create_table('portfolio_stocks',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('portfolio_id', sa.Integer(), nullable=False),
-    sa.Column('stock_id', sa.String(), nullable=False),
+    sa.Column('stock_ticker', sa.String(), nullable=False),
     sa.Column('quantity', sa.Float(), nullable=False),
     sa.ForeignKeyConstraint(['portfolio_id'], ['portfolios.id'], ),
-    sa.ForeignKeyConstraint(['stock_id'], ['stocks.ticker'], ),
+    sa.ForeignKeyConstraint(['stock_ticker'], ['stocks.ticker'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('portfolio_values',
@@ -96,22 +93,10 @@ def upgrade():
     )
     op.create_table('watchlist_stocks',
     sa.Column('watchlist_id', sa.Integer(), nullable=True),
-    sa.Column('stock_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['stock_id'], ['stocks.ticker'], ),
+    sa.Column('stock_ticker', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['stock_ticker'], ['stocks.ticker'], ),
     sa.ForeignKeyConstraint(['watchlist_id'], ['watchlists.id'], )
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE stocks SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE portfolios SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE watchlists SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE cash_transfers SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE portfolio_stocks SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE portfolio_values SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE watchlist_stocks SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 

@@ -8,7 +8,7 @@ class PortfolioStock(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     portfolio_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("portfolios.id")), nullable=False)
-    stock_id = db.Column(db.String, db.ForeignKey(add_prefix_for_prod("stocks.ticker")), nullable=False)
+    stock_ticker = db.Column(db.String, db.ForeignKey(add_prefix_for_prod("stocks.ticker")), nullable=False)
     quantity = db.Column(db.Float, nullable=False)
 
     portfolio = db.relationship('Portfolio', back_populates="stocks")
