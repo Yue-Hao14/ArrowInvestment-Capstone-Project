@@ -45,7 +45,7 @@
 
 ## 6. Bonus: Transaction History (partial CRUD)
 
-* Logged in user can see their transaction history
+* Logged in user can see their transaction history including buy/sell stocks and cash transfers
 
 
 ## 7. Bonus: Financial News (partial CRUD)
