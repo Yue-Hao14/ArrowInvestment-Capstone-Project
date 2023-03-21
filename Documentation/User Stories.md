@@ -80,7 +80,7 @@
 
 * As a logged in user, I want to be able to view details of a stock on '/stocks/:ticker' page
   * When I'm on the '/stocks/:ticker' page:
-    * I want to be able to see stock's current price, daily change in dollar and in percentage, a chart shows 1D, 1W, 1M, 3M, 1Y, 5Y price change view, about section, and key statistics of the company
+    * I want to be able to see stock's current price, daily change in dollar and in percentage, a chart shows 1D, 1W, 1M, 3M, 1Y, 5Y price change views
 
 ### Buy a stock
 
