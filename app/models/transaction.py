@@ -9,7 +9,7 @@ class Transaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("stocks.ticker")), nullable=False)
+    stock_id = db.Column(db.String, db.ForeignKey(add_prefix_for_prod("stocks.ticker")), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     date = db.Column(db.Date, default=datetime.now(tz=None), nullable=False)
