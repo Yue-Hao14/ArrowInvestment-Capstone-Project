@@ -10,7 +10,7 @@ class Portfolio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     portfolio_name = db.Column(db.String, nullable=False)
     sub_portfolio = db.Column(db.Boolean, nullable=False)
-    eod_gain_loss = db.Column(db.Float, nullable=False)
+    eod_gain_loss = db.Column(db.Float, default=0.00, nullable=False)
 
     user = db.relationship("User", back_populates="portfolios")
     values = db.relationship("PortfolioValue", back_populates="portfolio")

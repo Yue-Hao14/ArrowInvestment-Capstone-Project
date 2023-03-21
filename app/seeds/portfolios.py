@@ -4,9 +4,28 @@ from sqlalchemy.sql import text
 # seed watchlists data
 
 def seed_portfolios():
-    Demo
+    demo_portfolio = Portfolio(
+        user_id = 1,
+        portfolio_name = 'Overall',
+        sub_portfolio=False,
+    )
+    john_portfolio = Portfolio(
+        user_id = 2,
+        portfolio_name = 'Overall',
+        sub_portfolio=False,
+    )
+    jane_portfolio = Portfolio(
+        user_id = 3,
+        portfolio_name = 'Overall',
+        sub_portfolio=False,
+    )
+    yue_portfolio = Portfolio(
+        user_id = 4,
+        portfolio_name = 'Overall',
+        sub_portfolio=False,
+    )
 
-    db.session.add_all([])
+    db.session.add_all([demo_portfolio,john_portfolio,jane_portfolio, yue_portfolio])
     db.session.commit()
 
 
