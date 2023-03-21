@@ -14,6 +14,7 @@ class Portfolio(db.Model):
 
     user = db.relationship("User", back_populates="portfolios")
     values = db.relationship("PortfolioValue", back_populates="portfolio")
+    stocks = db.relationship("PortfolioStock", back_populates="portfolio")
 
     def to_dict(self):
         return {

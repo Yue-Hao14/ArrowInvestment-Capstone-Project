@@ -11,6 +11,7 @@ class Stock(db.Model):
     company_name = db.Column(db.String(255), nullable=False)
 
     transactions = db.relationship("Transaction", back_populates="stock")
+    portfolios = db.relationship("PortfolioStock", back_populates="stock")
 
     def to_dict(self):
         return {
