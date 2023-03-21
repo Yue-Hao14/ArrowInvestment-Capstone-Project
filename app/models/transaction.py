@@ -12,6 +12,7 @@ class Transaction(db.Model):
     stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("stocks.id")), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     settled_price = db.Column(db.Float, nullable=False)
+    type = db.Column(db.String, nullable=False)
     date = db.Column(db.Date, default=datetime.now(tz=None), nullable=False)
 
     user = db.relationship("User", back_populates="transactions")
