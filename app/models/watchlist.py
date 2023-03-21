@@ -12,7 +12,7 @@ class Watchlist(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
 
     user = db.relationship("User", back_populates="watchlists")
-    stocks = db.relationship("Watchlists", secondary=watchlist_stocks, back_populates="watchlists")
+    stocks = db.relationship("Stock", secondary=watchlist_stocks, back_populates="watchlists")
 
     def to_dict(self):
         return {

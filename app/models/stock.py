@@ -13,7 +13,7 @@ class Stock(db.Model):
 
     transactions = db.relationship("Transaction", back_populates="stock")
     portfolios = db.relationship("PortfolioStock", back_populates="stock")
-    watchlists = db.relationship("Stock", secondary=watchlist_stocks, back_populates="stocks")
+    watchlists = db.relationship("Watchlist", secondary=watchlist_stocks, back_populates="stocks")
 
     def to_dict(self):
         return {

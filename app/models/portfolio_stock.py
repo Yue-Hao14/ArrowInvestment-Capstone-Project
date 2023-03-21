@@ -12,7 +12,7 @@ class PortfolioStock(db.Model):
     quantity = db.Column(db.Float, nullable=False)
 
     portfolio = db.relationship('Portfolio', back_populates="stocks")
-    stock = db.relationship('Portfolio', back_populates="portfolios")
+    stock = db.relationship('Stock', back_populates="portfolios")
 
     def to_dict(self):
         return {
