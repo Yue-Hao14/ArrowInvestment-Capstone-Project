@@ -4,16 +4,27 @@ from sqlalchemy.sql import text
 # seed transactions data
 
 def seed_transactions():
-    transaction_1 = Transaction(
-        user_id = 1,
-        stock_id = 1,
-        quantity = 20,
-        settled_price = 125.02
-        date = '2023-01-05'
-    )
-    
+    transactions = [
+        {'user_id': 1, 'stock_id': 3, 'quantity': 30, 'settled_price': 120.95, 'type': 'buy',},
+        {'user_id': 1, 'stock_id': 1, 'quantity': 20, 'settled_price': 125.02, 'type': 'buy',},
+        {'user_id': 1, 'stock_id': 2, 'quantity': 10, 'settled_price': 188.77, 'type': 'buy', },
+        {'user_id': 1, 'stock_id': 1, 'quantity': -5, 'settled_price': 145.31, 'type': 'sell',},
+        {'user_id': 1, 'stock_id': 4, 'quantity': 5, 'settled_price': 305.79, 'type': 'buy'},
+        {'user_id': 4, 'stock_id': 24, 'quantity': 18, 'settled_price': 38.41, 'type': 'buy', },
+        {'user_id': 4, 'stock_id': 9, 'quantity': 15, 'settled_price': 94.71, 'type': 'buy', },
+        {'user_id': 4, 'stock_id': 24, 'quantity': -10, 'settled_price': 35.62, 'type': 'sell', },
+        {'user_id': 4, 'stock_id': 9, 'quantity': -5, 'settled_price': 115.19, 'type': 'sell', },
+    ]
 
-    db.session.add_all([])
+    for transaction in transactions:
+        db.session.add(Transaction(
+            user_id = transaction['user_id'],
+            stock_id = transaction['stock_id'],
+            quantity = transaction['quantity'],
+            settled_price = transaction['settled_price'],
+            type = transaction['type'],
+        ))
+
     db.session.commit()
 
 

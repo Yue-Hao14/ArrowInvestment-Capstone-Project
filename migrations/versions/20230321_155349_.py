@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: cea4e65fdd0e
-Revises: 
+Revises:
 Create Date: 2023-03-21 15:53:49.581199
 
 """
@@ -48,11 +48,12 @@ def upgrade():
     op.create_table('transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('stock_ticker', sa.String(), nullable=False),
+    sa.Column('stock_id', sa.String(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('settled_price', sa.Float(), nullable=False),
+    sa.Column('type', sa.String(),nullable=False),
     sa.Column('date', sa.Date(), nullable=False),
-    sa.ForeignKeyConstraint(['stock_ticker'], ['stocks.ticker'], ),
+    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
