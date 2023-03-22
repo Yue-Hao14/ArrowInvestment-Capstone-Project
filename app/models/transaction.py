@@ -9,7 +9,7 @@ class Transaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("stocks.id")), nullable=False)
+    stock_ticker = db.Column(db.String, db.ForeignKey(add_prefix_for_prod("stocks.ticker")), nullable=False)
     portfolio_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("portfolios.id")), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     settled_price = db.Column(db.Float, nullable=False)
@@ -24,10 +24,10 @@ class Transaction(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "stock_id": self.stock_id,
+            "stock_ticker": self.stock_ticker,
             "quantity": self.quantity,
-            "price": self.price,
+            "settled_price": self.settled_price,
             "date": self.date,
-            "user": self.user.to_dict(),
-            "stock": self.stock.to_dict(),
+            # "user": self.user.to_dict(),
+            # "stock": self.stock.to_dict(),
         }

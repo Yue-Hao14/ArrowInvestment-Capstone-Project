@@ -19,5 +19,5 @@ class Watchlist(db.Model):
             "id": self.id,
             "list_name": self.list_name,
             "user_id": self.user_id,
-            "user": self.user.to_dict()
+            "stocks": [stock.to_dict() for stock in self.stocks]
         }
