@@ -8,6 +8,9 @@ Create Date: 2023-03-21 15:53:49.581199
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
 revision = 'cea4e65fdd0e'
@@ -94,10 +97,22 @@ def upgrade():
     )
     op.create_table('watchlist_stocks',
     sa.Column('watchlist_id', sa.Integer(), nullable=True),
-    sa.Column('stock_ticker', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['stock_ticker'], ['stocks.ticker'], ),
+    sa.Column('stock_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
     sa.ForeignKeyConstraint(['watchlist_id'], ['watchlists.id'], )
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE stocks SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE portfolios SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE transactions SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE watchlists SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE cash_transfers SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE portfolio_stocks SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE portfolio_values SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
