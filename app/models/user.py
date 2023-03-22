@@ -37,7 +37,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'watchlists': self.watchlists.to_dict(),
-            'transactions': self.transactions.to_dict(),
-            'portfolios': self.portfolios.to_dict(),
+            # 'watchlists': self.watchlists.to_dict(),
+            # 'transactions': self.transactions.to_dict(),
+            # 'portfolios': self.portfolios.to_dict(),
         }
