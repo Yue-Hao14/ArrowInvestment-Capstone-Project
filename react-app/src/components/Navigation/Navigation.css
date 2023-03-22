@@ -5,3 +5,26 @@
 .hidden {
   display: none;
 }
+
+.navigation-container {
+  /* position:fixed; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  margin-top: 0px;
+}
+
+.navlogo {
+  margin-left: 0.5rem
+}
+
+.navigation-logo {
+  color: #53cfa2;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  /* margin-top: 18px; */
+}

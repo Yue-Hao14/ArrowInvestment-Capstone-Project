@@ -14,7 +14,7 @@ def get_all_watchlists_names():
     return logged in users' watchlists
     and their corresponding stocks within each watchlist
     """
-    return {'watchlists': [watchlist.to_dict() for watchlist in current_user.watchlists]}
+    return [watchlist.to_dict() for watchlist in current_user.watchlists]
 
 
 @watchlist_routes.route('/', methods=['POST'])
@@ -37,7 +37,7 @@ def add_watchlist():
 
         db.session.add(new_watchlist)
         db.session.commit()
-        return {'watchlists': [watchlist.to_dict() for watchlist in current_user.watchlists]}
+        return [watchlist.to_dict() for watchlist in current_user.watchlists]
     else:
         # return error
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -57,9 +57,9 @@ def add_stock_to_watchlist():
     ticker = data['ticker']
     # check if this stock already exists in this watchlist
     stocks_in_watchlist = Watchlist.query.get(watchlist_id).stocks  # an array of stocks object
-    print("----------stocks_in_watchlist-----------------", stocks_in_watchlist)
+    # print("----------stocks_in_watchlist-----------------", stocks_in_watchlist)
     stock = Stock.query.get(ticker)
-    print("-------------stock--------------", stock)
+    # print("-------------stock--------------", stock)
 
     if stock in stocks_in_watchlist:
         return {"errors": ["This stock already exists in this watchlist"]}, 401
@@ -68,7 +68,7 @@ def add_stock_to_watchlist():
         watchlist = Watchlist.query.get(watchlist_id)
         watchlist.stocks.append(stock)
         db.session.commit()
-        return {'watchlists': [watchlist.to_dict() for watchlist in current_user.watchlists]}
+        return [watchlist.to_dict() for watchlist in current_user.watchlists]
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -89,7 +89,7 @@ def remove_stock_from_watchlist(id, ticker):
     else:
         watchlist.stocks.remove(stock)
         db.session.commit()
-        return {'watchlists': [watchlist.to_dict() for watchlist in current_user.watchlists]}
+        return [watchlist.to_dict() for watchlist in current_user.watchlists]
 
 
 @watchlist_routes.route('/<int:id>', methods=['DELETE'])
@@ -106,4 +106,4 @@ def remove_watchlist(id):
     else:
         db.session.delete(watchlist)
         db.session.commit()
-        return {'watchlists': [watchlist.to_dict() for watchlist in current_user.watchlists]}
+        return [watchlist.to_dict() for watchlist in current_user.watchlists]
