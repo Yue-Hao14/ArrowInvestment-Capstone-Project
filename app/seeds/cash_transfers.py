@@ -1,18 +1,47 @@
 from app.models import db, CashTransfer, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import datetime
 
 
 # seed cash_transfers data
 def seed_cash_transfers():
     cash_transfer_1 = CashTransfer(
-        user_id = ,
-        portfolio_id = ,
-        type = ,
-        amount = ,
-        date = 
+        user_id = 1,
+        portfolio_id = 1,
+        type = 'deposit',
+        amount = 10000,
+        date = datetime(2022,5,1)
+    )
+    cash_transfer_2 = CashTransfer(
+        user_id = 2,
+        portfolio_id = 2,
+        type = 'deposit',
+        amount = 20000,
+        date = datetime(2022,10,1)
+    )
+    cash_transfer_3 = CashTransfer(
+        user_id = 3,
+        portfolio_id = 3,
+        type = 'deposit',
+        amount = 50000,
+        date = datetime(2022,12,1)
+    )
+    cash_transfer_4 = CashTransfer(
+        user_id = 4,
+        portfolio_id = 4,
+        type = 'deposit',
+        amount = 100000,
+        date = datetime(2022,4,1)
+    )
+    cash_transfer_5 = CashTransfer(
+        user_id = 1,
+        portfolio_id = 1,
+        type = 'withdraw',
+        amount = -500,
+        date = datetime(2023,3,1)
     )
 
-    db.session.add_all([demo, John_Smith,Jane_Doe,Yue_Hao])
+    db.session.add_all([cash_transfer_1, cash_transfer_2, cash_transfer_3, cash_transfer_4, cash_transfer_5])
     db.session.commit()
 
 

@@ -4,7 +4,7 @@ from .watchlists import seed_watchlists, undo_watchlists
 from .stocks import seed_stocks,undo_stocks
 from .portfolios import seed_portfolios, undo_portfolios
 from .transactions import seed_transactions, undo_transactions
-
+from .cash_transfers import seed_cash_transfers, undo_cash_transfers
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -20,6 +20,7 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        undo_cash_transfers()
         undo_transactions()
         undo_portfolios()
         undo_stocks()
@@ -30,12 +31,14 @@ def seed():
     seed_stocks()
     seed_portfolios()
     seed_transactions()
+    seed_cash_transfers()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_cash_transfers()
     undo_transactions()
     undo_portfolios()
     undo_stocks()
