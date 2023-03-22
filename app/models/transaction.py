@@ -10,6 +10,7 @@ class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     stock_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("stocks.id")), nullable=False)
+    portfolio_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("portfolios.id")), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     settled_price = db.Column(db.Float, nullable=False)
     type = db.Column(db.String, nullable=False)
@@ -17,6 +18,7 @@ class Transaction(db.Model):
 
     user = db.relationship("User", back_populates="transactions")
     stock = db.relationship("Stock", back_populates="transactions")
+    portfolio = db.relationship("Portfolio", back_populates="transactions")
 
     def to_dict(self):
         return {

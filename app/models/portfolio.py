@@ -10,11 +10,11 @@ class Portfolio(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     portfolio_name = db.Column(db.String, nullable=False)
     sub_portfolio = db.Column(db.Boolean, nullable=False)
-    eod_gain_loss = db.Column(db.Float, default=0.00, nullable=False)
 
     user = db.relationship("User", back_populates="portfolios")
-    values = db.relationship("PortfolioValue", back_populates="portfolio")
-    stocks = db.relationship("PortfolioStock", back_populates="portfolio")
+    # values = db.relationship("PortfolioValue", back_populates="portfolio")
+    # stocks = db.relationship("PortfolioStock", back_populates="portfolio")
+    transactions = db.relationship("Transaction", back_populates="portfolio")
     cash_transfers = db.relationship("CashTransfer", back_populates="portfolio")
 
     def to_dict(self):
