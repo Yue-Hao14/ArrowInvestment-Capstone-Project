@@ -4,8 +4,12 @@ from sqlalchemy.sql import text
 # seed watchlists data
 
 def seed_watchlists():
-    meme_stocks = Watchlist(
+    demo_meme_stocks = Watchlist(
         list_name = 'Meme Stocks',
+        user_id = 1
+    )
+    demo_faang_stocks = Watchlist(
+        list_name = 'FANNG Stocks',
         user_id = 1
     )
     faang_stocks = Watchlist(
@@ -21,7 +25,7 @@ def seed_watchlists():
         user_id = 4
     )
 
-    db.session.add_all([meme_stocks, faang_stocks, bank_stocks, tech_stocks])
+    db.session.add_all([demo_meme_stocks, demo_faang_stocks, faang_stocks, bank_stocks, tech_stocks])
     db.session.commit()
 
 
