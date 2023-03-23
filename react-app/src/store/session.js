@@ -1,5 +1,3 @@
-import { getAllWatchlistStocks } from "./watchlist";
-
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";

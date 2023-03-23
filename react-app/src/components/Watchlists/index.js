@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllWatchlistStocksThunk } from '../../store/watchlist';
 import WatchlistDetails from './WatchListDetails';
 import './Watchlist.css'
+import AddWatchlistModal from './AddWatchlistModal';
+import OpenModalButton from '../OpenModalButton'
 
 function Watchlists() {
   const dispatch = useDispatch()
@@ -25,6 +27,14 @@ function Watchlists() {
 
   return (
     <div className="watchlist-container">
+      <div className='watchlist-name-sign-container'>
+        <div className='watchlist-label'>Watchlists</div>
+        <OpenModalButton
+          modalComponent={<AddWatchlistModal />}
+          buttonText='+add'
+          className='fa-solid fa-user-plus'
+        />
+      </div>
       <div className='watchlist-details-container'>
         {Object.values(watchlists).map(watchlist => (
           <>
@@ -34,14 +44,13 @@ function Watchlists() {
               {watchlist.list_name}
             </div>
             <div className='watchlist-stock-details-container'>
-              {showDetailsId == watchlist.id && <WatchlistDetails watchlist={watchlist} />}
+              {showDetailsId === watchlist.id && <WatchlistDetails watchlist={watchlist} />}
             </div>
           </>
         ))
         }
       </div>
     </div>
-
   )
 }
 

@@ -1,7 +1,4 @@
 
-
-
-
 function WatchlistDetails({ watchlist }) {
   const stocksArr = watchlist.stocks
   console.log(stocksArr)
@@ -14,5 +11,4 @@ function WatchlistDetails({ watchlist }) {
     </div>
   )
 }
-
 export default WatchlistDetails
