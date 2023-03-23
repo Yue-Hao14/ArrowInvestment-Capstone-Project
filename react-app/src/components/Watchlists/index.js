@@ -31,8 +31,7 @@ function Watchlists() {
         <div className='watchlist-label'>Watchlists</div>
         <OpenModalButton
           modalComponent={<AddWatchlistModal />}
-          buttonText='+add'
-          className='fa-solid fa-user-plus'
+          buttonText={<i className="add-watchlist-button fa-sharp fa-solid fa-plus"></i>}
         />
       </div>
       <div className='watchlist-details-container'>
