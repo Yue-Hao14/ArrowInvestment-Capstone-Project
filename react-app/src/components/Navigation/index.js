@@ -3,6 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import AccountButton from './AccountButton';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
@@ -14,7 +15,7 @@ function Navigation({ isLoaded }) {
 				Arrow Investment
 				<i className="fa-solid fa-arrow-trend-up navlogo"></i>
 			</NavLink>
-			{isLoaded && (
+			{isLoaded && !sessionUser && (
 				<div className='navigation-right-container'>
 					<button
 						className='login-button'
@@ -32,6 +33,13 @@ function Navigation({ isLoaded }) {
 					</button>
 				</div>
 			)}
+			{isLoaded && sessionUser && (
+				<div className='navigation-right-container'>
+					<AccountButton user={sessionUser} />
+				</div>
+			)
+
+			}
 		</nav >
 	);
 }
