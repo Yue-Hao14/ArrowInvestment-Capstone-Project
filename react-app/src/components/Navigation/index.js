@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
 
 	return (
 		<nav className='navigation-container'>
-			<NavLink exact to='/' className='navigation-logo'>
+			<NavLink exact to='/dashboard' className='navigation-logo'>
 				Arrow Investment
 				<i className="fa-solid fa-arrow-trend-up navlogo"></i>
 			</NavLink>
