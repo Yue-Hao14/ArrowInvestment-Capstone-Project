@@ -1,21 +1,33 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
+import { addWatchlistThunk } from '../../store/watchlist';
 
 function AddWatchlistModal() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [listName, setListName] = useState('')
   const [errors, setErrors] = useState([])
+  const userId = useSelector(state => state.session.user.id)
 
   const handleSubmit = async e => {
     e.preventDefault()
-
-    
+    console.log('come into handleSubmit')
+    // pass info as a request to backend
+    const newWatchlist = { listName, userId }
+    const data = await dispatch(addWatchlistThunk(newWatchlist))
+    console.log("data in handleSubmit", data)
+    // if response from backend is good, close modal;
+    // if not show error on the modal
+    if (!data) {
+      setErrors(data)
+    } else {
+      closeModal()
+    }
   };
 
   return (
-    <form className='add-watchlist-modal-form' onsubmit={handleSubmit}>
+    <form className='add-watchlist-modal-form' onSubmit={handleSubmit}>
       <div className='add-watchlist-modal-title'>Add a Watchlist</div>
       <ul className='add-watchlist-modal-error-list'>
         {errors.map((error, idx) => (
@@ -35,7 +47,11 @@ function AddWatchlistModal() {
       >
         Cancel
       </button>
-      <button type='submit' className='add-watchlist-modal-submit-button'>Submit</button>
+      <button type='submit'
+        className='add-watchlist-modal-submit-button'
+      >
+        Add Watchlist
+      </button>
     </form>
   )
 }
