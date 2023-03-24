@@ -61,7 +61,7 @@ export const addWatchlistThunk = (watchlist) => async (dispatch) => {
 }
 
 export const addStocktoWatchlistThunk = (request) => async (dispatch) => {
-  console.log("JSON.stringify(request)", JSON.stringify(request))
+  // console.log("JSON.stringify(request)", JSON.stringify(request))
   const res = await fetch('/api/watchlists/stock', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -82,6 +82,9 @@ export const addStocktoWatchlistThunk = (request) => async (dispatch) => {
   }
 }
 
+export const removeStockFromWatchlistThunk = (watchlistId, ticker) => async (dispatch) => {
+  
+}
 
 
 // reducers

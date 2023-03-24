@@ -13,7 +13,7 @@ function Watchlists() {
   const sessionUser = useSelector(state => state.session.user)
   const [showDetailsId, setShowDetailsId] = useState(false)
 
-  // hydrate redux store
+  // hydrate redux store first
   useEffect(() => {
     dispatch(getAllWatchlistStocksThunk())
   }, [dispatch])
