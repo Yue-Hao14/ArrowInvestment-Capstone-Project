@@ -127,8 +127,16 @@ export const deleteWatchlistThunk = (watchlistId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(resetStore());
-
-
+    dispatch(deleteWatchlist(data))
+    return data
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An Error occurred. Please try again later."];
+  }
 }
 
 
@@ -159,6 +167,13 @@ export default function watchlistReducer(state = initialState, action) {
       return newState
     }
     case DELETE_STOCK_FROM_WATCHLIST: {
+      const newState = { ...state }
+      for (const watchlist of action.payload) {
+        newState[watchlist.id] = watchlist
+      }
+      return newState
+    }
+    case DELETE_WATCHLIST: {
       const newState = { ...state }
       for (const watchlist of action.payload) {
         newState[watchlist.id] = watchlist
