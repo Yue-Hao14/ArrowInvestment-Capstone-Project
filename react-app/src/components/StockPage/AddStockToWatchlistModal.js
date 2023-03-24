@@ -57,7 +57,7 @@ function AddStockToWatchlistModal({ ticker }) {
       watchlistId: selectedWatchlistArr,
       ticker
     }
-    console.log('request',request)
+    // console.log('request',request)
     const data = await dispatch(addStocktoWatchlistThunk(request))
 
     // if response from backend is good, close modal;

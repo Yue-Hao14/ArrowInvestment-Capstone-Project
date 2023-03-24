@@ -3,7 +3,8 @@
 const GET_ALL_WATCHLISTS_STOCKS = 'watchlists/GET_ALL_WATCHLISTS_STOCKS'
 const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST'
 const ADD_STOCK_TO_WATCHLISTS = 'watchlist/ADD_STOCK_TO_WATCHLISTS'
-
+const DELETE_STOCK_FROM_WATCHLIST = 'watchlist/DELETE_STOCK_FROM_WATCHLIST'
+const RESET = 'watchlist/RESET'
 
 // action creators
 export const getAllWatchlistStocks = watchlistsStocks => ({
@@ -17,8 +18,17 @@ export const addWatchlist = watchlistsStocks => ({
 })
 
 export const addStockToWatchlists = watchlistsStocks => ({
-  type: ADD_WATCHLIST,
+  type: ADD_STOCK_TO_WATCHLISTS,
   payload: watchlistsStocks
+})
+
+export const deleteStockFromWatchlist = watchlistsStocks => ({
+  type: DELETE_STOCK_FROM_WATCHLIST,
+  payload: watchlistsStocks
+})
+
+export const resetStore = () => ({
+  type: RESET
 })
 
 // thunks
@@ -83,7 +93,23 @@ export const addStocktoWatchlistThunk = (request) => async (dispatch) => {
 }
 
 export const removeStockFromWatchlistThunk = (watchlistId, ticker) => async (dispatch) => {
-  
+  const res = await fetch(`/api/watchlists/${watchlistId}/stock/${ticker}`, {
+    method: "DELETE"
+  })
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(resetStore());
+    dispatch(deleteStockFromWatchlist(data));
+    return data
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An Error occurred. Please try again later."];
+  }
 }
 
 
@@ -112,6 +138,16 @@ export default function watchlistReducer(state = initialState, action) {
         newState[watchlist.id] = watchlist
       }
       return newState
+    }
+    case DELETE_STOCK_FROM_WATCHLIST: {
+      const newState = { ...state }
+      for (const watchlist of action.payload) {
+        newState[watchlist.id] = watchlist
+      }
+      return newState
+    }
+    case RESET: {
+      return initialState;
     }
     default:
       return state

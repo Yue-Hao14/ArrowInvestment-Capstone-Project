@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getAllWatchlistStocksThunk } from "../../store/watchlist"
+import { removeStockFromWatchlistThunk } from "../../store/watchlist"
 import './WatchlistDetailsPage.css'
 
 // TO DO: need to add other stock info to each stock in stocksArr
@@ -11,7 +12,6 @@ function WatchlistDetailsPage() {
   watchlistId = Number(watchlistId)
   const watchlist = useSelector(state => state.watchlists[+watchlistId])
   let stocksArr = useSelector(state => state.watchlists[+watchlistId]?.stocks)
-  // console.log(stocksArr[0].ticker)
 
 
   // hydrate redux store with watchlists info first
@@ -21,11 +21,13 @@ function WatchlistDetailsPage() {
 
   if (!watchlist) return null
 
-  const handleDeleteStockFromWatchlist = async (e) => {
-    e.preventDefualt();
+  const handleDeleteStockFromWatchlist = async (e, watchlistId, ticker) => {
+    e.preventDefault();
 
-    
+    const data = await dispatch(removeStockFromWatchlistThunk(watchlistId, ticker))
+
   }
+  console.log(stocksArr)
 
   return (
     <div className="watchlist-details-page-container">
