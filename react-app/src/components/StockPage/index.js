@@ -9,7 +9,7 @@ function StockPage() {
   return (
     <div className="stock-page-container">
 
-      <h1>Welcome to Stock Page</h1>
+      <h1>Welcome to {ticker} Page</h1>
       <div className="stock-page-right-container">
         <div className="stock-page-right-watchlist-container">
           <OpenModalButton

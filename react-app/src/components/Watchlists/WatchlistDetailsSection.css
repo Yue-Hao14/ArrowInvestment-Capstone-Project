@@ -1,0 +1,8 @@
+.watchlist-details-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.watchlist-details-ticker {
+  text-decoration: none;
+}

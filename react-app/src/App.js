@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Watchlists from "./components/Watchlists";
 import StockPage from "./components/StockPage";
+import WatchlistDetailsPage from "./components/Watchlists/WatchlistDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" > <LoginFormPage /> </Route>
           <Route path="/signup"> <SignupFormPage /> </Route>
           <Route path="/dashboard"> <Watchlists /> </Route>
+          <Route path="/watchlists/:watchlistId"> <WatchlistDetailsPage /> </Route>
           <Route path="/stocks/:ticker"> <StockPage /> </Route>
         </Switch>
       )}

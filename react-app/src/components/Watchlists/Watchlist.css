@@ -1,3 +1,8 @@
+/* make sure NavLink's color does not change before and after click */
+a, a:visited {
+  color: inherit
+}
+
 .watchlist-container {
   position: sticky;
   border: 1px solid grey;
@@ -29,4 +34,14 @@
 
 .add-watchlist-button:hover {
   font-weight: bold;
+}
+
+.watchlist-list-name-expand-icon-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watchlist-list-name {
+  text-decoration: none;
 }
