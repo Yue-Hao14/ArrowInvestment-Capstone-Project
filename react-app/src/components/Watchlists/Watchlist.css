@@ -1,5 +1,5 @@
 /* make sure NavLink's color does not change before and after click */
-a, a:visited {
+.watchlist-container a, .watchlist-container a:visited {
   color: inherit
 }
 
