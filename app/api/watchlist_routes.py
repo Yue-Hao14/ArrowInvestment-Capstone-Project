@@ -47,31 +47,28 @@ def add_watchlist():
 @login_required
 def add_stock_to_watchlist():
     """
-    validate stock info via WTForms, add a new stock to this watchlist in db,
+    validate stock info via WTForms, add a new stock to watchlist(s) in db,
     and return current user's entire watchlists
     """
     data = request.get_json()
     form = WatchlistStockForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    watchlist_id = data['watchlistId']
+    watchlist_id_list = data['watchlistId']
     ticker = data['ticker']
-    # check if this stock already exists in this watchlist
-    stocks_in_watchlist = Watchlist.query.get(watchlist_id).stocks  # an array of stocks object
-    # print("----------stocks_in_watchlist-----------------", stocks_in_watchlist)
-    stock = Stock.query.get(ticker)
-    # print("-------------stock--------------", stock)
 
-    if stock in stocks_in_watchlist:
-        return {"errors": ["This stock already exists in this watchlist"]}, 401
+    # add stock to watchlist only if it doesn't already exists there
+    for watchlist_id in watchlist_id_list:
+        stocks_in_watchlist = Watchlist.query.get(watchlist_id).stocks  # an array of stocks object
+        # print("----------stocks_in_watchlist-----------------", stocks_in_watchlist)
+        stock = Stock.query.get(ticker)
+        # print("-------------stock--------------", stock)
 
-    if form.validate_on_submit():
-        watchlist = Watchlist.query.get(watchlist_id)
-        watchlist.stocks.append(stock)
-        db.session.commit()
-        return [watchlist.to_dict() for watchlist in current_user.watchlists]
-    else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        if stock not in stocks_in_watchlist and form.validate_on_submit():
+            watchlist = Watchlist.query.get(watchlist_id)
+            watchlist.stocks.append(stock)
+            db.session.commit()
 
+    return [watchlist.to_dict() for watchlist in current_user.watchlists]
 
 @watchlist_routes.route('/<int:id>/stock/<ticker>', methods=['DELETE'])
 @login_required

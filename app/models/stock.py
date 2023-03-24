@@ -19,3 +19,8 @@ class Stock(db.Model):
             "ticker": self.ticker,
             "company_name": self.company_name
         }
+
+    def to_dict_ticker(self):
+        return {
+            "ticker": self.ticker,
+        }

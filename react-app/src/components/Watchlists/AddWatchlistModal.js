@@ -12,11 +12,11 @@ function AddWatchlistModal() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log('come into handleSubmit')
+
     // pass info as a request to backend
     const newWatchlist = { listName, userId }
     const data = await dispatch(addWatchlistThunk(newWatchlist))
-    console.log("data in handleSubmit", data)
+
     // if response from backend is good, close modal;
     // if not show error on the modal
     if (!data) {

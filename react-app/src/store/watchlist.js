@@ -1,6 +1,8 @@
+
 // constants
 const GET_ALL_WATCHLISTS_STOCKS = 'watchlists/GET_ALL_WATCHLISTS_STOCKS'
 const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST'
+const ADD_STOCK_TO_WATCHLISTS = 'watchlist/ADD_STOCK_TO_WATCHLISTS'
 
 
 // action creators
@@ -14,6 +16,10 @@ export const addWatchlist = watchlistsStocks => ({
   payload: watchlistsStocks
 })
 
+export const addStockToWatchlists = watchlistsStocks => ({
+  type: ADD_WATCHLIST,
+  payload: watchlistsStocks
+})
 
 // thunks
 export const getAllWatchlistStocksThunk = () => async (dispatch) => {
@@ -54,6 +60,29 @@ export const addWatchlistThunk = (watchlist) => async (dispatch) => {
   }
 }
 
+export const addStocktoWatchlistThunk = (request) => async (dispatch) => {
+  console.log("JSON.stringify(request)", JSON.stringify(request))
+  const res = await fetch('/api/watchlists/stock', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(request)
+  })
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(addStockToWatchlists(data));
+    return data;
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An Error occurred. Please try again later."];
+  }
+}
+
+
 
 // reducers
 const initialState = {}
@@ -68,6 +97,13 @@ export default function watchlistReducer(state = initialState, action) {
       return newState
     }
     case ADD_WATCHLIST: {
+      const newState = { ...state }
+      for (const watchlist of action.payload) {
+        newState[watchlist.id] = watchlist
+      }
+      return newState
+    }
+    case ADD_STOCK_TO_WATCHLISTS: {
       const newState = { ...state }
       for (const watchlist of action.payload) {
         newState[watchlist.id] = watchlist
