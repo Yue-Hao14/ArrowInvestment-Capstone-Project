@@ -4,6 +4,7 @@ const GET_ALL_WATCHLISTS_STOCKS = 'watchlists/GET_ALL_WATCHLISTS_STOCKS'
 const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST'
 const ADD_STOCK_TO_WATCHLISTS = 'watchlist/ADD_STOCK_TO_WATCHLISTS'
 const DELETE_STOCK_FROM_WATCHLIST = 'watchlist/DELETE_STOCK_FROM_WATCHLIST'
+const DELETE_WATCHLIST = 'watchlist/DELETE_WATCHLIST'
 const RESET = 'watchlist/RESET'
 
 // action creators
@@ -27,9 +28,15 @@ export const deleteStockFromWatchlist = watchlistsStocks => ({
   payload: watchlistsStocks
 })
 
+export const deleteWatchlist = watchlistsStocks => ({
+  type: DELETE_WATCHLIST,
+  payload: watchlistsStocks
+})
+
 export const resetStore = () => ({
   type: RESET
 })
+
 
 // thunks
 export const getAllWatchlistStocksThunk = () => async (dispatch) => {
@@ -110,6 +117,18 @@ export const removeStockFromWatchlistThunk = (watchlistId, ticker) => async (dis
   } else {
     return ["An Error occurred. Please try again later."];
   }
+}
+
+export const deleteWatchlistThunk = (watchlistId) => async (dispatch) => {
+  const res = await fetch(`/api/watchlists/${watchlistId}`, {
+    method: "DELETE"
+  })
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(resetStore());
+
+
 }
 
 
