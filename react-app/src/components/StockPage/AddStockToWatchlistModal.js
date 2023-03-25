@@ -46,7 +46,7 @@ function AddStockToWatchlistModal({ ticker }) {
     }
 
   }
-  console.log("selectedWatchlistArr", selectedWatchlistArr)
+  // console.log("selectedWatchlistArr", selectedWatchlistArr)
 
 
   const handleSubmit = async (e) => {

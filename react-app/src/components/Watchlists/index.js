@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllWatchlistStocksThunk } from '../../store/watchlist';
 import WatchlistDetails from './WatchlistDetailsSection';
 import AddWatchlistModal from './AddWatchlistModal';
+import DeleteWatchlistModal from './DeleteWatchlistModal';
 import OpenModalButton from '../OpenModalButton'
 import './Watchlist.css'
 import { NavLink } from 'react-router-dom';
@@ -12,7 +13,7 @@ function Watchlists() {
   const watchlists = useSelector(state => state.watchlists);
   const sessionUser = useSelector(state => state.session.user);
   const [showDetailsId, setShowDetailsId] = useState(false);
-  const [showSettingId, setShowSettingsId] = useState(false);
+  const [showSettingId, setShowSettingId] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef()
 
@@ -25,13 +26,13 @@ function Watchlists() {
   // and set showSettingId equal to this specific watchlist's id
   // so then dropdown menu only show up for the watchlist being clicked
   const openMenu = (watchlist) => {
-    console.log("watchlist.id",!showMenu)
+    // console.log("watchlist.id",!showMenu)
     if (!showMenu && showSettingId !== watchlist.id) {
-      setShowSettingsId(watchlist.id)
+      setShowSettingId(watchlist.id)
       setShowMenu(true);
-      console.log(showSettingId)
+      // console.log(showSettingId)
     } else {
-      setShowSettingsId(null)
+      setShowSettingId(null)
       setShowMenu(false);
     }
   };
@@ -50,6 +51,7 @@ function Watchlists() {
   }
 
   const ulClassName = "setting-dropdown" + (showMenu ? "" : " hidden");
+  const closeMenu = () => setShowMenu(false);
 
   return (
     <div className="watchlist-container">
@@ -83,14 +85,13 @@ function Watchlists() {
                   </div>
                   {showSettingId === watchlist.id &&
                     <ul className={ulClassName} ref={ulRef}>
-                      <div
-                        className='watchlist-list-setting-delete-watchlist-icon'
-                        onClick={handleDeleteWatchlist(watchlist)}
-                        key='delete-icon'
-                      >
-                        <i className="fa-solid fa-xmark" />
-                        Delete watchlist
-                      </div>
+                      <i className="fa-solid fa-xmark" />
+                      <OpenModalButton
+                        buttonText="Delete watchlist"
+                        onItemClick={closeMenu}
+                        className="watchlist-delete-button"
+                        modalComponent={<DeleteWatchlistModal watchlist={watchlist}/>}
+                      />
                     </ul>
                   }
                   <div

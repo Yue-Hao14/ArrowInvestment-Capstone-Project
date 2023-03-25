@@ -3,6 +3,18 @@
   color: inherit
 }
 
+.setting-dropdown {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  z-index: 1;
+  flex-direction: column;
+  background-color: white;
+  width: 200px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 12px;
+}
+
 
 .hidden {
   display: none;
