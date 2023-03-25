@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { deleteWatchlistThunk } from '../../store/watchlist';
+import './DeleteWatchlistModal.css'
 
 function DeleteWatchlistModal({ watchlist }) {
   const dispatch = useDispatch();
@@ -9,10 +10,7 @@ function DeleteWatchlistModal({ watchlist }) {
 
   const handleDeleteWatchlist = async (e)=> {
     e.preventDefault()
-    console.log("here is handleDeleteWatchlist")
-
     const data = await dispatch(deleteWatchlistThunk(watchlist.id))
-
     if (data) {
       closeModal()
     }
@@ -41,7 +39,7 @@ function DeleteWatchlistModal({ watchlist }) {
       <button
             type="button"
             onClick={e => handleDeleteWatchlist(e)}
-            className="add-stock-to-watchlist-modal-exit-button"
+            className="delete-watchlist-modal-exit-button"
           >
             Delete {watchlist.list_name}
           </button>

@@ -46,9 +46,19 @@ function Watchlists() {
     }
   }
 
-  const handleDeleteWatchlist = (watchlistId) => {
+  useEffect(() => {
+    if (!showMenu) return;
 
-  }
+    const closeMenu = (e) => {
+      if (!ulRef.current?.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
 
   const ulClassName = "setting-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);

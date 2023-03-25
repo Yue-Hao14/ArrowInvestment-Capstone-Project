@@ -62,3 +62,10 @@
 .watchlist-list-name {
   text-decoration: none;
 }
+
+.setting-dropdown button {
+  text-decoration: underline;
+  background-color: white;
+  border: none;
+  font-size: 14px
+}
