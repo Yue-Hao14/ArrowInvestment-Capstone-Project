@@ -11,7 +11,6 @@ function StockPage() {
     <div className="stock-page-container">
       <h1>Welcome to {ticker} Page</h1>
       <div className='stock-page-line-chart-container'>
-        <h1>hello</h1>
         <LineChart ticker={ticker} />
       </div>
       <div className="stock-page-right-container">
