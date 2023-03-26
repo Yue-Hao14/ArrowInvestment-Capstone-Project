@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton'
 import AddStockToWatchlistModal from './AddStockToWatchlistModal'
-import LineChart from './LineChart'
+import OneDayChart from './OneDayChart'
 
 
 function StockPage() {
@@ -11,7 +11,7 @@ function StockPage() {
     <div className="stock-page-container">
       <h1>Welcome to {ticker} Page</h1>
       <div className='stock-page-line-chart-container'>
-        <LineChart ticker={ticker} />
+        <OneDayChart ticker={ticker} />
       </div>
       <div className="stock-page-right-container">
         <div className='stock-page-right-stock-buy-sell-container'>
