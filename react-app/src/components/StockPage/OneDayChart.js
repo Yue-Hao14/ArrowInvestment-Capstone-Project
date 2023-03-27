@@ -5,17 +5,18 @@ import { Line } from 'react-chartjs-2';
 
 function OneDayChart({ ticker }) {
   const [chartData, setChartData] = useState();
+  const [price, setPrice] = useState();
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 is Sunday
   const daysToSubtract = dayOfWeek === 0 ? 2
     : dayOfWeek === 6 ? 1 : 0; // if Sun, substract 2 days, if Sat, substract 1 day
-  const previousDate = new Date(today.getTime() - daysToSubtract * 24 * 60 * 60 * 1000); // latest business day
-  const year = previousDate.getFullYear();
-  const month = (previousDate.getMonth() + 1).toString().padStart(2, '0');
-  const day = previousDate.getDate().toString().padStart(2, '0');
-  const formattedDate = `${year}-${month}-${day}`;
+  const latestBusinessDate = new Date(today.getTime() - daysToSubtract * 24 * 60 * 60 * 1000); // latest business day
+  const year = latestBusinessDate.getFullYear();
+  const month = (latestBusinessDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = latestBusinessDate.getDate().toString().padStart(2, '0');
+  const formattedBusinessDate = `${year}-${month}-${day}`;
 
-  console.log("previousDate", previousDate)
+  console.log("latestBusinessDate", latestBusinessDate)
 
   // fetch stock data from AlphaVantage and plot stock data to chartJS
   useEffect(() => {
@@ -28,7 +29,7 @@ function OneDayChart({ ticker }) {
       // need to filter to get only latest business day's (today or Fri) dateTimes
       let filteredDateTimes = []
       dateTimes.forEach(label => {
-        if (label.slice(0, 10) === formattedDate) {
+        if (label.slice(0, 10) === formattedBusinessDate) {
           return filteredDateTimes.push(label)
         }
       })
@@ -47,6 +48,9 @@ function OneDayChart({ ticker }) {
       const filteredPrices = prices.slice(0, dataEndIndex)
       // console.log(typeof DateTime[0])
       // console.log(prices)
+
+      setPrice(filteredPrices[filteredPrices.length - 1])
+
 
       setChartData({
         labels: filteredDateTimes,
@@ -71,6 +75,16 @@ function OneDayChart({ ticker }) {
     fetchChartData()
   }, [])
 
+  // function to extract the stock price where mouse hovers over
+  // so we can display it above the chart
+  const handleHover = (event, active, chart) => {
+    if (active.length > 0) {
+      const dataIndex = active[0].index;
+      const datasetIndex = active[0].datasetIndex;
+      const value = chart.data.datasets[datasetIndex].data[dataIndex];
+      setPrice(value);
+    }
+  };
 
   // Chart.js options
   const options = {
@@ -94,14 +108,18 @@ function OneDayChart({ ticker }) {
           display: false
         }
       },
-
-    }
+    },
+    onHover: (event, activeElements, chart) => {
+      handleHover(event, activeElements, chart);
+    },
   }
 
 
   return (
     <div className="line-chart-section-container">
-      <h1>here comes the fancy line chart</h1>
+      <div className="line-chart-price">
+        {`$${Number(price).toFixed(2)}`}
+      </div>
       <div className="line-chart-container">
         {chartData && (
           <Line

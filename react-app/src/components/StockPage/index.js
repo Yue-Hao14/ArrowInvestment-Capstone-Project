@@ -10,7 +10,7 @@ function StockPage() {
 
   return (
     <div className="stock-page-container">
-      <h1>Welcome to {ticker} Page</h1>
+      <h1>{ticker}</h1>
       <div className='stock-page-line-chart-container'>
         <OneWeekChart ticker={ticker} />
       </div>

@@ -3,9 +3,8 @@ import { fetchStockIntradayData } from "../../utils/FetchStockData"
 import { Chart } from "chart.js/auto"
 import { Line } from 'react-chartjs-2';
 
-function OneWeekChart({ ticker }) {
+function OneMonthChart({ ticker }) {
   const [chartData, setChartData] = useState();
-  const [price, setPrice] = useState();
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 is Sunday
   const daysToSubtract = dayOfWeek === 0 ? 2
@@ -46,8 +45,6 @@ function OneWeekChart({ ticker }) {
       // console.log(typeof DateTime[0])
       // console.log(prices)
 
-      setPrice(filteredPrices[filteredPrices.length - 1])
-
       setChartData({
         labels: slicedDateTimes,
         datasets: [{
@@ -70,17 +67,6 @@ function OneWeekChart({ ticker }) {
     }
     fetchChartData()
   }, [])
-
-  // function to extract the stock price where mouse hovers over
-  // so we can display it above the chart
-  const handleHover = (event, active, chart) => {
-    if (active.length > 0) {
-      const dataIndex = active[0].index;
-      const datasetIndex = active[0].datasetIndex;
-      const value = chart.data.datasets[datasetIndex].data[dataIndex];
-      setPrice(value);
-    }
-  };
 
 
   // Chart.js options
@@ -105,18 +91,14 @@ function OneWeekChart({ ticker }) {
           display: false
         }
       },
-    },
-    onHover: (event, activeElements, chart) => {
-      handleHover(event, activeElements, chart);
-    },
+
+    }
   }
 
 
   return (
     <div className="line-chart-section-container">
-      <div className="line-chart-price">
-        {`$${Number(price).toFixed(2)}`}
-      </div>
+      <h1>here comes the fancy line chart</h1>
       <div className="line-chart-container">
         {chartData && (
           <Line
