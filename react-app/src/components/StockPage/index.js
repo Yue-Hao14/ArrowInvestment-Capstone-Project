@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton'
 import AddStockToWatchlistModal from './AddStockToWatchlistModal'
@@ -7,12 +8,22 @@ import OneWeekChart from './OneWeekChart'
 
 function StockPage() {
   const { ticker } = useParams()
+  const [chart, setChart] = useState("1D")
+
+  const chartObj = {
+    "1D": <OneDayChart ticker={ticker} />,
+    "1W": <OneWeekChart ticker={ticker} />,
+  }
 
   return (
     <div className="stock-page-container">
       <h1>{ticker}</h1>
       <div className='stock-page-line-chart-container'>
-        <OneWeekChart ticker={ticker} />
+        {chartObj[chart]}
+      </div>
+      <div className='stock-page-line-chart-navbar-container'>
+        <button className='stock-page-line-chart-button' onClick={() => setChart("1D")}>1D</button>
+        <button className='stock-page-line-chart-button' onClick={() => setChart("1W")}>1W</button>
       </div>
       <div className="stock-page-right-container">
         <div className='stock-page-right-stock-buy-sell-container'>

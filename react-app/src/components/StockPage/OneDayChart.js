@@ -25,50 +25,53 @@ function OneDayChart({ ticker }) {
 
       // set x axis labels equal to today's date and time
       // get date and time keys from data
-      const dateTimes = Object.keys(data["Time Series (5min)"]).reverse()
-      // need to filter to get only latest business day's (today or Fri) dateTimes
-      let filteredDateTimes = []
-      dateTimes.forEach(label => {
-        if (label.slice(0, 10) === formattedBusinessDate) {
-          return filteredDateTimes.push(label)
+      if (data) {
+
+        const dateTimes = Object.keys(data["Time Series (5min)"]).reverse()
+        // need to filter to get only latest business day's (today or Fri) dateTimes
+        let filteredDateTimes = []
+        dateTimes.forEach(label => {
+          if (label.slice(0, 10) === formattedBusinessDate) {
+            return filteredDateTimes.push(label)
+          }
+        })
+        // find out how many data point of latest business day available right now
+        // so we can slice stock prices accordingly later
+        const dataEndIndex = filteredDateTimes.length
+        console.log("trim the date portion of label", dateTimes[0], dateTimes[0].length, dateTimes[0].slice(0, 10))
+        console.log("DateTime", dateTimes)
+        console.log("filteredDateTime", filteredDateTimes)
+
+        // get stock prices from data and slice it to the same amount of data point as filteredDateTimes
+        const pricesArr = Object.values(data["Time Series (5min)"])
+        const prices = pricesArr.map(price => (
+          parseFloat(price["4. close"]).toFixed(2)
+          )).reverse()
+          const filteredPrices = prices.slice(0, dataEndIndex)
+          // console.log(typeof DateTime[0])
+          // console.log(prices)
+
+          setPrice(filteredPrices[filteredPrices.length - 1])
+
+
+          setChartData({
+            labels: filteredDateTimes,
+            datasets: [{
+              data: filteredPrices,
+              backgroundColor: 'none',
+              borderColor: '#5AC53B',
+              borderWidth: 2,
+              pointBorderColor: 'rgba(0, 0, 0, 0)',
+              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+              pointHoverBackgroundColor: '#5AC53B',
+              pointHoverBorderColor: '#000000',
+              pointHoverBorderWidth: 4,
+              pointHoverRadius: 6,
+              tension: 0.0,
+              fill: false
+            }]
+          })
         }
-      })
-      // find out how many data point of latest business day available right now
-      // so we can slice stock prices accordingly later
-      const dataEndIndex = filteredDateTimes.length
-      console.log("trim the date portion of label", dateTimes[0], dateTimes[0].length, dateTimes[0].slice(0, 10))
-      console.log("DateTime", dateTimes)
-      console.log("filteredDateTime", filteredDateTimes)
-
-      // get stock prices from data and slice it to the same amount of data point as filteredDateTimes
-      const pricesArr = Object.values(data["Time Series (5min)"])
-      const prices = pricesArr.map(price => (
-        parseFloat(price["4. close"]).toFixed(2)
-      )).reverse()
-      const filteredPrices = prices.slice(0, dataEndIndex)
-      // console.log(typeof DateTime[0])
-      // console.log(prices)
-
-      setPrice(filteredPrices[filteredPrices.length - 1])
-
-
-      setChartData({
-        labels: filteredDateTimes,
-        datasets: [{
-          data: filteredPrices,
-          backgroundColor: 'none',
-          borderColor: '#5AC53B',
-          borderWidth: 2,
-          pointBorderColor: 'rgba(0, 0, 0, 0)',
-          pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-          pointHoverBackgroundColor: '#5AC53B',
-          pointHoverBorderColor: '#000000',
-          pointHoverBorderWidth: 4,
-          pointHoverRadius: 6,
-          tension: 0.0,
-          fill: false
-        }]
-      })
 
       // console.log(chartData)
     }
