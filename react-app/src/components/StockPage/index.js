@@ -12,18 +12,38 @@ import './stockPage.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllTransactionsByTickerThunk } from '../../store/transaction'
 import { dbDateToDisplay } from '../../utils/DateFunctions'
+import StockBuySell from './StockBuySell'
+import { fetchStockDailyAdjustedData } from '../../utils/FetchStockData'
 
 function StockPage() {
   const { ticker } = useParams();
   const dispatch = useDispatch();
   let transactions = useSelector(state => state.transactions.tickerTransactions);
   transactions = Object.values(transactions);
-  const [chart, setChart] = useState("1D")
-  console.log(transactions)
 
+  const [chart, setChart] = useState("1D")
+  const [closePrice, setClosePrice] = useState(0)
+  const [stockData, setStockData] = useState({})
+
+  // hydrate redux store with tickerTransaction slice
   useEffect(() => {
     dispatch(getAllTransactionsByTickerThunk(ticker))
   }, [dispatch])
+
+  // get latest closing price from AlphaVantage(daily_adjusted)
+  useEffect(() => {
+    async function fetchStockData () {
+      const data = await fetchStockDailyAdjustedData(ticker.toUpperCase())
+      setStockData(data)
+      // console.log(data)
+
+      if (data["Note"]) return
+      let latestPrice = Object.values(data["Time Series (Daily)"])[0]["4. close"]
+      latestPrice = parseFloat(latestPrice).toFixed(2)
+      setClosePrice(latestPrice)
+    };
+    fetchStockData()
+  },[ticker])
 
   const chartObj = {
     "1D": <OneDayChart ticker={ticker} />,
@@ -38,6 +58,9 @@ function StockPage() {
   const transactionCost = (price, quantity) => {
     return Math.abs(price * quantity).toFixed(2)
   }
+
+
+  if (!stockData["Time Series (Daily)"]) return <div>Loading.....Please refresh in 1 minute</div>
 
   return (
     <div className="stock-page-container">
@@ -58,7 +81,7 @@ function StockPage() {
         <div className='stock-page-transactions-container'>
           <h2>Transactions</h2>
           {transactions.map(transaction => (
-            <div className='transaction-details-container'>
+            <div className='transaction-details-container' key={transaction.id}>
               <div className='transaction-details-1st-row'>
                 <div className='transaction-details-tikcer-type'>{`${ticker} ${transaction.type}`}</div>
                 <div className='transaction-details-cost'>
@@ -79,6 +102,7 @@ function StockPage() {
       <div className="stock-page-right-container">
         <div className='stock-page-right-stock-buy-sell-container'>
           {/* stock buy/sell form goes here */}
+          <StockBuySell closePrice={closePrice} ticker={ticker} />
         </div>
         <div className="stock-page-right-watchlist-container">
           <OpenModalButton
