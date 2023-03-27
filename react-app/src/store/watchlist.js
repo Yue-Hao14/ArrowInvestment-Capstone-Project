@@ -1,5 +1,4 @@
-
-// constants
+// actions
 const GET_ALL_WATCHLISTS_STOCKS = 'watchlists/GET_ALL_WATCHLISTS_STOCKS'
 const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST'
 const ADD_STOCK_TO_WATCHLISTS = 'watchlist/ADD_STOCK_TO_WATCHLISTS'
