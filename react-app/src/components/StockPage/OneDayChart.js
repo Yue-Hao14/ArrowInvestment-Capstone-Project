@@ -79,7 +79,7 @@ function OneDayChart({ ticker }) {
       // console.log(chartData)
     }
     fetchChartData()
-  }, [])
+  }, [ticker, formattedBusinessDate])
 
   // function to extract the stock price where mouse hovers over
   // so we can display it above the chart

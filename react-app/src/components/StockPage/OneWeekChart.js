@@ -60,7 +60,7 @@ function OneWeekChart({ ticker }) {
       // console.log(chartData)
     }
     fetchChartData()
-  }, [])
+  }, [ticker])
 
   // function to extract the stock price where mouse hovers over
   // so we can display it above the chart

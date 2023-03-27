@@ -5,3 +5,9 @@
 .stock-page-line-chart-container {
   width: 700px;
 }
+
+.transaction-details-1st-row,
+.transaction-details-2nd-row {
+  display: flex;
+  justify-content: space-between;
+}

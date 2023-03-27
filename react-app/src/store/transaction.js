@@ -96,5 +96,7 @@ export default function transactionReducer(state = initialState, action) {
       newState.tickerTransactions = transactionsByTicker
       return newState;
     }
+    default:
+      return state
   }
 }
