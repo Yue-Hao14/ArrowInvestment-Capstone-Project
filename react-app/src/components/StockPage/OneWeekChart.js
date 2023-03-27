@@ -6,37 +6,49 @@ import { Line } from 'react-chartjs-2';
 function OneWeekChart({ ticker }) {
   const [chartData, setChartData] = useState();
   const today = new Date();
-  const dayOfWeek = today.getDay();
+  const dayOfWeek = today.getDay(); // 0 is Sunday
   const daysToSubtract = dayOfWeek === 0 ? 2
-                              : dayOfWeek === 1 ? 3 : 1;
-  const previousDate = new Date(today.getTime() - daysToSubtract * 24 * 60 * 60 * 1000);
-  const year = previousDate.getFullYear();
-  const month = (previousDate.getMonth() + 1).toString().padStart(2, '0');
-  const day = previousDate.getDate().toString().padStart(2, '0');
-  const formattedDate = `${year}-${month}-${day}`;
+    : dayOfWeek === 6 ? 1 : 0; // if Sun, substract 2 days, if Sat, substract 1 day
+  const latestBusinessDate = new Date(today.getTime() - daysToSubtract * 24 * 60 * 60 * 1000); // latest business day
+  const year = latestBusinessDate.getFullYear();
+  const month = (latestBusinessDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = latestBusinessDate.getDate().toString().padStart(2, '0');
+  const formattedBusinessDate = `${year}-${month}-${day}`;
 
-  console.log("formattedDate",typeof formattedDate)
+  console.log("latestBusinessDate", latestBusinessDate)
 
   // fetch stock data from AlphaVantage and plot stock data to chartJS
   useEffect(() => {
     async function fetchChartData() {
-      const data = await fetchStockIntradayData(ticker.toUpperCase(),'15min', 'full')
+      const data = await fetchStockIntradayData(ticker.toUpperCase(), '15min', 'full')
 
-      // set x axis labels equal to time
-      const labels = Object.keys(data["Time Series (15min)"])
+      // set x axis labels
+      // get date and time keys from data
+      const dateTimes = Object.keys(data["Time Series (15min)"])
+      // slice the latest 377 data point and reverse them to ascending order
+      const slicedDateTimes = dateTimes.slice(0, 377).reverse()
+      console.log(slicedDateTimes, slicedDateTimes)
 
-      // get stock prices of current day from data
+      // find out how many data point of latest business day available right now
+      // so we can slice stock prices accordingly later
+      const dataEndIndex = slicedDateTimes.length
+      console.log("trim the date portion of label", dateTimes[0], dateTimes[0].length, dateTimes[0].slice(0, 10))
+      console.log("DateTime", dateTimes)
+      console.log("filteredDateTime", slicedDateTimes)
+
+      // get stock prices from data and slice it to the same amount of data point as slicedDateTimes
       const pricesArr = Object.values(data["Time Series (15min)"])
       const prices = pricesArr.map(price => (
         parseFloat(price["4. close"]).toFixed(2)
       ))
-      // console.log(typeof labels[0])
+      const filteredPrices = prices.slice(0, dataEndIndex).reverse()
+      // console.log(typeof DateTime[0])
       // console.log(prices)
 
       setChartData({
-        labels,
+        labels: slicedDateTimes,
         datasets: [{
-          data: prices,
+          data: filteredPrices,
           backgroundColor: 'none',
           borderColor: '#5AC53B',
           borderWidth: 2,
@@ -51,7 +63,7 @@ function OneWeekChart({ ticker }) {
         }]
       })
 
-      console.log(chartData)
+      // console.log(chartData)
     }
     fetchChartData()
   }, [])
