@@ -5,6 +5,7 @@ import AddStockToWatchlistModal from './AddStockToWatchlistModal'
 import OneDayChart from './OneDayChart'
 import OneWeekChart from './OneWeekChart'
 import OneMonthChart from './OneMonthChart'
+import './stockPage.css'
 
 
 function StockPage() {
@@ -19,14 +20,16 @@ function StockPage() {
 
   return (
     <div className="stock-page-container">
-      <h1>{ticker}</h1>
-      <div className='stock-page-line-chart-container'>
-        {chartObj[chart]}
-      </div>
-      <div className='stock-page-line-chart-navbar-container'>
-        <button className='stock-page-line-chart-button' onClick={() => setChart("1D")}>1D</button>
-        <button className='stock-page-line-chart-button' onClick={() => setChart("1W")}>1W</button>
-        <button className='stock-page-line-chart-button' onClick={() => setChart("1M")}>1M</button>
+      <div className='stock-page-upper-left-container'>
+        <h1>{ticker}</h1>
+        <div className='stock-page-line-chart-container'>
+          {chartObj[chart]}
+        </div>
+        <div className='stock-page-line-chart-navbar-container'>
+          <button className='stock-page-line-chart-button' onClick={() => setChart("1D")}>1D</button>
+          <button className='stock-page-line-chart-button' onClick={() => setChart("1W")}>1W</button>
+          <button className='stock-page-line-chart-button' onClick={() => setChart("1M")}>1M</button>
+        </div>
       </div>
       <div className="stock-page-right-container">
         <div className='stock-page-right-stock-buy-sell-container'>

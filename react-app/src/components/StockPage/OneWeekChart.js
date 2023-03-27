@@ -6,22 +6,13 @@ import { Line } from 'react-chartjs-2';
 function OneWeekChart({ ticker }) {
   const [chartData, setChartData] = useState();
   const [price, setPrice] = useState();
-  const today = new Date();
-  const dayOfWeek = today.getDay(); // 0 is Sunday
-  const daysToSubtract = dayOfWeek === 0 ? 2
-    : dayOfWeek === 6 ? 1 : 0; // if Sun, substract 2 days, if Sat, substract 1 day
-  const latestBusinessDate = new Date(today.getTime() - daysToSubtract * 24 * 60 * 60 * 1000); // latest business day
-  const year = latestBusinessDate.getFullYear();
-  const month = (latestBusinessDate.getMonth() + 1).toString().padStart(2, '0');
-  const day = latestBusinessDate.getDate().toString().padStart(2, '0');
-  const formattedBusinessDate = `${year}-${month}-${day}`;
-
-  console.log("latestBusinessDate", latestBusinessDate)
+  const [stockData, setStockData] = useState({})
 
   // fetch stock data from AlphaVantage and plot stock data to chartJS
   useEffect(() => {
     async function fetchChartData() {
       const data = await fetchStockIntradayData(ticker.toUpperCase(), '15min', 'full')
+      setStockData(data)
 
       // set x axis labels
       // get date and time keys from data
@@ -111,6 +102,8 @@ function OneWeekChart({ ticker }) {
     },
   }
 
+  // show "Loading..." message when we exceeds the allowed # of fetch request in 1 min with AlphaVantage
+  if (!stockData["Time Series (5min)"]) return <div>Loading.....Please refresh in 1 minute</div>
 
   return (
     <div className="line-chart-section-container">

@@ -1,0 +1,7 @@
+.stock-page-container {
+  display: flex;
+}
+
+.stock-page-line-chart-container {
+  width: 700px;
+}

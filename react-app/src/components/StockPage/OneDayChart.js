@@ -3,13 +3,16 @@ import { fetchStockIntradayData } from "../../utils/FetchStockData"
 import { Chart } from "chart.js/auto"
 import { Line } from 'react-chartjs-2';
 
+
+// TO DO: Figure out how to show “Loding…” sign/message if fetch more than allowed w/ AlphaVantage
 function OneDayChart({ ticker }) {
   const [chartData, setChartData] = useState();
+  const [stockData, setStockData] = useState({});
   const [price, setPrice] = useState();
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 is Sunday
   const daysToSubtract = dayOfWeek === 0 ? 2
-    : dayOfWeek === 6 ? 1 : 0; // if Sun, substract 2 days, if Sat, substract 1 day
+    : dayOfWeek === 1 ? 3 : 1; // if Sun, subtract 2 days, if Mon, subsract 3 days, rest subtract 1 day
   const latestBusinessDate = new Date(today.getTime() - daysToSubtract * 24 * 60 * 60 * 1000); // latest business day
   const year = latestBusinessDate.getFullYear();
   const month = (latestBusinessDate.getMonth() + 1).toString().padStart(2, '0');
@@ -22,11 +25,12 @@ function OneDayChart({ ticker }) {
   useEffect(() => {
     async function fetchChartData() {
       const data = await fetchStockIntradayData(ticker.toUpperCase())
+      setStockData(data)
 
       // set x axis labels equal to today's date and time
       // get date and time keys from data
-      if (data) {
-
+      
+      if (data["Time Series (5min)"]) {
         const dateTimes = Object.keys(data["Time Series (5min)"]).reverse()
         // need to filter to get only latest business day's (today or Fri) dateTimes
         let filteredDateTimes = []
@@ -52,7 +56,6 @@ function OneDayChart({ ticker }) {
           // console.log(prices)
 
           setPrice(filteredPrices[filteredPrices.length - 1])
-
 
           setChartData({
             labels: filteredDateTimes,
@@ -117,6 +120,8 @@ function OneDayChart({ ticker }) {
     },
   }
 
+  // show "Loading..." message when we exceeds the allowed # of fetch request in 1 min with AlphaVantage
+  if (!stockData["Time Series (5min)"]) return <div>Loading.....Please refresh in 1 minute</div>
 
   return (
     <div className="line-chart-section-container">
