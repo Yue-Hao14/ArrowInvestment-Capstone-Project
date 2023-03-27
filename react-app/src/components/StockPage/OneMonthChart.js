@@ -5,6 +5,7 @@ import { Line } from 'react-chartjs-2';
 
 function OneMonthChart({ ticker }) {
   const [chartData, setChartData] = useState();
+  const [price, setPrice] = useState();
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 is Sunday
   const daysToSubtract = dayOfWeek === 0 ? 2
@@ -20,13 +21,13 @@ function OneMonthChart({ ticker }) {
   // fetch stock data from AlphaVantage and plot stock data to chartJS
   useEffect(() => {
     async function fetchChartData() {
-      const data = await fetchStockIntradayData(ticker.toUpperCase(), '15min', 'full')
+      const data = await fetchStockIntradayData(ticker.toUpperCase(), '60min', 'full')
 
       // set x axis labels
       // get date and time keys from data
-      const dateTimes = Object.keys(data["Time Series (15min)"])
-      // slice the latest 377 data point and reverse them to ascending order
-      const slicedDateTimes = dateTimes.slice(0, 377).reverse()
+      const dateTimes = Object.keys(data["Time Series (60min)"])
+      // slice the latest 319 data point and reverse them to ascending order
+      const slicedDateTimes = dateTimes.slice(0, 319).reverse()
       console.log(slicedDateTimes, slicedDateTimes)
 
       // find out how many data point of latest business day available right now
@@ -37,13 +38,15 @@ function OneMonthChart({ ticker }) {
       console.log("filteredDateTime", slicedDateTimes)
 
       // get stock prices from data and slice it to the same amount of data point as slicedDateTimes
-      const pricesArr = Object.values(data["Time Series (15min)"])
+      const pricesArr = Object.values(data["Time Series (60min)"])
       const prices = pricesArr.map(price => (
         parseFloat(price["4. close"]).toFixed(2)
       ))
       const filteredPrices = prices.slice(0, dataEndIndex).reverse()
       // console.log(typeof DateTime[0])
       // console.log(prices)
+
+      setPrice(filteredPrices[filteredPrices.length - 1])
 
       setChartData({
         labels: slicedDateTimes,
@@ -68,6 +71,17 @@ function OneMonthChart({ ticker }) {
     fetchChartData()
   }, [])
 
+  // function to extract the stock price where mouse hovers over
+  // so we can display it above the chart
+  const handleHover = (event, active, chart) => {
+    if (active.length > 0) {
+      const dataIndex = active[0].index;
+      const datasetIndex = active[0].datasetIndex;
+      const value = chart.data.datasets[datasetIndex].data[dataIndex];
+      setPrice(value);
+    }
+  };
+
 
   // Chart.js options
   const options = {
@@ -91,14 +105,18 @@ function OneMonthChart({ ticker }) {
           display: false
         }
       },
-
-    }
+    },
+    onHover: (event, activeElements, chart) => {
+      handleHover(event, activeElements, chart);
+    },
   }
 
 
   return (
     <div className="line-chart-section-container">
-      <h1>here comes the fancy line chart</h1>
+      <div className="line-chart-price">
+        {`$${Number(price).toFixed(2)}`}
+      </div>
       <div className="line-chart-container">
         {chartData && (
           <Line
@@ -111,4 +129,4 @@ function OneMonthChart({ ticker }) {
   )
 }
 
-export default OneWeekChart
+export default OneMonthChart
