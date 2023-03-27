@@ -27,6 +27,7 @@ class Transaction(db.Model):
             "stock_ticker": self.stock_ticker,
             "quantity": self.quantity,
             "settled_price": self.settled_price,
+            "type":self.type,
             "date": self.date,
             # "user": self.user.to_dict(),
             # "stock": self.stock.to_dict(),
