@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { fetchStockDailyAdjustedData } from "../../utils/FetchStockData"
+import { fetchStockWeeklyAdjustedData } from "../../utils/FetchStockData"
 import { Chart } from "chart.js/auto"
 import { Line } from 'react-chartjs-2';
 
-function OneYearChart({ ticker }) {
+function FiveYearChart({ ticker }) {
   const [chartData, setChartData] = useState();
   const [price, setPrice] = useState();
   const [stockData, setStockData] = useState({})
@@ -11,17 +11,17 @@ function OneYearChart({ ticker }) {
   // fetch stock data from AlphaVantage and plot stock data to chartJS
   useEffect(() => {
     async function fetchChartData() {
-      const data = await fetchStockDailyAdjustedData(ticker.toUpperCase(), "full")
+      const data = await fetchStockWeeklyAdjustedData(ticker.toUpperCase())
       setStockData(data)
       // console.log(data)
-      if (data["Time Series (Daily)"].length === 0) return
+      if (data["Weekly Adjusted Time Series"].length === 0) return
 
       // set x axis labels
       // get date and time keys from data
-      const dateTimes = Object.keys(data["Time Series (Daily)"])
-      // slice the latest 251 data point (251 trading days a year in 2022)
+      const dateTimes = Object.keys(data["Weekly Adjusted Time Series"])
+      // slice the latest 260 data point (avg 52 trading weeks a year * 5 years)
       // and reverse them to ascending order
-      const slicedDateTimes = dateTimes.slice(0, 251).reverse()
+      const slicedDateTimes = dateTimes.slice(0, 260).reverse()
       // console.log(slicedDateTimes, slicedDateTimes)
 
       // find out how many data point of latest business day available right now
@@ -29,7 +29,7 @@ function OneYearChart({ ticker }) {
       const dataEndIndex = slicedDateTimes.length
 
       // get stock prices from data and slice it to the same amount of data point as slicedDateTimes
-      const pricesArr = Object.values(data["Time Series (Daily)"])
+      const pricesArr = Object.values(data["Weekly Adjusted Time Series"])
       const prices = pricesArr.map(price => (
         parseFloat(price["4. close"]).toFixed(2)
       ))
@@ -102,7 +102,7 @@ function OneYearChart({ ticker }) {
   }
 
   // show "Loading..." message when we exceeds the allowed # of fetch request in 1 min with AlphaVantage
-  if (!stockData["Time Series (Daily)"]) return <div>Loading.....Please refresh in 1 minute</div>
+  if (!stockData["Weekly Adjusted Time Series"]) return <div>Loading.....Please refresh in 1 minute</div>
 
   return (
     <div className="line-chart-section-container">
@@ -121,4 +121,4 @@ function OneYearChart({ ticker }) {
   )
 }
 
-export default OneYearChart
+export default FiveYearChart

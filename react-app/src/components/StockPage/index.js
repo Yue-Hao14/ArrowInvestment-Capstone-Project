@@ -6,6 +6,8 @@ import OneDayChart from './OneDayChart'
 import OneWeekChart from './OneWeekChart'
 import OneMonthChart from './OneMonthChart'
 import ThreeMonthChart from './ThreeMonthChart'
+import OneYearChart from './OneYearChart'
+import FiveYearChart from './FiveYearChart'
 import './stockPage.css'
 
 
@@ -18,6 +20,8 @@ function StockPage() {
     "1W": <OneWeekChart ticker={ticker} />,
     "1M": <OneMonthChart ticker={ticker} />,
     "3M": <ThreeMonthChart ticker={ticker} />,
+    "1Y": <OneYearChart ticker={ticker} />,
+    "5Y": <FiveYearChart ticker={ticker} />,
   }
 
   return (
@@ -31,7 +35,8 @@ function StockPage() {
           <button className='stock-page-line-chart-button' onClick={() => setChart("1D")}>1D</button>
           <button className='stock-page-line-chart-button' onClick={() => setChart("1W")}>1W</button>
           <button className='stock-page-line-chart-button' onClick={() => setChart("1M")}>1M</button>
-          <button className='stock-page-line-chart-button' onClick={() => setChart("3M")}>3M</button>
+          <button className='stock-page-line-chart-button' onClick={() => setChart("1Y")}>1Y</button>
+          <button className='stock-page-line-chart-button' onClick={() => setChart("5Y")}>5Y</button>
         </div>
       </div>
       <div className="stock-page-right-container">
