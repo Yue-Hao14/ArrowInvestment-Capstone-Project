@@ -9,3 +9,11 @@ export const fetchStockIntradayData = async (ticker, interval = '5min', outputsi
   const data = await response.json();
   return data
 }
+
+
+export const fetchStockDailyAdjustedData = async (ticker, outputsize = 'compact') => {
+  const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&outputsize=${outputsize}&apikey=${apiKey}`
+  const response = await fetch(url);
+  const data = await response.json();
+  return data
+}

@@ -19,14 +19,14 @@ function OneWeekChart({ ticker }) {
       const dateTimes = Object.keys(data["Time Series (15min)"])
       // slice the latest 377 data point and reverse them to ascending order
       const slicedDateTimes = dateTimes.slice(0, 377).reverse()
-      console.log(slicedDateTimes, slicedDateTimes)
+      // console.log(slicedDateTimes, slicedDateTimes)
 
       // find out how many data point of latest business day available right now
       // so we can slice stock prices accordingly later
       const dataEndIndex = slicedDateTimes.length
-      console.log("trim the date portion of label", dateTimes[0], dateTimes[0].length, dateTimes[0].slice(0, 10))
-      console.log("DateTime", dateTimes)
-      console.log("filteredDateTime", slicedDateTimes)
+      // console.log("trim the date portion of label", dateTimes[0], dateTimes[0].length, dateTimes[0].slice(0, 10))
+      // console.log("DateTime", dateTimes)
+      // console.log("filteredDateTime", slicedDateTimes)
 
       // get stock prices from data and slice it to the same amount of data point as slicedDateTimes
       const pricesArr = Object.values(data["Time Series (15min)"])
@@ -103,7 +103,7 @@ function OneWeekChart({ ticker }) {
   }
 
   // show "Loading..." message when we exceeds the allowed # of fetch request in 1 min with AlphaVantage
-  if (!stockData["Time Series (5min)"]) return <div>Loading.....Please refresh in 1 minute</div>
+  if (!stockData["Time Series (15min)"]) return <div>Loading.....Please refresh in 1 minute</div>
 
   return (
     <div className="line-chart-section-container">

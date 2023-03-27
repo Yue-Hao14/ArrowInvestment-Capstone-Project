@@ -19,7 +19,7 @@ function OneDayChart({ ticker }) {
   const day = latestBusinessDate.getDate().toString().padStart(2, '0');
   const formattedBusinessDate = `${year}-${month}-${day}`;
 
-  console.log("latestBusinessDate", latestBusinessDate)
+  // console.log("latestBusinessDate", latestBusinessDate)
 
   // fetch stock data from AlphaVantage and plot stock data to chartJS
   useEffect(() => {
@@ -29,7 +29,7 @@ function OneDayChart({ ticker }) {
 
       // set x axis labels equal to today's date and time
       // get date and time keys from data
-      
+
       if (data["Time Series (5min)"]) {
         const dateTimes = Object.keys(data["Time Series (5min)"]).reverse()
         // need to filter to get only latest business day's (today or Fri) dateTimes
@@ -42,9 +42,9 @@ function OneDayChart({ ticker }) {
         // find out how many data point of latest business day available right now
         // so we can slice stock prices accordingly later
         const dataEndIndex = filteredDateTimes.length
-        console.log("trim the date portion of label", dateTimes[0], dateTimes[0].length, dateTimes[0].slice(0, 10))
-        console.log("DateTime", dateTimes)
-        console.log("filteredDateTime", filteredDateTimes)
+        // console.log("trim the date portion of label", dateTimes[0], dateTimes[0].length, dateTimes[0].slice(0, 10))
+        // console.log("DateTime", dateTimes)
+        // console.log("filteredDateTime", filteredDateTimes)
 
         // get stock prices from data and slice it to the same amount of data point as filteredDateTimes
         const pricesArr = Object.values(data["Time Series (5min)"])
