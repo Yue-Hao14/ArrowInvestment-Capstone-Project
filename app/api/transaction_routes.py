@@ -46,4 +46,6 @@ def create_transaction():
 
     db.session.add(new_transaction)
     db.session.commit()
-    return [transaction.to_dict() for transaction in current_user.transactions]
+
+    transactions = Transaction.query.filter_by(user_id=current_user.id).filter_by(stock_ticker=data['ticker'])
+    return [transaction.to_dict() for transaction in transactions]
