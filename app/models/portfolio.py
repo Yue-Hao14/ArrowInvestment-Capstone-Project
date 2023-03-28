@@ -23,7 +23,4 @@ class Portfolio(db.Model):
             'user_id': self.user_id,
             'portfolio_name': self.portfolio_name,
             'sub_portfolio': self.sub_portfolio,
-            'eod_gain_loss': self.eod_gain_loss,
-            'user': self.user.to_dict(),
-            'values': self.values.to_dict(),
         }
