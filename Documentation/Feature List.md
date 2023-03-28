@@ -24,12 +24,12 @@
 * Logged in user can sell stock
 
 
-## 3. Portfolio / Dashboard (full CRUD)
+## 3. Portfolio / Dashboard (full/partial CRUD)
 
-* Logged in user can view their overall portfolio's position of live gain/loss
-* Logged in user can break down/create specific portfolio to track a certain segment's position (retirment sub portfolio, meme stock sub portfolio)
-* Logged in user can update sub portfolio by adding and removing their stocks
-* Logged in user can delete any sub portfolio
+* Logged in user can view their overall portfolio's position of gain/loss
+* When user sign up, a new portfolio is automatically created for them
+* Logged in user can update portfolio by buying and selling their stocks
+* Logged in user can update portfolio by deposit and withdraw cash
 
 
 ## 4. Cash Transfer (full/partial CRUD)
