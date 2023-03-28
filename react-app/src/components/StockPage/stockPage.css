@@ -30,7 +30,7 @@
   flex-direction: column;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.02) 0px -12px 24px 0px, rgba(0, 0, 0, 0.06) 0px 12px 24px 0px;
-  z-index:3;
+  z-index:2;
   border: solid 1px rgb(227, 233, 237);
   border-radius: 4px;
   gap: 10px;

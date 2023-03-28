@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
 		<nav className='navigation-container'>
 			<NavLink exact to='/dashboard' className='navigation-logo'>
 				Arrow Investment
-				<i className="fa-solid fa-arrow-trend-up navlogo"></i>
+				<img src="https://cdn-icons-png.flaticon.com/512/3458/3458992.png" className='navlogo' />
 			</NavLink>
 			{isLoaded && !sessionUser && (
 				<div className='navigation-right-container'>

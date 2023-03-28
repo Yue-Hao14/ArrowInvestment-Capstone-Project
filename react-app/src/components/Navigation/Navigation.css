@@ -1,3 +1,8 @@
+.navlogo {
+  width: 22px;
+  filter: invert(43%) sepia(97%) saturate(1515%) hue-rotate(88deg) brightness(104%) contrast(106%);
+}
+
 .profile-dropdown {
   position: absolute;
 }
@@ -88,6 +93,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 3;
+  background-color: white;
 }
 
 .account-dropdown-inner-container {
