@@ -3,6 +3,6 @@
   flex-direction: column;
 }
 
-.watchlist-details-ticker {
+.watchlist-details-container > a {
   text-decoration: none;
 }

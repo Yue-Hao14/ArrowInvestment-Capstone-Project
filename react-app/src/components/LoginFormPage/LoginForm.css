@@ -82,8 +82,7 @@
   margin-top: 30px;
 }
 
-.login-redirect-to-signup-container >div> a,
-.login-redirect-to-signup-container>div > a:visited {
+.login-redirect-to-signup-container >div> a {
   color: inherit;
   font-weight: bold;
 }

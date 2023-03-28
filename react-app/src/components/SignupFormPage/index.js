@@ -108,7 +108,7 @@ function SignupFormPage() {
         </form>
         <div className="signup-redirect-to-login-container">
           Already started?
-          <NavLink to="/login"> Log In Here</NavLink>
+          <NavLink to="/login"> Log in here</NavLink>
         </div>
       </div>
     </div>
