@@ -9,10 +9,12 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
 
+	const siteClassName = "sitename" + (sessionUser ? " hidden" : "");
+
 	return (
 		<nav className='navigation-container'>
 			<NavLink exact to='/dashboard' className='navigation-logo'>
-				Arrow Investment
+				<div className={siteClassName}>Arrow Investment</div>
 				<img src="https://cdn-icons-png.flaticon.com/512/3458/3458992.png" className='navlogo' />
 			</NavLink>
 			{!sessionUser && (

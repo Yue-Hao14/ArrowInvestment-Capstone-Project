@@ -1,8 +1,3 @@
-.navlogo {
-  width: 22px;
-  filter: invert(43%) sepia(97%) saturate(1515%) hue-rotate(88deg) brightness(104%) contrast(106%);
-}
-
 .profile-dropdown {
   position: absolute;
 }
@@ -12,7 +7,6 @@
 }
 
 .navigation-container {
-  /* position:fixed; */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -22,11 +16,13 @@
 }
 
 .navlogo {
+  width: 25px;
   margin-left: 0.5rem
 }
 
 .navigation-logo {
-  color: #00c805;
+  display: flex;
+  color: black;
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -34,11 +30,13 @@
   /* margin-top: 18px; */
 }
 
+.navigation-container>a>img:hover {
+  filter: invert(43%) sepia(97%) saturate(1515%) hue-rotate(88deg) brightness(104%) contrast(106%);
+}
+
 .navigation-right-container {
   display: flex;
 }
-
-
 
 .login-button {
   display: flex;
