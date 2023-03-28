@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
+import { createPortfolioThunk } from "../../store/portfolio";
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -21,7 +22,9 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(username, firstName, lastName, email, password));
+      const data = await dispatch(signUp(username, firstName, lastName, email, password))
+      .then(() => dispatch(createPortfolioThunk()))
+
       if (data) {
         setErrors(data)
       } else {
