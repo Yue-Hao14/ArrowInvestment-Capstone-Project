@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -74,6 +74,12 @@ function LoginFormPage() {
             <button onClick={demoLogin} className="login-demo-button">Demo Login</button>
           </div>
         </form>
+        <div className="login-redirect-to-signup-container">
+          <div>
+              Not on Arrow Investment?
+              <NavLink to="/signup"> Create an account</NavLink>
+          </div>
+        </div>
       </div>
     </div>
   );

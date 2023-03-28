@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import { createPortfolioThunk } from "../../store/portfolio";
 import './SignupForm.css';
@@ -106,6 +106,10 @@ function SignupFormPage() {
           </label>
           <button type="submit" className="signup-page-button">Sign Up</button>
         </form>
+        <div className="signup-redirect-to-login-container">
+          Already started?
+          <NavLink to="/login"> Log In Here</NavLink>
+        </div>
       </div>
     </div>
   );

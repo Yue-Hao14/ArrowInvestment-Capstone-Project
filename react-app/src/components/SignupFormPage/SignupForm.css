@@ -34,7 +34,7 @@
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .signup-form > label {
@@ -63,5 +63,15 @@
   border-radius: 50px;
   border: 1px solid black;
   font-size: 10pt;
+  font-weight: bold;
+}
+
+.signup-redirect-to-login-container {
+  margin-top: 20px;
+}
+
+.signup-redirect-to-login-container > a,
+.signup-redirect-to-login-container > a:visited {
+  color: inherit;
   font-weight: bold;
 }
