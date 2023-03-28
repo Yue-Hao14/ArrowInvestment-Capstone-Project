@@ -40,13 +40,16 @@ function AccountButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>Account</button>
-      <ul className={ulClassName} ref={ulRef}>
+      <button onClick={openMenu} className="account-button">Account</button>
+      <div className={ulClassName} ref={ulRef}>
         {user && (
-          <button onClick={handleLogout}>Log Out</button>
+          <div className="logout-row">
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+            <button onClick={handleLogout} className="logout-button">Log Out</button>
+          </div>
         )
         }
-      </ul>
+      </div>
     </>
   )
 }

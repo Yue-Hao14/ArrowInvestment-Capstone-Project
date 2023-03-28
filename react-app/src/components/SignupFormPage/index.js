@@ -40,7 +40,7 @@ function SignupFormPage() {
       </div>
       <div className="signup-right-container">
         <div className="signup-title">Sign Up with Arrow Investment</div>
-        <span className="signup-message">We'll need your username, email address, and a unique password. You'll use this login to access Arrow Investment next time.</span>
+        <span className="signup-message">We'll need your email address, username and a unique password. You'll use this login to access Arrow Investment next time.</span>
         <form onSubmit={handleSubmit} className="signup-form">
           <ul>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}

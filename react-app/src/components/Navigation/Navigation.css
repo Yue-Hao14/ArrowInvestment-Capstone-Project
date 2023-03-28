@@ -58,9 +58,42 @@
   height: 40px;
   margin: 10px;
   background-color: black;
-  color:white;
+  color: white;
   border-radius: 50px;
   border: 1px solid black;
   font-size: 10pt;
   font-weight: bold;
+}
+
+.account-button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  padding-right: 40px;
+}
+
+.account-button:hover {
+  color: #00c805;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px -12px 24px 0px, rgba(0, 0, 0, 0.06) 0px 12px 24px 0px;
+  border: solid 1px rgb(227, 233, 237);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logout-row {
+  margin: 10px 20px;
+}
+
+.logout-button {
+  background: none;
+  border:none;
+  font-size: 15px;
 }

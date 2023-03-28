@@ -35,7 +35,7 @@ function Navigation({ isLoaded }) {
 			)}
 			{isLoaded && sessionUser && (
 				<div className='navigation-right-container'>
-					<AccountButton user={sessionUser} />
+					<AccountButton user={sessionUser} className="account-button" />
 				</div>
 			)
 
