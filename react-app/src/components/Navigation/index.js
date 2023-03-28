@@ -25,8 +25,8 @@ function Navigation({ isLoaded }) {
 						Log in
 					</button>
 					<button
-						className='Signup-button'
-						id='Signup'
+						className='signup-button'
+						id='signup'
 						onClick={() => history.push("/signup")}
 					>
 						Sign up
