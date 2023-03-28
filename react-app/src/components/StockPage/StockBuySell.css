@@ -1,0 +1,50 @@
+.stock-buy-sell-container {
+  width: 270px;
+  height: fit-content;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px -12px 24px 0px, rgba(0, 0, 0, 0.06) 0px 12px 24px 0px;
+  border: solid 1px rgb(227, 233, 237);
+  border-radius: 4px;
+  gap: 10px;
+}
+
+.stock-buy-sell-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.stock-buy-sell-toggle,
+.stock-buy-sell-form-1st-row,
+.stock-buy-sell-form-2nd-row,
+.stock-buy-sell-form-3rd-row,
+.stock-buy-sell-form-4th-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stock-buy-sell-form-button {
+  width: 100%
+}
+
+.stock-buy-sell-toggle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: solid 1px grey;
+}
+
+.buy-div {
+  padding: 20px 31px;
+}
+
+.sell-div {
+  padding: 20px 31px;
+}
+.active-type {
+  border-bottom: solid 1px #00c805;
+}
