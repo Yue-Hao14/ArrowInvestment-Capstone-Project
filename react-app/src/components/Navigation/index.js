@@ -15,7 +15,7 @@ function Navigation({ isLoaded }) {
 				Arrow Investment
 				<img src="https://cdn-icons-png.flaticon.com/512/3458/3458992.png" className='navlogo' />
 			</NavLink>
-			{isLoaded && !sessionUser && (
+			{!sessionUser && (
 				<div className='navigation-right-container'>
 					<button
 						className='login-button'
@@ -33,7 +33,7 @@ function Navigation({ isLoaded }) {
 					</button>
 				</div>
 			)}
-			{isLoaded && sessionUser && (
+			{sessionUser && (
 				<div className='navigation-right-container'>
 					<AccountButton user={sessionUser} className="account-button" />
 				</div>
