@@ -43,9 +43,12 @@ function AccountButton({ user }) {
       <button onClick={openMenu} className="account-button">Account</button>
       <div className={ulClassName} ref={ulRef}>
         {user && (
+          <div className="account-dropdown-inner-container">
+          <div className="username-row">{user.username}</div>
           <div className="logout-row">
             <i className="fa-solid fa-arrow-right-from-bracket"></i>
             <button onClick={handleLogout} className="logout-button">Log Out</button>
+          </div>
           </div>
         )
         }

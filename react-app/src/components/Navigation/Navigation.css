@@ -79,6 +79,7 @@
 
 .profile-dropdown {
   position: absolute;
+  width: 150px;
   top: 70px;
   right: 20px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px -12px 24px 0px, rgba(0, 0, 0, 0.06) 0px 12px 24px 0px;
@@ -86,14 +87,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.logout-row {
-  margin: 10px 20px;
+.account-dropdown-inner-container {
+  width: 100%;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.username-row {
+  border-bottom: solid 1px grey;
 }
 
 .logout-button {
   background: none;
-  border:none;
+  border: none;
   font-size: 15px;
 }
