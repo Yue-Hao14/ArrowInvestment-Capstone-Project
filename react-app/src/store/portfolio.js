@@ -46,7 +46,7 @@ export const createPortfolioThunk = () => async (dispatch) => {
 
 // reducer
 const initialState = {}
-export default function portfolioReducer(state=initialState, action) {
+export default function portfolioReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PORTFOLIO: {
       return action.payload
