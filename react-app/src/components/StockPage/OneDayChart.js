@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom";
 import { fetchStockIntradayData } from "../../utils/FetchStockData"
 import { Chart } from "chart.js/auto"
 import { Line } from 'react-chartjs-2';
@@ -6,9 +7,12 @@ import { Line } from 'react-chartjs-2';
 
 // TO DO: Figure out how to show “Loding…” sign/message if fetch more than allowed w/ AlphaVantage
 function OneDayChart({ ticker }) {
+  const location = useLocation()
+
   const [chartData, setChartData] = useState();
   const [stockData, setStockData] = useState({});
   const [price, setPrice] = useState();
+
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 is Sunday
   const daysToSubtract = dayOfWeek === 0 ? 2
@@ -50,31 +54,31 @@ function OneDayChart({ ticker }) {
         const pricesArr = Object.values(data["Time Series (5min)"])
         const prices = pricesArr.map(price => (
           parseFloat(price["4. close"]).toFixed(2)
-          )).reverse()
-          const filteredPrices = prices.slice(0, dataEndIndex)
-          // console.log(typeof DateTime[0])
-          // console.log(prices)
+        )).reverse()
+        const filteredPrices = prices.slice(0, dataEndIndex)
+        // console.log(typeof DateTime[0])
+        // console.log(prices)
 
-          setPrice(filteredPrices[filteredPrices.length - 1])
+        setPrice(filteredPrices[filteredPrices.length - 1])
 
-          setChartData({
-            labels: filteredDateTimes,
-            datasets: [{
-              data: filteredPrices,
-              backgroundColor: 'none',
-              borderColor: '#5AC53B',
-              borderWidth: 2,
-              pointBorderColor: 'rgba(0, 0, 0, 0)',
-              pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-              pointHoverBackgroundColor: '#5AC53B',
-              pointHoverBorderColor: '#000000',
-              pointHoverBorderWidth: 4,
-              pointHoverRadius: 6,
-              tension: 0.0,
-              fill: false
-            }]
-          })
-        }
+        setChartData({
+          labels: filteredDateTimes,
+          datasets: [{
+            data: filteredPrices,
+            backgroundColor: 'none',
+            borderColor: '#5AC53B',
+            borderWidth: 2,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+            pointHoverBackgroundColor: '#5AC53B',
+            pointHoverBorderColor: '#000000',
+            pointHoverBorderWidth: 4,
+            pointHoverRadius: 6,
+            tension: 0.0,
+            fill: false
+          }]
+        })
+      }
 
       // console.log(chartData)
     }
