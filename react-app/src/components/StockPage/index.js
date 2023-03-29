@@ -32,6 +32,9 @@ function StockPage() {
     dispatch(getAllTransactionsByTickerThunk(ticker));
   }, [dispatch])
 
+  // function to get latest stock price data from child component (StockChart)
+  // function getLatestPriceCallBack
+
   // get latest closing price from AlphaVantage(daily_adjusted)
   // useEffect(() => {
   //   async function fetchStockData() {

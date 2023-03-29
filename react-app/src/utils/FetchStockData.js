@@ -46,12 +46,11 @@ export const stockOneDayChange = async (ticker) => {
 
 
 // from Polygon API ---------------------------------------------------
-const polygonApiKey = process.env.POLYGON_API_KEY;
+const polygonApiKey = process.env.REACT_APP_POLYGON_API_KEY;
 
 // multiplier = 1, timeSpan = "minute" means each data point is 1 min difference
 // dateDuration = 0, today's data; dateDuration = 1, last 2 day's data
 export const fetchAggStockData = async (ticker, multiplier, timeSpan, dateDuration) => {
-  console.log("API key", polygonApiKey)
   const dateTo = new Date();
   const dateFrom = new Date();
   dateFrom.setDate(dateFrom.getDate() - dateDuration);

@@ -6,8 +6,9 @@
   margin-left: 100px;
 }
 
-.stock-page-line-chart-container {
+.line-chart-container {
   width: 700px;
+  height: 300px;
 }
 
 .transaction-details-1st-row,

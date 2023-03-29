@@ -4,11 +4,14 @@ import { Line } from 'react-chartjs-2';
 import { fetchAggStockData } from '../../utils/FetchStockData';
 
 function StockChart() {
-  // State for storing parameters for fetching stock data
+  // state for storing parameters for fetching stock data
   const [chartData, setChartData] = useState(null);
-  const [multiplier, setMultiplier] = useState(1); // amount of interval; 1 min = 2 price is 1 min away
-  const [timeSpan, setTimeSpan] = useState("day"); // interval between data points
-  const [dateDuration, setDateDuration] = useState(1) // duration between to and from dates
+  const [multiplier, setMultiplier] = useState(5); // amount of interval; 1 min = 2 price is 1 min away
+  const [timeSpan, setTimeSpan] = useState("minute"); // interval between data points
+  const [dateDuration, setDateDuration] = useState(0) // duration between to and from dates
+
+  const [price, setPrice] = useState(); // state for showing the price above chart whereever mouse hovers over
+  const [latestPrice, setLatestPrice] = useState(); // state to pass back to parent component (stockPage) to have latest price for stock buy/sell
 
   // Get the stock ticker from the URL params
   let { ticker } = useParams();
@@ -19,8 +22,12 @@ function StockChart() {
     async function fetchChartData() {
       const data = await fetchAggStockData(ticker, multiplier, timeSpan, dateDuration);
       console.log(data)
-      const labels = data.results.map(result => new Date(result.t).toLocaleDateString());
+      const labels = data.results.map(result => new Date(result.t).toLocaleString());
       const prices = data.results.map(result => result.c);
+
+      setPrice(prices[prices.length - 1]) // set default price to latest stock price
+      setLatestPrice(prices[prices.length - 1]) 
+
       setChartData({
         labels,
         datasets: [{
@@ -42,6 +49,16 @@ function StockChart() {
     fetchChartData();
   }, [ticker, multiplier, timeSpan, dateDuration]);
 
+  // function to extract the stock price where mouse hovers over
+  // so we can display it above the chart
+  const handleHover = (event, active, chart) => {
+    if (active.length > 0) {
+      const dataIndex = active[0].index;
+      const datasetIndex = active[0].datasetIndex;
+      const value = chart.data.datasets[datasetIndex].data[dataIndex];
+      setPrice(value);
+    }
+  };
 
   // Chart.js options
   const options = {
@@ -69,6 +86,9 @@ function StockChart() {
     },
     plugins: {
       legend: false,
+    },
+    onHover: (event, activeElements, chart) => {
+      handleHover(event, activeElements, chart);
     },
   };
 
@@ -118,9 +138,9 @@ function StockChart() {
 
   return (
     <div className="line-chart-section-container">
-      {/* <div className="line-chart-price">
+      <div className="line-chart-price">
         {`$${Number(price).toFixed(2)}`}
-      </div> */}
+      </div>
       <div className="line-chart-container">
         {chartData && (
           <Line
