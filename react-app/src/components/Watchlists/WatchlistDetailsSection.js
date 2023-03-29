@@ -1,9 +1,14 @@
 import { NavLink } from "react-router-dom";
 import OneDayChart from "../StockPage/OneDayChart";
+import { stockOneDayChange } from "../../utils/FetchStockData";
 import './WatchlistDetailsSection.css'
+import { useEffect } from "react";
 
 function WatchlistDetails({ watchlist }) {
   const stocksArr = watchlist.stocks
+  useEffect(() => {
+
+  })
   // console.log(stocksArr)
   return (
     <div className="watchlist-details-container">
@@ -11,8 +16,8 @@ function WatchlistDetails({ watchlist }) {
         <NavLink to={`/stocks/${stock.ticker}`} className="watchlist-details-individual-container" key={stock.ticker}>
           <div className="watchlist-details-ticker">{stock.ticker}</div>
           <div className="watchlist-details-chart-container"><OneDayChart ticker={stock.ticker} /></div>
-          <div className="watchlist-details-stock-price-percentage">stock price here</div>
-         </NavLink>
+          {/* <div className="watchlist-details-stock-price-percentage">{const data = stockOneDayChange(stock.ticker) return data["DoDPercChange"]}  {stockOneDayChange(stock.ticker)["DoDPercChange"]}</div> */}
+        </NavLink>
       ))
       }
     </div>
