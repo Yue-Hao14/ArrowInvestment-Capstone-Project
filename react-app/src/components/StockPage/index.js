@@ -18,7 +18,8 @@ import { fetchStockDailyAdjustedData } from '../../utils/FetchStockData'
 
 
 function StockPage() {
-  const { ticker } = useParams();
+  let { ticker } = useParams();
+  ticker = ticker.toUpperCase();
   const dispatch = useDispatch();
   let transactions = useSelector(state => state.transactions.tickerTransactions);
   transactions = Object.values(transactions);
@@ -33,7 +34,9 @@ function StockPage() {
   }, [dispatch])
 
   // function to get latest stock price data from child component (StockChart)
-  // function getLatestPriceCallBack
+  function getLatestPriceCallBack(latestPrice) {
+    setClosePrice(latestPrice)
+  }
 
   // get latest closing price from AlphaVantage(daily_adjusted)
   // useEffect(() => {
@@ -82,7 +85,7 @@ function StockPage() {
             <button className='stock-page-line-chart-button' onClick={() => setChart("1M")}>1M</button>
             <button className='stock-page-line-chart-button' onClick={() => setChart("1Y")}>1Y</button>
             <button className='stock-page-line-chart-button' onClick={() => setChart("5Y")}>5Y</button> */}
-            <StockChart />
+            <StockChart getLatestPriceCallBack={getLatestPriceCallBack}/>
           </div>
         </div>
         <div className='stock-page-transactions-container'>

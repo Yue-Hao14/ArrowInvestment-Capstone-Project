@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import { fetchAggStockData } from '../../utils/FetchStockData';
 
-function StockChart() {
+function StockChart({ getLatestPriceCallBack }) {
   // state for storing parameters for fetching stock data
   const [chartData, setChartData] = useState(null);
   const [multiplier, setMultiplier] = useState(5); // amount of interval; 1 min = 2 price is 1 min away
@@ -12,6 +12,9 @@ function StockChart() {
 
   const [price, setPrice] = useState(); // state for showing the price above chart whereever mouse hovers over
   const [latestPrice, setLatestPrice] = useState(); // state to pass back to parent component (stockPage) to have latest price for stock buy/sell
+
+  // pass latestPrice back to stockPage
+  getLatestPriceCallBack(latestPrice)
 
   // Get the stock ticker from the URL params
   let { ticker } = useParams();
@@ -26,7 +29,7 @@ function StockChart() {
       const prices = data.results.map(result => result.c);
 
       setPrice(prices[prices.length - 1]) // set default price to latest stock price
-      setLatestPrice(prices[prices.length - 1]) 
+      setLatestPrice(prices[prices.length - 1])
 
       setChartData({
         labels,
