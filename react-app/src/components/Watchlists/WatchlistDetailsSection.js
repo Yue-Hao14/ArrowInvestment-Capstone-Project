@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import OneDayChart from "../StockPage/OneDayChart";
+import OneDayChart from "../StockPage/AlphaVantageStockCharts/OneDayChart";
 import { stockOneDayChange } from "../../utils/FetchStockData";
 import './WatchlistDetailsSection.css'
 import { useEffect } from "react";

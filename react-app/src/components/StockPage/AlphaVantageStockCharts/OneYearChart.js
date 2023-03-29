@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchStockDailyAdjustedData } from "../../utils/FetchStockData"
+import { fetchStockDailyAdjustedData } from "../../../utils/FetchStockData"
 import { Chart } from "chart.js/auto"
 import { Line } from 'react-chartjs-2';
 
