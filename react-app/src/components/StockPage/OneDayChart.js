@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom";
 import { fetchStockIntradayData } from "../../utils/FetchStockData"
 import { Chart } from "chart.js/auto"
 import { Line } from 'react-chartjs-2';
@@ -7,8 +6,6 @@ import { Line } from 'react-chartjs-2';
 
 // TO DO: Figure out how to show “Loding…” sign/message if fetch more than allowed w/ AlphaVantage
 function OneDayChart({ ticker }) {
-  const location = useLocation()
-
   const [chartData, setChartData] = useState();
   const [stockData, setStockData] = useState({});
   const [price, setPrice] = useState();

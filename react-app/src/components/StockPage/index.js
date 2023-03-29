@@ -14,6 +14,7 @@ import { getAllTransactionsByTickerThunk } from '../../store/transaction'
 import { dbDateToDisplay } from '../../utils/DateFunctions'
 import StockBuySell from './StockBuySell'
 import { fetchStockDailyAdjustedData } from '../../utils/FetchStockData'
+import { getPortfolioThunk } from '../../store/portfolio'
 
 function StockPage() {
   const { ticker } = useParams();
@@ -27,12 +28,13 @@ function StockPage() {
 
   // hydrate redux store with tickerTransaction slice
   useEffect(() => {
-    dispatch(getAllTransactionsByTickerThunk(ticker))
+    dispatch(getAllTransactionsByTickerThunk(ticker));
+    // dispatch(getPortfolioThunk())
   }, [dispatch])
 
   // get latest closing price from AlphaVantage(daily_adjusted)
   useEffect(() => {
-    async function fetchStockData () {
+    async function fetchStockData() {
       const data = await fetchStockDailyAdjustedData(ticker.toUpperCase())
       setStockData(data)
       // console.log(data)
@@ -43,7 +45,7 @@ function StockPage() {
       setClosePrice(latestPrice)
     };
     fetchStockData()
-  },[ticker])
+  }, [ticker])
 
   const chartObj = {
     "1D": <OneDayChart ticker={ticker} />,
