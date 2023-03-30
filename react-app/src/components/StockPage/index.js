@@ -8,8 +8,8 @@ import { getAllTransactionsByTickerThunk } from '../../store/transaction'
 import { dbDateToDisplay } from '../../utils/DateFunctions'
 import StockBuySell from './StockBuySell'
 import StockChart from './StockChart'
-import { fetchStockNews } from '../../utils/FetchStockData'
-
+import { fetchStockNews, fetchTickerDetails } from '../../utils/FetchStockData'
+import StockAbout from './StockAbout'
 
 function StockPage() {
   let { ticker } = useParams();
@@ -48,6 +48,9 @@ function StockPage() {
           <div className='stock-page-line-chart-container'>
             <StockChart getLatestPriceCallBack={getLatestPriceCallBack}/>
           </div>
+        </div>
+        <div className='stock-page-company-about-container'>
+          <StockAbout />
         </div>
         <div className='stock-page-transactions-container'>
           <h2>Transactions</h2>

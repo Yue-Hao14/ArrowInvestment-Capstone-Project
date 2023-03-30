@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {
 		async function fetchTickersForSearchBar() {
 			const data = await fetchAllTickers()
-			console.log("data.results", data)
+			// console.log("data.results", data)
 			setStocksArr(data.results)
 		};
 		fetchTickersForSearchBar()

@@ -89,6 +89,15 @@ export const fetchAllTickers = async () => {
   return data
 }
 
+// fetch company information
+export const fetchTickerDetails = async (ticker) => {
+  const url = `https://api.polygon.io/v3/reference/tickers/AAPL?apiKey=${polygonApiKey}`
+  const response = await fetch(url);
+  const data = await response.json();
+  return data
+}
+
+
 // fetch specific stock's news
 export const fetchStockNews = async (ticker) => {
   const url = `https://api.polygon.io/v2/reference/news?ticker=AAPL&apiKey=${polygonApiKey}`
