@@ -68,6 +68,15 @@ export const fetchAggStockData = async (ticker, multiplier, timeSpan, dateDurati
   return data;
 }
 
+// fetch current day's snapshots data for a specific stock, including one day dollar and percentage change
+export const fetchSnapshotsTicker = async (ticker) => {
+  const url = `https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers/${ticker}?apiKey=${polygonApiKey}`
+  const response = await fetch(url);
+  const data = await response.json();
+  return data
+}
+
+
 export const stockDoDChange = async (ticker) => {
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 is Sunday
@@ -87,5 +96,4 @@ export const stockDoDChange = async (ticker) => {
   const DoDPercChange = (todayPrice - priorDayPrice) / priorDayPrice
   console.log(DoD$Change, DoDPercChange)
   return DoD$Change
-
 }
