@@ -34,6 +34,7 @@ function StockChart({ getLatestPriceCallBack }) {
       setChartData({
         labels,
         datasets: [{
+          label: "Stock Price",
           data: prices,
           backgroundColor: 'none',
           borderColor: '#5AC53B',

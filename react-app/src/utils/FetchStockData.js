@@ -51,11 +51,16 @@ const polygonApiKey = process.env.REACT_APP_POLYGON_API_KEY;
 // multiplier = 1, timeSpan = "minute" means each data point is 1 min difference
 // dateDuration = 0, today's data; dateDuration = 1, last 2 day's data
 export const fetchAggStockData = async (ticker, multiplier, timeSpan, dateDuration) => {
-  const dateTo = new Date();
+  const dateTo = new Date(); // set dateTo as today in local time
+  const offset = dateTo.getTimezoneOffset() // get time zone diff w/ UTC timezone
+  dateTo.setTime(dateTo.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
+
   const dateFrom = new Date();
-  dateFrom.setDate(dateFrom.getDate() - dateDuration);
-  const to = dateTo.toISOString().slice(0, 10);
-  const from = dateFrom.toISOString().slice(0, 10);
+  dateFrom.setDate(dateFrom.getDate() - dateDuration); // set the starting date of stock data
+  dateFrom.setTime(dateFrom.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
+  const to = dateTo.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
+  const from = dateFrom.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
+
   const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/${multiplier}/${timeSpan}/${from}/${to}?apiKey=${polygonApiKey}`;
   const response = await fetch(url);
   const data = await response.json();

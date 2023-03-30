@@ -71,15 +71,3 @@
 }
 
 
-.watchlist-details-individual-container {
-  display: flex;
-}
-
-
-.watchlist-details-chart-container>.line-chart-section-container>.line-chart-price {
-  display: none;
-}
-
-.watchlist-details-chart-container {
-  width: 40%;
-}

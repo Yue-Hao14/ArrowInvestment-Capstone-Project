@@ -5,4 +5,12 @@
 
 .watchlist-details-container > a {
   text-decoration: none;
+  display: flex;
+  padding: 0 23px;
+  align-items: center;
+}
+
+.watchlist-line-chart-container  {
+
+  height: 60px;
 }
