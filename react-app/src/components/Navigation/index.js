@@ -37,6 +37,7 @@ function Navigation({ isLoaded }) {
 			)}
 			{sessionUser && (
 				<div className='navigation-right-container'>
+					<NavLink to="/dashboard" className="investing-button">Investing</NavLink>
 					<AccountButton user={sessionUser} className="account-button" />
 				</div>
 			)

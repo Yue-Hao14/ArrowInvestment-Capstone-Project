@@ -68,6 +68,23 @@
   font-weight: bold;
 }
 
+.investing-button {
+  background: none;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+  padding-right: 40px;
+}
+
+.navigation-right-container > a {
+  color:inherit
+}
+
+.investing-button:hover {
+  color: #00c805;
+}
+
+
 .account-button {
   background: none;
   border: none;
