@@ -25,7 +25,7 @@ function StockPage() {
   // hydrate redux store with tickerTransaction slice
   useEffect(() => {
     dispatch(getAllTransactionsByTickerThunk(ticker));
-  }, [dispatch])
+  }, [dispatch,ticker])
 
   // function to get latest stock price data from child component (StockChart)
   function getLatestPriceCallBack(latestPrice) {

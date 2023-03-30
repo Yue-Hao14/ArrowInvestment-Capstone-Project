@@ -60,7 +60,7 @@ export const fetchAggStockData = async (ticker, multiplier, timeSpan, dateDurati
   dateFrom.setTime(dateFrom.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
   const to = dateTo.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
   const from = dateFrom.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
-  console.log("to and from", to, from)
+  // console.log("to and from", to, from)
 
   const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/${multiplier}/${timeSpan}/${from}/${to}?apiKey=${polygonApiKey}`;
   const response = await fetch(url);
@@ -76,9 +76,14 @@ export const fetchSnapshotsTicker = async (ticker) => {
   return data
 }
 
-// fetch all tickers supported by polygon
+// fetch all US tickers supported by polygon
 export const fetchAllTickers = async () => {
-  const url = `https://api.polygon.io/v3/reference/tickers?type=CS&market=stocks&active=true&limit=1000&apiKey=${polygonApiKey}`
+  const dateTo = new Date(); // set dateTo as today in local time
+  const offset = dateTo.getTimezoneOffset() // get time zone diff w/ UTC timezone
+  dateTo.setTime(dateTo.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
+  const to = dateTo.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
+
+  const url = `https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/${to}?adjusted=true&apiKey=${polygonApiKey}`
   const response = await fetch(url);
   const data = await response.json();
   return data

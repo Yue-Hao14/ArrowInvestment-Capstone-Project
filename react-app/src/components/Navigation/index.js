@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {
 		async function fetchTickersForSearchBar() {
 			const data = await fetchAllTickers()
-			console.log("data.results", data.results)
+			console.log("data.results", data)
 			setStocksArr(data.results)
 		};
 		fetchTickersForSearchBar()
@@ -38,10 +38,9 @@ function Navigation({ isLoaded }) {
 		e.preventDefault();
 
 		const searchStock = e.target.value;
-		console.log("searchStock",searchStock)
-		console.log("stocksArr",stocksArr)
+
 		const filteredStocksArr = stocksArr.filter(stock => {
-			return stock.ticker.toUpperCase().startsWith(searchStock.toUpperCase())
+			return stock.T.toUpperCase().startsWith(searchStock.toUpperCase())
 		})
 
 		if (searchStock === "") {
@@ -86,10 +85,10 @@ function Navigation({ isLoaded }) {
 							<div className='navigation-search-bar-results'>
 								{filteredData.slice(0, 5).map(stock => (
 									<NavLink
-										to={`/stocks/${stock.ticker}`}
+										to={`/stocks/${stock.T}`}
 										className="navigation-search-bar-results-items">
-										<span className='navigation-search-bar-results-items-ticker'>{stock.ticker}</span>
-										<span className='navigation-search-bar-results-items-name'>{stock.name}</span>
+										<span className='navigation-search-bar-results-items-ticker'>{stock.T}</span>
+										{/* <span className='navigation-search-bar-results-items-name'>{stock.name}</span> */}
 									</NavLink>
 								))}
 							</div>
