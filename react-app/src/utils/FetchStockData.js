@@ -91,7 +91,7 @@ export const fetchAllTickers = async () => {
 
 // fetch company information
 export const fetchTickerDetails = async (ticker) => {
-  const url = `https://api.polygon.io/v3/reference/tickers/AAPL?apiKey=${polygonApiKey}`
+  const url = `https://api.polygon.io/v3/reference/tickers/${ticker}?apiKey=${polygonApiKey}`
   const response = await fetch(url);
   const data = await response.json();
   return data
