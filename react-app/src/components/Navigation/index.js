@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import AccountButton from './AccountButton';
+import { fetchAllTickers } from '../../utils/FetchStockData';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
+
+	const [stocksArr, setStocksArr] = useState([])
+	const [filteredData, setFilteredData] = useState([])
 
 	const siteClassName = "sitename" + (sessionUser ? " hidden" : "");
 
 	const comingSoon = (e) => {
 		e.preventDefault();
 		alert("Feature coming soon...")
+	}
+
+	// fetch the list of available stocks from polygon
+	useEffect(() => {
+		async function fetchTickersForSearchBar() {
+			const data = await fetchAllTickers()
+			setStocksArr(data.results)
+		};
+		fetchTickersForSearchBar()
+	}, [])
+
+
+	// function that takes user input and filter through all the stocks,
+	// return an array with tickers includes user's input
+	// set this array to filteredData so can be passed on to JSX
+	const handleFilter = (e) => {
+		e.preventDefault();
+
+		const searchStock = e.target.value;
+		const filteredStocksArr = stocksArr.filter(stock => {
+			return stock.ticker.toUpperCase().includes(searchStock.toUpperCase())
+		})
+
+		if (searchStock === "") {
+			setFilteredData([]);
+		} else {
+			setFilteredData(filteredStocksArr)
+		}
 	}
 
 	return (
@@ -41,14 +73,35 @@ function Navigation({ isLoaded }) {
 				</div>
 			)}
 			{sessionUser && (
-				<div className='navigation-right-container'>
-					<button className='rewards-button' onClick={comingSoon}>Rewards</button>
-					<NavLink to="/dashboard" className="investing-button">Investing</NavLink>
-					<button className='spending-button' onClick={comingSoon}>Spending</button>
-					<button className='retirement-button' onClick={comingSoon}>Retirement</button>
-					<button className='notification-button' onClick={comingSoon}>Notification</button>
-					<AccountButton user={sessionUser} className="account-button" />
-				</div>
+				<>
+					<div className='navigation-search-bar-container'>
+						<div className='navigation-search-bar-inputs'>
+							<i className="fa-solid fa-magnifying-glass search-icon"></i>
+							<input type="text" placeholder='Search' onChange={handleFilter} />
+						</div>
+						{filteredData.length !== 0 && (
+							<div className='navigation-search-bar-results'>
+								{filteredData.slice(0, 5).map(stock => (
+									<NavLink
+										to={`/stocks/${stock.ticker}`}
+										className="navigation-search-bar-results-items">
+										<span className='navigation-search-bar-results-items-ticker'>{stock.ticker}</span>
+										<span className='navigation-search-bar-results-items-name'>{stock.name}</span>
+									</NavLink>
+								))}
+							</div>
+						)}
+
+					</div>
+					<div className='navigation-right-container'>
+						<button className='rewards-button' onClick={comingSoon}>Rewards</button>
+						<NavLink to="/dashboard" className="investing-button">Investing</NavLink>
+						<button className='spending-button' onClick={comingSoon}>Spending</button>
+						<button className='retirement-button' onClick={comingSoon}>Retirement</button>
+						<button className='notification-button' onClick={comingSoon}>Notification</button>
+						<AccountButton user={sessionUser} className="account-button" />
+					</div>
+				</>
 			)
 
 			}

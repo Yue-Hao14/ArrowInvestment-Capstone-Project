@@ -76,6 +76,14 @@ export const fetchSnapshotsTicker = async (ticker) => {
   return data
 }
 
+// fetch all tickers supported by polygon
+export const fetchAllTickers = async () => {
+  const url = `https://api.polygon.io/v3/reference/tickers?market=stocks&active=true&apiKey=${polygonApiKey}`
+  const response = await fetch(url);
+  const data = await response.json();
+  return data
+}
+
 
 export const stockDoDChange = async (ticker) => {
   const today = new Date();
