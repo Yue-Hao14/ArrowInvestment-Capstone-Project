@@ -68,7 +68,7 @@ function Watchlists() {
       {sessionUser && (
         <>
           <div className='watchlist-name-sign-container' key='name-sign'>
-            <div className='watchlist-label' key='label'>Watchlists</div>
+            <div className='watchlist-label' key='label'>Lists</div>
             <OpenModalButton
               modalComponent={<AddWatchlistModal />}
               buttonText={<i className="add-watchlist-button fa-sharp fa-solid fa-plus"></i>}
@@ -115,7 +115,7 @@ function Watchlists() {
                 <div className='watchlist-stock-details-container' key={watchlist.list_name}>
                   {showDetailsId === watchlist.id &&
                     watchlist.stocks.map (stock => (
-                      <WatchlistDetails ticker={stock.ticker} />
+                      <WatchlistDetails ticker={stock.ticker}  key={stock.ticker}/>
                     ))}
                 </div>
               </>
