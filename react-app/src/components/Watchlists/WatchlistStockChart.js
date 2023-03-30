@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart } from "chart.js/auto"
-import { fetchAggStockData } from '../../utils/FetchStockData';
 
-function WatchlistStockChart({ticker}) {
-  const [chartData, setChartData] = useState(null);
 
-  // Fetch stock data from polygon for graph
-  useEffect(() => {
-    async function fetchChartData() {
-      const data = await fetchAggStockData(ticker, 1, "hour", 0);
-      console.log(data)
-      const labels = data.results.map(result => new Date(result.t).toLocaleString());
-      const prices = data.results.map(result => result.c);
-
-      setChartData({
-        labels,
+function WatchlistStockChart({labels, prices}) {
+  const chartData = {
+    labels,
         datasets: [{
           data: prices,
           backgroundColor: 'none',
@@ -30,13 +20,10 @@ function WatchlistStockChart({ticker}) {
           tension: 0.0,
           fill: false
         }],
-      });
-    }
-    fetchChartData();
-  }, [ticker]);
+  }
 
   // Chart.js options
-  const options = {
+  const watchlistChartOptions = {
     events: [],
     responsive: true,
     maintainAspectRatio: false,
@@ -64,7 +51,7 @@ function WatchlistStockChart({ticker}) {
         {chartData && (
           <Line
             data={chartData}
-            options={options}
+            options={watchlistChartOptions}
           />
         )}
       </div>

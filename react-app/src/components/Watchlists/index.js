@@ -113,7 +113,10 @@ function Watchlists() {
                   </div>
                 </div>
                 <div className='watchlist-stock-details-container' key={watchlist.list_name}>
-                  {showDetailsId === watchlist.id && <WatchlistDetails watchlist={watchlist} />}
+                  {showDetailsId === watchlist.id &&
+                    watchlist.stocks.map (stock => (
+                      <WatchlistDetails ticker={stock.ticker} />
+                    ))}
                 </div>
               </>
             ))

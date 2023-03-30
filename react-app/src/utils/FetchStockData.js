@@ -60,6 +60,7 @@ export const fetchAggStockData = async (ticker, multiplier, timeSpan, dateDurati
   dateFrom.setTime(dateFrom.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
   const to = dateTo.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
   const from = dateFrom.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
+  console.log("to and from", to, from)
 
   const url = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/${multiplier}/${timeSpan}/${from}/${to}?apiKey=${polygonApiKey}`;
   const response = await fetch(url);
@@ -75,9 +76,10 @@ export const stockDoDChange = async (ticker) => {
   // if today is Sat, fromDate should be Thur (-2), so compare Fri vs. Thur
   // the rest is simply comparing today vs. yeasterday
   const daysToSubtract = dayOfWeek === 1 ? 3
-    : dayOfWeek === 0 ? 3 : dayOfWeek === 6 ? 2 : 1;
+    : dayOfWeek === 0 ? 3 : dayOfWeek === 6 ? 2 : 2;
+  console.log("daysToSubtract",daysToSubtract)
   const data = await fetchAggStockData(ticker, 1, "day", daysToSubtract)
-  // console.log("data in stockDoDChange", data)
+  console.log("data in stockDoDChange", data)
   const todayPrice = data.results[0].c
   const priorDayPrice = data.results[1].c
   console.log("todayPrice",todayPrice)
