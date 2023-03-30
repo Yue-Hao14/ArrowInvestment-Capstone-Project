@@ -9,7 +9,7 @@ function WatchlistStockChart({ticker}) {
   // Fetch stock data from polygon for graph
   useEffect(() => {
     async function fetchChartData() {
-      const data = await fetchAggStockData(ticker, 5, "minute", 0);
+      const data = await fetchAggStockData(ticker, 1, "hour", 0);
       console.log(data)
       const labels = data.results.map(result => new Date(result.t).toLocaleString());
       const prices = data.results.map(result => result.c);
@@ -37,6 +37,7 @@ function WatchlistStockChart({ticker}) {
 
   // Chart.js options
   const options = {
+    events: [],
     responsive: true,
     maintainAspectRatio: false,
     scales: {

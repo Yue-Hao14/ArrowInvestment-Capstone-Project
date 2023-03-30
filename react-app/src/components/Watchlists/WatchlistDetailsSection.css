@@ -11,6 +11,6 @@
 }
 
 .watchlist-line-chart-container  {
-
-  height: 60px;
+  width: 130px;
+  height: 100%
 }

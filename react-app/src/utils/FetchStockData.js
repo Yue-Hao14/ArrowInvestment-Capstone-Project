@@ -66,3 +66,24 @@ export const fetchAggStockData = async (ticker, multiplier, timeSpan, dateDurati
   const data = await response.json();
   return data;
 }
+
+export const stockDoDChange = async (ticker) => {
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0 is Sunday
+  // if today is Mon, fromDate should be Fri (-3)
+  // if today is Sun, fromDate should be Thur (-3), so compare Fri vs. Thur
+  // if today is Sat, fromDate should be Thur (-2), so compare Fri vs. Thur
+  // the rest is simply comparing today vs. yeasterday
+  const daysToSubtract = dayOfWeek === 1 ? 3
+    : dayOfWeek === 0 ? 3 : dayOfWeek === 6 ? 2 : 1;
+  const data = await fetchAggStockData(ticker, 1, "day", daysToSubtract)
+  // console.log("data in stockDoDChange", data)
+  const todayPrice = data.results[0].c
+  const priorDayPrice = data.results[1].c
+  console.log("todayPrice",todayPrice)
+  const DoD$Change = todayPrice - priorDayPrice
+  const DoDPercChange = (todayPrice - priorDayPrice) / priorDayPrice
+  console.log(DoD$Change, DoDPercChange)
+  return DoD$Change
+
+}
