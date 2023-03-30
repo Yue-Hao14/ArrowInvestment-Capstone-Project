@@ -1,0 +1,73 @@
+/* make sure NavLink's color does not change before and after click */
+.watchlist-container a {
+  color: inherit
+}
+
+.setting-dropdown {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  z-index: 1;
+  flex-direction: column;
+  background-color: white;
+  width: 200px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 12px;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.watchlist-container {
+  position: sticky;
+  border: 1px solid grey;
+  width: 20%
+}
+
+
+.watchlist-name-sign-container {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  border: 1px solid grey;
+}
+
+.watchlist-name-sign-container button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.add-watchlist-button {
+  color: #00c805;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 16px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.add-watchlist-button:hover {
+  font-weight: bold;
+}
+
+.watchlist-list-name-setting-expand-icon-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watchlist-list-name {
+  text-decoration: none;
+}
+
+.setting-dropdown button {
+  text-decoration: underline;
+  background-color: white;
+  border: none;
+  font-size: 14px
+}
+
+

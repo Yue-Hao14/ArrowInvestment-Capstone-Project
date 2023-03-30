@@ -95,7 +95,7 @@ function Navigation({ isLoaded }) {
 						)}
 
 					</div>
-					<div className='navigation-right-container'>
+					<div className='navigation-right-container-logged-in'>
 						<button className='rewards-button' onClick={comingSoon}>Rewards</button>
 						<NavLink to="/dashboard" className="investing-button">Investing</NavLink>
 						<button className='spending-button' onClick={comingSoon}>Spending</button>
