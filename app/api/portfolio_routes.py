@@ -6,6 +6,17 @@ from .auth_routes import validation_errors_to_error_messages
 
 portfolio_routes = Blueprint('portfolios', __name__)
 
+
+@portfolio_routes.route('/')
+@login_required
+def get_portfolio():
+    """
+    return user's portoflio info
+    """
+    portfolio = Portfolio.query.filter(Portfolio.user_id==current_user.id).first()
+    return portfolio.to_dict()
+
+
 @portfolio_routes.route('/', methods=['POST'])
 @login_required
 def create_portfolio():

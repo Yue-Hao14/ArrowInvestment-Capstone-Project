@@ -24,6 +24,7 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {
 		async function fetchTickersForSearchBar() {
 			const data = await fetchAllTickers()
+			console.log("data.results", data.results)
 			setStocksArr(data.results)
 		};
 		fetchTickersForSearchBar()
@@ -37,8 +38,10 @@ function Navigation({ isLoaded }) {
 		e.preventDefault();
 
 		const searchStock = e.target.value;
+		console.log("searchStock",searchStock)
+		console.log("stocksArr",stocksArr)
 		const filteredStocksArr = stocksArr.filter(stock => {
-			return stock.ticker.toUpperCase().includes(searchStock.toUpperCase())
+			return stock.ticker.toUpperCase().startsWith(searchStock.toUpperCase())
 		})
 
 		if (searchStock === "") {

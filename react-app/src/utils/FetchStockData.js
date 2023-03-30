@@ -78,7 +78,15 @@ export const fetchSnapshotsTicker = async (ticker) => {
 
 // fetch all tickers supported by polygon
 export const fetchAllTickers = async () => {
-  const url = `https://api.polygon.io/v3/reference/tickers?market=stocks&active=true&apiKey=${polygonApiKey}`
+  const url = `https://api.polygon.io/v3/reference/tickers?type=CS&market=stocks&active=true&limit=1000&apiKey=${polygonApiKey}`
+  const response = await fetch(url);
+  const data = await response.json();
+  return data
+}
+
+// fetch specific stock's news
+export const fetchStockNews = async (ticker) => {
+  const url = `https://api.polygon.io/v2/reference/news?ticker=AAPL&apiKey=${polygonApiKey}`
   const response = await fetch(url);
   const data = await response.json();
   return data
