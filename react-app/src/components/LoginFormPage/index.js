@@ -46,7 +46,7 @@ function LoginFormPage() {
       <div className="'login-right-container">
         <div className="login-title">Log in to Arrow Investment</div>
         <form onSubmit={handleSubmit} className="login-form">
-          <ul>
+          <ul className="login-errro-messages">
             {errors && errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}

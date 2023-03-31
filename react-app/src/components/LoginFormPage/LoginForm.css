@@ -29,6 +29,10 @@
   gap: 30px;
 }
 
+.login-errro-messages {
+  color: #c53b3b;
+}
+
 .login-form >label {
   display: flex;
   flex-direction: column;

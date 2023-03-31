@@ -21,7 +21,14 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+
+    // error handling
+    let validationErrors=[]
+    if (!email.includes("@")) validationErrors.push('Please enter a valid email address')
+    if (password !== confirmPassword) validationErrors.push('Confirm Password field must be the same as the Password field')
+    setErrors(validationErrors)
+
+    if (!errors) {
       const data = await dispatch(signUp(username, firstName, lastName, email, password))
       .then(() => dispatch(createPortfolioThunk()))
 
@@ -30,8 +37,6 @@ function SignupFormPage() {
       } else {
         history.push('/dashboard')
       }
-    } else {
-      setErrors(['Confirm Password field must be the same as the Password field']);
     }
   };
 
@@ -47,9 +52,9 @@ function SignupFormPage() {
         <div className="signup-title">Sign Up with Arrow Investment</div>
         <span className="signup-message">We'll need your email address, username, first name, last name and a unique password. You'll use this login to access Arrow Investment next time.</span>
         <form onSubmit={handleSubmit} className="signup-form">
-          <ul>
+          <div className="signup-error-messages-container">
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>
+          </div>
           <label>
             Email
             <input
