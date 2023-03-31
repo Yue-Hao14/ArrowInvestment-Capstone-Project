@@ -15,7 +15,6 @@
   border-radius: 12px;
 }
 
-
 .hidden {
   display: none;
 }
@@ -27,8 +26,7 @@
   font-size: 18px;
 }
 
-
-.watchlist-name-sign-container {
+.watchlist-name-add-sign-container {
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -37,7 +35,7 @@
   padding: 8px 12px;
 }
 
-.watchlist-name-sign-container button {
+.watchlist-name-add-sign-container button {
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -53,12 +51,10 @@
 }
 
 .add-watchlist-button:hover {
-  font-weight: bold;
+  background-color: #e0e0e0;
 }
 
-.watchlist-details-container {
-  padding: 0px 12px;
-}
+
 
 .watchlist-list-name-setting-expand-icon-container {
   display: flex;
@@ -83,4 +79,8 @@
   background-color: white;
   border: none;
   font-size: 14px
+}
+
+.watchlist-details-container {
+  padding: 0px 12px;
 }

@@ -1,10 +1,10 @@
 .dashboard-left-container {
-  margin-left: 100px;
+  margin-left: 7%;
 }
 
 .dashboard-right-container {
   position: absolute;
-  right: 100px;
+  right: 7%;
   top: 100px;
 }
 

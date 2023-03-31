@@ -24,7 +24,7 @@ function StockChart({ getLatestPriceCallBack }) {
   useEffect(() => {
     async function fetchChartData() {
       const data = await fetchAggStockData(ticker, multiplier, timeSpan, dateDuration);
-      // console.log(data)
+      // console.log("data in StockChart",data)
       const labels = data.results.map(result => new Date(result.t).toLocaleString());
       const prices = data.results.map(result => result.c);
 

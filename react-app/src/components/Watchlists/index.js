@@ -7,19 +7,26 @@ import DeleteWatchlistModal from './DeleteWatchlistModal';
 import OpenModalButton from '../OpenModalButton'
 import './Watchlist.css'
 import { NavLink } from 'react-router-dom';
+import { addWatchlistThunk } from '../../store/watchlist';
+
 
 function Watchlists() {
   const dispatch = useDispatch();
+  const ulRef = useRef();
   const watchlists = useSelector(state => state.watchlists);
   const sessionUser = useSelector(state => state.session.user);
+  const userId = useSelector(state => state.session.user.id);
+
   const [showDetailsId, setShowDetailsId] = useState(false);
   const [showSettingId, setShowSettingId] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const ulRef = useRef()
+  const [showAddList, setShowAddList] = useState(false);
+  const [listName, setListName] = useState('');
+  const [errors, setErrors] = useState()
 
   // hydrate redux store first
   useEffect(() => {
-    dispatch(getAllWatchlistStocksThunk())
+    dispatch(getAllWatchlistStocksThunk());
   }, [dispatch])
 
   // function to set showMenu to true once user click on the setting icon
@@ -37,15 +44,7 @@ function Watchlists() {
     }
   };
 
-  // function to control only the watchlist being clicked shows details
-  const displayDetails = watchlist => {
-    if (showDetailsId !== watchlist.id) {
-      setShowDetailsId(watchlist.id)
-    } else {
-      setShowDetailsId(null)
-    }
-  }
-
+  // function to close setting dropdown menu when mouse click outside of it
   useEffect(() => {
     if (!showMenu) return;
 
@@ -60,6 +59,39 @@ function Watchlists() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  // function that set showAddList to true when user click on the "+" icon
+  const openAddList = () => {
+    setShowAddList(true);
+  }
+  // function that set showAddList to false when user click on the "cancel" button
+  const closeAddList = () => {
+    setShowAddList(false);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log("handleSubmit fired");
+    console.log("listName", listName.length);
+    // pass info as a request to backend
+    if (listName.length > 0) {
+      const newWatchlist = { listName, userId }
+      const data = await dispatch(addWatchlistThunk(newWatchlist))
+      setShowAddList(false) // close add list section
+    } else {
+      setErrors("List name is required.")
+    }
+  }
+
+
+  // function to control only the watchlist being clicked shows details
+  const displayDetails = watchlist => {
+    if (showDetailsId !== watchlist.id) {
+      setShowDetailsId(watchlist.id)
+    } else {
+      setShowDetailsId(null)
+    }
+  }
+
   const ulClassName = "setting-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
@@ -67,13 +99,39 @@ function Watchlists() {
     <div className="watchlist-container">
       {sessionUser && (
         <>
-          <div className='watchlist-name-sign-container' key='name-sign'>
+          <div className='watchlist-name-add-sign-container' key='name-sign'>
             <div className='watchlist-label' key='label'>Lists</div>
-            <OpenModalButton
-              modalComponent={<AddWatchlistModal />}
-              buttonText={<i className="add-watchlist-button fa-sharp fa-solid fa-plus"></i>}
-              key='modal'
-            />
+            <div className='watchlist-add-sign'>
+              <button onClick={openAddList}><i className="add-watchlist-button fa-sharp fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+          <div className='watchlist-add-sign-dropdown-container'>
+            {showAddList &&
+              <>
+                <div className='watchlist-add-sign-dropdown-input-container'>
+                  <div className='add-list-error'>{errors}</div>
+                  <input
+                    type='text'
+                    onChange={e => setListName(e.target.value)}
+                    required
+                    placeholder='List Name'
+                    className='add-watchlist-input'
+                  />
+                </div>
+                <div className='watchlist-add-sign-dropdown-buttons-container'>
+                  <button type='button' onClick={closeAddList}
+                    className='add-watchlist-cancel-button'
+                  >
+                    Cancel
+                  </button>
+                  <button type='submit' onClick={handleSubmit}
+                    className='add-watchlist-submit-button'
+                  >
+                    Create List
+                  </button>
+                </div>
+              </>
+            }
           </div>
           <div className='watchlist-details-container' key='details'>
             {Object.values(watchlists).map(watchlist => (
