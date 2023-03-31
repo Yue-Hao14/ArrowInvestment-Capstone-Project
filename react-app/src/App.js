@@ -8,7 +8,7 @@ import Navigation from "./components/Navigation";
 import Watchlists from "./components/Watchlists";
 import StockPage from "./components/StockPage";
 import SplashPage from "./components/SplashPage";
-import WatchlistDetailsPage from "./components/Watchlists/WatchlistDetailsPage";
+import WatchlistManagePage from "./components/Watchlists/WatchlistManagePage";
 import DashboardPage from "./components/Dashboard";
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
           <Route exact path="/login" > {isLoggedIn ? <Redirect to="/dashboard" /> : <LoginFormPage />} </Route>
           <Route exact path="/signup"> {isLoggedIn ? <Redirect to="/dashboard" /> : <SignupFormPage />} </Route>
           <Route path="/dashboard"> {isLoggedIn ? <DashboardPage /> : <Redirect to="/" />}</Route>
-          <Route path="/watchlists/:watchlistId"> {isLoggedIn ? <WatchlistDetailsPage /> : <Redirect to="/" />} </Route>
+          <Route path="/watchlists/:watchlistId"> {isLoggedIn ? <WatchlistManagePage /> : <Redirect to="/" />} </Route>
           <Route path="/stocks/:ticker"> {isLoggedIn ? <StockPage /> : <Redirect to="/" />} </Route>
         </Switch>
       )}

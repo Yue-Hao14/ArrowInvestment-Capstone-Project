@@ -56,12 +56,22 @@ def add_stock_to_watchlist():
     watchlist_id_list = data['watchlistId']
     ticker = data['ticker']
 
+    all_stocks = Stock.query.all()
+    # print("-------------------all stocks", all_stocks)
+
+
     # add stock to watchlist only if it doesn't already exists there
     for watchlist_id in watchlist_id_list:
+        stock = Stock.query.get(ticker)
+        print("-------------stock--------------", stock)
+        if stock == None:
+            new_stock = Stock(ticker = ticker, company_name="null")
+            db.session.add(new_stock)
+            db.session.commit()
+
+        stock = Stock.query.get(ticker)
         stocks_in_watchlist = Watchlist.query.get(watchlist_id).stocks  # an array of stocks object
         # print("----------stocks_in_watchlist-----------------", stocks_in_watchlist)
-        stock = Stock.query.get(ticker)
-        # print("-------------stock--------------", stock)
 
         if stock not in stocks_in_watchlist and form.validate_on_submit():
             watchlist = Watchlist.query.get(watchlist_id)

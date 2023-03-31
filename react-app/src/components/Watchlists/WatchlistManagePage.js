@@ -8,7 +8,7 @@ import WatchlistDetailsStockRow from "./WatchlistDetailsStockRow"
 import './WatchlistDetailsPage.css'
 
 // TO DO: need to add other stock info to each stock in stocksArr
-function WatchlistDetailsPage() {
+function WatchlistManagePage() {
   const dispatch = useDispatch()
   let { watchlistId } = useParams()
   watchlistId = Number(watchlistId)
@@ -57,4 +57,4 @@ function WatchlistDetailsPage() {
   )
 }
 
-export default WatchlistDetailsPage
+export default WatchlistManagePage
