@@ -110,6 +110,11 @@ function Watchlists() {
               <>
                 <div className='watchlist-add-sign-dropdown-input-container'>
                   <div className='add-list-error'>{errors}</div>
+                  <div className='light-bulb-icon-container'>
+                    <img className='light-bulb-icon'
+                      src="https://cdn.robinhood.com/emoji/v0/128/1f4a1.png"
+                    />
+                  </div>
                   <input
                     type='text'
                     onChange={e => setListName(e.target.value)}
@@ -137,13 +142,20 @@ function Watchlists() {
             {Object.values(watchlists).map(watchlist => (
               <>
                 <div className='watchlist-list-name-setting-expand-icon-container' key={watchlist.id}>
-                  <NavLink
-                    to={`/watchlists/${watchlist.id}`}
-                    className='watchlist-list-name'
-                    key={watchlist.list_name}
-                  >
-                    {watchlist.list_name}
-                  </NavLink>
+                  <div className='watchlist-icon-name-container'>
+                    <div className='light-bulb-icon-container'>
+                      <img className='light-bulb-icon'
+                        src="https://cdn.robinhood.com/emoji/v0/128/1f4a1.png"
+                      />
+                    </div>
+                    <NavLink
+                      to={`/watchlists/${watchlist.id}`}
+                      className='watchlist-list-name'
+                      key={watchlist.list_name}
+                    >
+                      {watchlist.list_name}
+                    </NavLink>
+                  </div>
                   <div className='watchlist-setting-dropdown-icons'>
                     <div
                       className='watchlist-list-setting-icon'

@@ -54,6 +54,71 @@
   background-color: #e0e0e0;
 }
 
+.watchlist-add-sign-dropdown-container {
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.watchlist-add-sign-dropdown-input-container {
+  padding: 8px 12px;
+  display: flex;
+}
+
+.add-watchlist-input {
+  width: 80%;
+  height: 45px;
+  padding-left: 16px;
+  background-color: rgb(245,248,250);
+  border: 1px white solid;
+  margin-left: 12px;
+}
+
+.add-watchlist-input:hover {
+  background-color: white;
+  border: 1px rgb(219, 219, 219) solid;
+  border-radius: 5px;
+}
+
+.add-watchlist-input:focus {
+  background-color: white;
+  border: 1px rgb(0,200,5) solid;
+  border-radius: 5px;
+  outline: none;
+}
+
+.watchlist-add-sign-dropdown-buttons-container {
+  padding: 0px 12px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.add-watchlist-cancel-button {
+  background-color: white;
+  border: 1px solid rgb(0,200,5);
+  color: rgb(0,200,5);
+}
+
+.add-watchlist-cancel-button:hover {
+  background-color: rgb(229,249,230);
+}
+
+.add-watchlist-submit-button {
+  background-color: rgb(0,200,5);
+  border: none;
+  color: white;
+  margin-left: 8px;
+}
+
+.add-watchlist-submit-button:hover {
+  background-color: rgb(0,180,5);
+}
+
+.add-watchlist-cancel-button,
+.add-watchlist-submit-button {
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: bolder;
+}
 
 
 .watchlist-list-name-setting-expand-icon-container {
@@ -62,9 +127,27 @@
   align-items: center;
   padding: 8px 0px;
 }
+.watchlist-icon-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.light-bulb-icon-container {
+  background-color: rgb(245, 248, 250);
+  width: 35px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.light-bulb-icon {
+  width: 80%;
+  height: 50%;
+}
 
 .watchlist-list-name {
   text-decoration: none;
+  margin-left: 8px;
 }
 
 .watchlist-setting-dropdown-icons {
