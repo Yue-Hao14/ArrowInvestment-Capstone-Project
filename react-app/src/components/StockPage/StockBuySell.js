@@ -9,7 +9,7 @@ function StockBuySell({ closePrice, ticker }) {
   const dispatch = useDispatch();
   const portfolioId = useSelector(state => state.portfolios.id)
 
-  const [quantity, setQuantity] = useState();
+  const [share, setShare] = useState();
   const [errors, setErrors] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [buySelected, setBuySelected] = useState(true)
@@ -22,21 +22,21 @@ function StockBuySell({ closePrice, ticker }) {
 
   // error handling
   useEffect(() => {
-    if (quantity <= 0) {
+    if (share <= 0 ) {
       setErrors('You must enter a positive number of shares.')
     } else {
       setErrors("")
     }
-  },[quantity])
+  },[share])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // only when there is no error, buy/sell stock can happen
     if (errors.length === 0) {
-      let type
+      let type, quantity
       buySelected ? type = 'buy' : type = 'sell'
-      buySelected ? setQuantity(quantity) : setQuantity(-Number(quantity))
+      buySelected ? quantity=Number(share) : quantity=Number(share)*-1
 
       // pass info as a request to backend
       const request = {
@@ -69,7 +69,7 @@ function StockBuySell({ closePrice, ticker }) {
           </div>
           <div className='stock-buy-sell-form-2nd-row'>
             <div className='stock-buy-sell-form-quantity-label'>Shares</div>
-            <input className='stock-buy-sell-form-quantity' type="number" onChange={e => setQuantity(e.target.value)} />
+            <input className='stock-buy-sell-form-quantity' type="number" onChange={e => setShare(e.target.value)} />
           </div>
           <div className='stock-buy-sell-form-3rd-row'>
             <div className='stock-buy-sell-form-price-label'>Price</div>
@@ -77,7 +77,7 @@ function StockBuySell({ closePrice, ticker }) {
           </div>
           <div className='stock-buy-sell-form-4th-row'>
             <div className='stock-buy-sell-form-estimated-cost-label'>Estimated Cost</div>
-            <div className='stock-buy-sell-form-estimated-cost'>${((quantity? quantity : 0) * closePrice).toFixed(2)}</div>
+            <div className='stock-buy-sell-form-estimated-cost'>${((share? share : 0) * closePrice).toFixed(2)}</div>
           </div>
           <button type='submit' onClick={handleSubmit} className="stock-buy-sell-form-button">
             {buySelected ? "Purchase Stock" : "Sell Stock"}
