@@ -1,9 +1,0 @@
-.delete-watchlist-modal-title-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.delete-watchlist-modal-exit-button {
-  width: 100%
-}

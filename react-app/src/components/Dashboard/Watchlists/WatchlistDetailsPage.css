@@ -1,9 +1,0 @@
-.watchlist-details-page-table-header-container {
-  display: flex;
-  /* flex-direction: row; */
-  justify-content: space-around;
-}
-
-.watchlist-details-page-table-details-stock-container {
-  display: flex;
-}

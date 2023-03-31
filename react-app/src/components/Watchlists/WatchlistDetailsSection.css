@@ -6,9 +6,12 @@
 .watchlist-details-container > a {
   text-decoration: none;
   display: flex;
-  padding: 0 23px;
   align-items: center;
+  font-size: 18px;
+  justify-content: space-between;
+  width: 100%;
 }
+
 
 .watchlist-line-chart-container  {
   width: 100px;

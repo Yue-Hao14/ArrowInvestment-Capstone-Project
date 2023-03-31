@@ -1,0 +1,17 @@
+.dashboard-left-container {
+  margin-left: 100px;
+}
+
+.dashboard-right-container {
+  position: absolute;
+  right: 100px;
+  top: 100px;
+}
+
+.dashboard-header-pic {
+  width: 65%;
+}
+
+.welcome-message {
+  margin: 30px 0px;
+}

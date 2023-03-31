@@ -86,36 +86,38 @@ function Watchlists() {
                   >
                     {watchlist.list_name}
                   </NavLink>
-                  <div
-                    className='watchlist-list-setting-icon'
-                    onClick={() => openMenu(watchlist)}
-                    key='setting-icon'
-                  >
-                    <i className="fa-solid fa-ellipsis"></i>
-                  </div>
-                  {showSettingId === watchlist.id &&
-                    <ul className={ulClassName} ref={ulRef}>
-                      <i className="fa-solid fa-xmark" />
-                      <OpenModalButton
-                        buttonText="Delete watchlist"
-                        onItemClick={closeMenu}
-                        className="watchlist-delete-button"
-                        modalComponent={<DeleteWatchlistModal watchlist={watchlist}/>}
-                      />
-                    </ul>
-                  }
-                  <div
-                    className='watchlist-list-expand-icon'
-                    onClick={() => displayDetails(watchlist)}
-                    key={watchlist.id}
-                  >
-                    <i className="fa-solid fa-chevron-down"></i>
+                  <div className='watchlist-setting-dropdown-icons'>
+                    <div
+                      className='watchlist-list-setting-icon'
+                      onClick={() => openMenu(watchlist)}
+                      key='setting-icon'
+                    >
+                      <i className="fa-solid fa-ellipsis"></i>
+                    </div>
+                    {showSettingId === watchlist.id &&
+                      <ul className={ulClassName} ref={ulRef}>
+                        <i className="fa-solid fa-xmark" />
+                        <OpenModalButton
+                          buttonText="Delete watchlist"
+                          onItemClick={closeMenu}
+                          className="watchlist-delete-button"
+                          modalComponent={<DeleteWatchlistModal watchlist={watchlist} />}
+                        />
+                      </ul>
+                    }
+                    <div
+                      className='watchlist-list-expand-icon'
+                      onClick={() => displayDetails(watchlist)}
+                      key={watchlist.id}
+                    >
+                      <i className="fa-solid fa-chevron-down"></i>
+                    </div>
                   </div>
                 </div>
                 <div className='watchlist-stock-details-container' key={watchlist.list_name}>
                   {showDetailsId === watchlist.id &&
-                    watchlist.stocks.map (stock => (
-                      <WatchlistDetails ticker={stock.ticker}  key={stock.ticker}/>
+                    watchlist.stocks.map(stock => (
+                      <WatchlistDetails ticker={stock.ticker} key={stock.ticker} />
                     ))}
                 </div>
               </>
