@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom'
 import { fetchTickerDetails } from '../../utils/FetchStockData'
 
 function StockAbout() {
-  const [stockInfo, setStockInfo] = useState({})
-  const [addressInfo, setAddressInfo] = useState({})
-  const { ticker } = useParams()
+  const [stockInfo, setStockInfo] = useState()
+  const [addressInfo, setAddressInfo] = useState()
+  let { ticker } = useParams();
+  ticker = ticker.toUpperCase();
 
   useEffect(() => {
-    async function fetchStockInfo(ticker) {
+    async function fetchStockInfo() {
       const data = await fetchTickerDetails(ticker);
       if (data.results) {
         setStockInfo(data.results)
@@ -18,7 +19,7 @@ function StockAbout() {
     fetchStockInfo()
   }, [ticker])
 
-  if (!stockInfo) return null
+  if (!stockInfo || !addressInfo) return null
 
   return (
     <>
@@ -32,7 +33,7 @@ function StockAbout() {
           </div>
           <div className='company-about-headquarters'>
             <div className='label'>Headquarters</div>
-            {/* <div className='content'>{addressInfo.city?[0] + addressInfo.city.slice?(1).toLowerCase()}, {addressInfo.state}</div> */}
+            <div className='content'>{addressInfo.city[0] + addressInfo.city.slice(1).toLowerCase()}, {addressInfo.state}</div>
           </div>
         </div>
       </div>

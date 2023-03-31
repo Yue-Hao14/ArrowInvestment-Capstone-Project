@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
 
-	const [stocksArr, setStocksArr] = useState([])
+	const [stocksArr, setStocksArr] = useState()
 	const [filteredData, setFilteredData] = useState([])
 
 	const siteClassName = "sitename" + (sessionUser ? " hidden" : "");
@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {
 		async function fetchTickersForSearchBar() {
 			const data = await fetchAllTickers()
-			// console.log("data.results", data)
+			// console.log("data.results in Navigation", data)
 			setStocksArr(data.results)
 		};
 		fetchTickersForSearchBar()
@@ -38,10 +38,12 @@ function Navigation({ isLoaded }) {
 		e.preventDefault();
 
 		const searchStock = e.target.value;
-
-		const filteredStocksArr = stocksArr.filter(stock => {
-			return stock.T.toUpperCase().startsWith(searchStock.toUpperCase())
-		})
+		let filteredStocksArr;
+		if (stocksArr) {
+			filteredStocksArr = stocksArr.filter(stock => {
+				return stock.T.toUpperCase().startsWith(searchStock.toUpperCase())
+			})
+		}
 
 		if (searchStock === "") {
 			setFilteredData([]);
@@ -49,6 +51,8 @@ function Navigation({ isLoaded }) {
 			setFilteredData(filteredStocksArr)
 		}
 	}
+
+
 
 	return (
 		<nav className='navigation-container'>

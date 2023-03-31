@@ -76,12 +76,20 @@ export const fetchSnapshotsTicker = async (ticker) => {
   return data
 }
 
-// fetch all US tickers supported by polygon
+// fetch all US tickers supported by polygon on T-1 to avoid market open/close data unavailability
 export const fetchAllTickers = async () => {
-  const dateTo = new Date(); // set dateTo as today in local time
-  const offset = dateTo.getTimezoneOffset() // get time zone diff w/ UTC timezone
-  dateTo.setTime(dateTo.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
-  const to = dateTo.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
+  const today = new Date(); // set dateTo as today in local time
+  const dayOfWeek = today.getDay(); // 0 is Sunday
+  // if today is Mon, date should be Fri (-3)
+  // if today is Sun, date should be Fri (-2)
+  // if today is Sat, date should be Fri (-1)
+  // the rest is simply -1
+  const daysToSubtract = dayOfWeek === 1 ? 3
+    : dayOfWeek === 0 ? 2 : dayOfWeek === 6 ? 1 : 1;
+  const offset = today.getTimezoneOffset() // get time zone diff w/ UTC timezone
+  // align UTC time to local time, like 8pm EST show as 8pm UTC and subtract to previous business day
+  today.setTime(today.getTime() - (offset * 60 * 1000) - daysToSubtract * 24 * 60 * 60 * 1000)
+  const to = today.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
 
   const url = `https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/${to}?adjusted=true&apiKey=${polygonApiKey}`
   const response = await fetch(url);
