@@ -69,7 +69,7 @@ function StockBuySell({ closePrice, ticker }) {
           </div>
           <div className='stock-buy-sell-form-2nd-row'>
             <div className='stock-buy-sell-form-quantity-label'>Shares</div>
-            <input className='stock-buy-sell-form-quantity' type="number" placeholder="0" onChange={e => setQuantity(e.target.value)} />
+            <input className='stock-buy-sell-form-quantity' type="number" onChange={e => setQuantity(e.target.value)} />
           </div>
           <div className='stock-buy-sell-form-3rd-row'>
             <div className='stock-buy-sell-form-price-label'>Price</div>
@@ -77,7 +77,7 @@ function StockBuySell({ closePrice, ticker }) {
           </div>
           <div className='stock-buy-sell-form-4th-row'>
             <div className='stock-buy-sell-form-estimated-cost-label'>Estimated Cost</div>
-            <div className='stock-buy-sell-form-estimated-cost'>${(quantity? quantity : 0 * closePrice).toFixed(2)}</div>
+            <div className='stock-buy-sell-form-estimated-cost'>${((quantity? quantity : 0) * closePrice).toFixed(2)}</div>
           </div>
           <button type='submit' onClick={handleSubmit} className="stock-buy-sell-form-button">
             {buySelected ? "Purchase Stock" : "Sell Stock"}
