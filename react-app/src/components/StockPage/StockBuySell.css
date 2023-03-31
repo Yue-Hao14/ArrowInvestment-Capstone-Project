@@ -18,6 +18,10 @@
   padding: 10px;
 }
 
+.shares-error-message {
+  color: #c53b3b;
+}
+
 .stock-buy-sell-toggle,
 .stock-buy-sell-form-1st-row,
 .stock-buy-sell-form-2nd-row,
@@ -35,11 +39,11 @@
 }
 
 .buy-div {
-  padding: 20px 31px;
+  padding: 20px 28px;
 }
 
 .sell-div {
-  padding: 20px 31px;
+  padding: 20px 28px;
 }
 
 .active-type {

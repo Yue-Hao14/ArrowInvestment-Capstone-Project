@@ -10,7 +10,7 @@ function StockBuySell({ closePrice, ticker }) {
   const portfolioId = useSelector(state => state.portfolios.id)
 
   const [quantity, setQuantity] = useState(0);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [buySelected, setBuySelected] = useState(true)
   const [estimatedCost, setEstimatedCost] = useState(0)
@@ -23,21 +23,27 @@ function StockBuySell({ closePrice, ticker }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let type
-    buySelected ? type = 'buy' : type = 'sell'
-    buySelected ? setQuantity(quantity) : setQuantity(-Number(quantity))
-    // pass info as a request to backend
-    const request = {
-      ticker,
-      portfolioId,
-      quantity,
-      price: closePrice,
-      type
-    }
-    console.log('request', request)
-    setHasSubmitted(true)
+    // error handling
+    if (quantity <= 0) return setErrors('You must enter a positive number of shares.')
 
-    await dispatch(addTransactionThunk(request))
+    // only when there is no error, buy/sell stock can happen
+    if (errors.length === 0) {
+      let type
+      buySelected ? type = 'buy' : type = 'sell'
+      buySelected ? setQuantity(quantity) : setQuantity(-Number(quantity))
+
+      // pass info as a request to backend
+      const request = {
+        ticker,
+        portfolioId,
+        quantity,
+        price: closePrice,
+        type
+      }
+      setHasSubmitted(true)
+
+      await dispatch(addTransactionThunk(request))
+    }
   }
 
   return (
@@ -48,13 +54,16 @@ function StockBuySell({ closePrice, ticker }) {
           <div className={'sell-div' + (buySelected ? '' : ' active-type')} onClick={() => setBuySelected(false)}>Sell {ticker}</div>
         </div>
         <div className='stock-buy-sell-form-container'>
+            {errors.length>0 &&
+              <div className='shares-error-message'>{errors}</div>
+            }
           <div className='stock-buy-sell-form-1st-row'>
             <div className='stock-buy-sell-form-order-type-label'>Order Type</div>
             <div className='stock-buy-sell-form-order-type'>{buySelected ? "Buy Market Order" : "Sell Market Order"}</div>
           </div>
           <div className='stock-buy-sell-form-2nd-row'>
             <div className='stock-buy-sell-form-quantity-label'>Shares</div>
-            <input className='stock-buy-sell-form-quantity' type="number" value={quantity} onChange={e => setQuantity(e.target.value)} />
+            <input className='stock-buy-sell-form-quantity' type="number" placeholder="0" onChange={e => setQuantity(e.target.value)} />
           </div>
           <div className='stock-buy-sell-form-3rd-row'>
             <div className='stock-buy-sell-form-price-label'>Price</div>
