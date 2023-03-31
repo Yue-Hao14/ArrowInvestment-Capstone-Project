@@ -22,13 +22,13 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // error handling
+    // error handling (ideally this should be in an useEffect and monitor email and password state variables)
     let validationErrors=[]
     if (!email.includes("@")) validationErrors.push('Please enter a valid email address')
     if (password !== confirmPassword) validationErrors.push('Confirm Password field must be the same as the Password field')
     setErrors(validationErrors)
 
-    if (!errors) {
+    if (email.includes("@") && password == confirmPassword) {
       const data = await dispatch(signUp(username, firstName, lastName, email, password))
       .then(() => dispatch(createPortfolioThunk()))
 
