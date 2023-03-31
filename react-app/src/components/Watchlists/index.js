@@ -70,8 +70,7 @@ function Watchlists() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("handleSubmit fired");
-    console.log("listName", listName.length);
+
     // pass info as a request to backend
     if (listName.length > 0) {
       const newWatchlist = { listName, userId }

@@ -24,7 +24,11 @@ function StockBuySell({ closePrice, ticker }) {
     e.preventDefault();
 
     // error handling
-    if (quantity <= 0) return setErrors('You must enter a positive number of shares.')
+    if (quantity <= 0) {
+      setErrors('You must enter a positive number of shares.')
+    } else {
+      setErrors("")
+    }
 
     // only when there is no error, buy/sell stock can happen
     if (errors.length === 0) {

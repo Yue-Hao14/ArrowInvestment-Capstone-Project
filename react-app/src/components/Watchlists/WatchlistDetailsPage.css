@@ -1,3 +1,7 @@
+.watchlist-details-page-container {
+  display: flex;
+  justify-content: space-around;
+}
 .watchlist-details-page-table-header-container {
   display: flex;
   /* flex-direction: row; */
