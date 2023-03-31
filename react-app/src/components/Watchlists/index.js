@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllWatchlistStocksThunk } from '../../store/watchlist';
 import WatchlistDetails from './WatchlistDetailsSection';
-import AddWatchlistModal from './AddWatchlistModal';
 import DeleteWatchlistModal from './DeleteWatchlistModal';
 import OpenModalButton from '../OpenModalButton'
 import './Watchlist.css'

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -16,19 +16,25 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false)
 
   // if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(()=> {
 
     // error handling (ideally this should be in an useEffect and monitor email and password state variables)
     let validationErrors=[]
     if (!email.includes("@")) validationErrors.push('Please enter a valid email address')
+    if (password.length < 8 || password.length > 20) validationErrors.push("Passsword needs to be between 8 and 20 characters.")
     if (password !== confirmPassword) validationErrors.push('Confirm Password field must be the same as the Password field')
     setErrors(validationErrors)
+  },[email, password, confirmPassword])
 
-    if (email.includes("@") && password == confirmPassword) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoaded(true)
+    console.log(errors)
+    if (errors.length === 0) {
       const data = await dispatch(signUp(username, firstName, lastName, email, password))
       .then(() => dispatch(createPortfolioThunk()))
 
@@ -53,7 +59,7 @@ function SignupFormPage() {
         <span className="signup-message">We'll need your email address, username, first name, last name and a unique password. You'll use this login to access Arrow Investment next time.</span>
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="signup-error-messages-container">
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            {isLoaded && errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </div>
           <label>
             Email

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { getAllWatchlistStocksThunk } from "../../store/watchlist"
 import { removeStockFromWatchlistThunk } from "../../store/watchlist"
 import Watchlists from "."
+import WatchlistDetailsStockRow from "./WatchlistDetailsStockRow"
 import './WatchlistDetailsPage.css'
 
 // TO DO: need to add other stock info to each stock in stocksArr
@@ -20,14 +21,6 @@ function WatchlistDetailsPage() {
   }, [dispatch])
 
   if (!watchlist) return null
-
-  const handleDeleteStockFromWatchlist = async (e, watchlistId, ticker) => {
-    e.preventDefault();
-
-    const data = await dispatch(removeStockFromWatchlistThunk(watchlistId, ticker))
-
-  }
-  console.log(stocksArr)
 
   return (
     <div className="watchlist-details-page-container">
@@ -47,20 +40,10 @@ function WatchlistDetailsPage() {
             <div className="watchlist-details-page-table-header-price">Price</div>
             <div className="watchlist-details-page-table-header-marketCap">Market Cap</div>
           </div>
-
           <div className="watchlist-details-page-table-details-container">
             {stocksArr?.map(stock => (
               <div className="watchlist-details-page-table-details-stock-container">
-                <div className="watchlist-details-page-table-stock-symbol" key={stock.ticker}>
-                  {stock.ticker}
-                </div>
-                <button
-                  className="watchlist-details-page-table-stock-symbol-delete-button"
-                  key={stock.ticker}
-                  onClick={e => handleDeleteStockFromWatchlist(e, watchlistId, stock.ticker)}
-                >
-                  <i className="fa-solid fa-xmark"></i>
-                </button>
+                <WatchlistDetailsStockRow ticker={stock.ticker} watchlistId={watchlistId} />
               </div>
             ))
             }

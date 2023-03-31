@@ -9,7 +9,7 @@ function StockBuySell({ closePrice, ticker }) {
   const dispatch = useDispatch();
   const portfolioId = useSelector(state => state.portfolios.id)
 
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState();
   const [errors, setErrors] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [buySelected, setBuySelected] = useState(true)
@@ -20,15 +20,17 @@ function StockBuySell({ closePrice, ticker }) {
     dispatch(getPortfolioThunk())
   }, [dispatch])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // error handling
+  // error handling
+  useEffect(() => {
     if (quantity <= 0) {
       setErrors('You must enter a positive number of shares.')
     } else {
       setErrors("")
     }
+  },[quantity])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     // only when there is no error, buy/sell stock can happen
     if (errors.length === 0) {
@@ -75,7 +77,7 @@ function StockBuySell({ closePrice, ticker }) {
           </div>
           <div className='stock-buy-sell-form-4th-row'>
             <div className='stock-buy-sell-form-estimated-cost-label'>Estimated Cost</div>
-            <div className='stock-buy-sell-form-estimated-cost'>${(quantity * closePrice).toFixed(2)}</div>
+            <div className='stock-buy-sell-form-estimated-cost'>${(quantity? quantity : 0 * closePrice).toFixed(2)}</div>
           </div>
           <button type='submit' onClick={handleSubmit} className="stock-buy-sell-form-button">
             {buySelected ? "Purchase Stock" : "Sell Stock"}
