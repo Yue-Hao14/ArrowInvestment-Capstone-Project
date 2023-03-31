@@ -53,7 +53,7 @@ function Navigation({ isLoaded }) {
 			setFilteredData(filteredStocksArr)
 		}
 	}
-console.log("searchStock", searchStock)
+// console.log("searchStock", searchStock)
 	return (
 		<nav className='navigation-container'>
 			<NavLink exact to='/dashboard' className='navigation-logo'>
@@ -83,7 +83,7 @@ console.log("searchStock", searchStock)
 					<div className='navigation-search-bar-container'>
 						<div className='navigation-search-bar-inputs'>
 							<i className="fa-solid fa-magnifying-glass search-icon"></i>
-							<input type="text" placeholder='Search' onChange={handleFilter} />
+							<input type="text" placeholder='Search' value={searchStock} onChange={handleFilter} />
 						</div>
 						{filteredData.length !== 0 && searchStock.length !== 0 && (
 							<div className='navigation-search-bar-results'>
