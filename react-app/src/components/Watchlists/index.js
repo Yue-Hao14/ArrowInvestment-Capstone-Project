@@ -142,46 +142,53 @@ function Watchlists() {
             {Object.values(watchlists).map(watchlist => (
               <>
                 <div className='watchlist-list-name-setting-expand-icon-container' key={watchlist.id}>
-                  <div className='watchlist-icon-name-container'>
-                    <div className='light-bulb-icon-container'>
-                      <img className='light-bulb-icon'
-                        src="https://cdn.robinhood.com/emoji/v0/128/1f4a1.png"
-                      />
-                    </div>
-                    <NavLink
-                      to={`/watchlists/${watchlist.id}`}
-                      className='watchlist-list-name'
-                      key={watchlist.list_name}
-                    >
-                      {watchlist.list_name}
-                    </NavLink>
-                  </div>
-                  <div className='watchlist-setting-dropdown-icons'>
-                    <div
-                      className='watchlist-list-setting-icon'
-                      onClick={() => openMenu(watchlist)}
-                      key='setting-icon'
-                    >
-                      <i className="fa-solid fa-ellipsis"></i>
-                    </div>
-                    {showSettingId === watchlist.id &&
-                      <ul className={ulClassName} ref={ulRef}>
-                        <i className="fa-solid fa-xmark" />
-                        <OpenModalButton
-                          buttonText="Delete watchlist"
-                          onItemClick={closeMenu}
-                          className="watchlist-delete-button"
-                          modalComponent={<DeleteWatchlistModal watchlist={watchlist} />}
+                  <div className='watchlist-list-name-setting-expand-icon'>
+                    <div className='watchlist-icon-name-container'>
+                      <div className='light-bulb-icon-container'>
+                        <img className='light-bulb-icon'
+                          src="https://cdn.robinhood.com/emoji/v0/128/1f4a1.png"
                         />
-                      </ul>
-                    }
-                    <div
-                      className='watchlist-list-expand-icon'
-                      onClick={() => displayDetails(watchlist)}
-                      key={watchlist.id}
-                    >
-                      <i className="fa-solid fa-chevron-down"></i>
+                      </div>
+                      <NavLink
+                        to={`/watchlists/${watchlist.id}`}
+                        className='watchlist-list-name'
+                        key={watchlist.list_name}
+                      >
+                        {watchlist.list_name}
+                      </NavLink>
                     </div>
+                    <div className='watchlist-setting-dropdown-icons'>
+                      <div
+                        className='watchlist-list-setting-icon'
+                        onClick={() => openMenu(watchlist)}
+                        key='setting-icon'
+                      >
+                        <i className="fa-solid fa-ellipsis"></i>
+                      </div>
+                      <div
+                        className='watchlist-list-expand-icon'
+                        onClick={() => displayDetails(watchlist)}
+                        key={watchlist.id}
+                      >
+                        <i className="fa-solid fa-chevron-down"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='watchlist-setting-dropdown-container'>
+                    {showSettingId === watchlist.id &&
+                      <div className={ulClassName} ref={ulRef}>
+                        <div className='watchlist-setting-dropdown-row'>
+                          <i className="fa-solid fa-xmark" />
+                          <OpenModalButton
+                            buttonText="Delete watchlist"
+                            onItemClick={closeMenu}
+                            className="watchlist-delete-button"
+                            modalComponent={<DeleteWatchlistModal watchlist={watchlist} />}
+                          />
+                        </div>
+                      </div>
+                    }
+
                   </div>
                 </div>
                 <div className='watchlist-stock-details-container' key={watchlist.list_name}>
@@ -195,8 +202,9 @@ function Watchlists() {
             }
           </div>
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   )
 }
 

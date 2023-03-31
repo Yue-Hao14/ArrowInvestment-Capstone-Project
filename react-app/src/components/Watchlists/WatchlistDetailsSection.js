@@ -37,7 +37,7 @@ function WatchlistDetails({ ticker }) {
           <div className="watchlist-details-ticker">{ticker}</div>
           <div className="watchlist-details-chart-container"><WatchlistStockChart labels={labels} prices={prices} priceChange={priceChange} /></div>
           <div className="watchlist-details-stock-price-percentage">
-            <div className="watchlist-details-stock-price">${latestPrice}</div>
+            <div className="watchlist-details-stock-price">${latestPrice.toFixed(2)}</div>
             <div className={"watchlist-details-stock-price-change" + (priceChange >=0 ? " green": " red")}>{priceChange}%</div>
           </div>
         </NavLink>

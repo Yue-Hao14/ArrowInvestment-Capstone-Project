@@ -3,20 +3,31 @@
   color: inherit;
 }
 
+.watchlist-setting-dropdown-container {
+  height: 0px;
+}
+
 .setting-dropdown {
-  position: absolute;
-  top: 30%;
-  left: 60%;
+  position: relative;
+  top: -20px;
+  left: 120px;
   z-index: 1;
   flex-direction: column;
   background-color: white;
-  width: 200px;
+  width: 150px;
+  border: 1px solid #CCCCCC;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 12px;
 }
 
 .hidden {
   display: none;
+}
+
+.watchlist-setting-dropdown-row {
+  margin: 10px 10px;
+  display: flex;
+  align-items: center;
 }
 
 .watchlist-container {
@@ -123,10 +134,16 @@
 
 .watchlist-list-name-setting-expand-icon-container {
   display: flex;
+  flex-direction: column;
+}
+
+.watchlist-list-name-setting-expand-icon {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 0px;
 }
+
 .watchlist-icon-name-container {
   display: flex;
   align-items: center;
