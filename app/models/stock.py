@@ -8,7 +8,7 @@ class Stock(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     ticker = db.Column(db.String(40), primary_key=True, nullable=False, unique=True)
-    company_name = db.Column(db.String(255), nullable=False)
+    company_name = db.Column(db.String(255))
 
     transactions = db.relationship("Transaction", back_populates="stock")
     # portfolios = db.relationship("PortfolioStock", back_populates="stock")

@@ -12,6 +12,7 @@ function Navigation({ isLoaded }) {
 
 	const [stocksArr, setStocksArr] = useState()
 	const [filteredData, setFilteredData] = useState([])
+	const [searchStock, setSearchStock] = useState("")
 
 	const siteClassName = "sitename" + (sessionUser ? " hidden" : "");
 
@@ -30,14 +31,15 @@ function Navigation({ isLoaded }) {
 		fetchTickersForSearchBar()
 	}, [])
 
-
 	// function that takes user input and filter through all the stocks,
 	// return an array with tickers includes user's input
 	// set this array to filteredData so can be passed on to JSX
 	const handleFilter = (e) => {
 		e.preventDefault();
 
-		const searchStock = e.target.value;
+		let searchStock = e.target.value
+		setSearchStock(searchStock)
+
 		let filteredStocksArr;
 		if (stocksArr) {
 			filteredStocksArr = stocksArr.filter(stock => {
@@ -51,9 +53,7 @@ function Navigation({ isLoaded }) {
 			setFilteredData(filteredStocksArr)
 		}
 	}
-
-
-
+console.log("searchStock", searchStock)
 	return (
 		<nav className='navigation-container'>
 			<NavLink exact to='/dashboard' className='navigation-logo'>
@@ -85,12 +85,13 @@ function Navigation({ isLoaded }) {
 							<i className="fa-solid fa-magnifying-glass search-icon"></i>
 							<input type="text" placeholder='Search' onChange={handleFilter} />
 						</div>
-						{filteredData.length !== 0 && (
+						{filteredData.length !== 0 && searchStock.length !== 0 && (
 							<div className='navigation-search-bar-results'>
 								{filteredData.slice(0, 5).map(stock => (
 									<NavLink
 										to={`/stocks/${stock.T}`}
-										className="navigation-search-bar-results-items">
+										className="navigation-search-bar-results-items"
+										onClick={()=> setSearchStock("")}>
 										<span className='navigation-search-bar-results-items-ticker'>{stock.T}</span>
 										{/* <span className='navigation-search-bar-results-items-name'>{stock.name}</span> */}
 									</NavLink>
