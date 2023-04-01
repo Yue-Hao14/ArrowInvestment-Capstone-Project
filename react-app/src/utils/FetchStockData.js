@@ -104,7 +104,7 @@ export const fetchAllTickers = async () => {
   return data
 }
 
-// fetch company information
+// fetch company information, market cap
 export const fetchTickerDetails = async (ticker) => {
   const url = `https://api.polygon.io/v3/reference/tickers/${ticker}?apiKey=${polygonApiKey}`
   const response = await fetch(url);
