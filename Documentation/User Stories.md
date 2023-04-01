@@ -10,8 +10,7 @@
     * I would like the website to log me in upon successful completion of the sign-up form.
       * So that I can seamlessly access the site's functionality
   * When I enter invalid data on the sign-up form:
-    * I would like the website to inform me of the validations I failed to pass, and repopulate the form with my valid entries (except my password).
-    * So that I can try again without needing to refill forms I entered valid data into.
+    * I would like the website to inform me of the validations I failed to pass.
 
 ### Log in
 
@@ -46,7 +45,7 @@
 * As a logged in user, I want to be able to create a watchlist on '/dashboard' page
   * When I'm on the '/dashboard' page:
     * I would like to be able to easily create a new watchlist with a "+" icon
-    * I would name my new watchlist
+    * I want to be able to name my new watchlist
     * Once the form is submitted, I should see a new watchlist
 
 ### Read a watchlist
@@ -56,14 +55,22 @@
     * I would like to see all of my watchlist(s) and stocks in it
     * The stock will show its current price and daily % change
 
-### Update a watchlist
+### Update Watchlist
+#### Add a stock to watchlist
 
-* As a logged in user, I want to be able to add or remove stocks from any of my watchlist on '/stocks/:ticker' page
+* As a logged in user, I want to be able to add stocks to any of my watchlist on '/stocks/:ticker' page
   * When I'm on the '/stocks/:ticker' page:
     * I would like to have a "Add to Lists" button
     * Once I click on the button, a modal with all of my watchlists will show up so I can select which watchlist to add this stock to. A "Save Changes" button will allow me to finish adding this stock to certain watchlist(s)
-    * The "Add to Lists" button also works for removing a stock from watchlist by de-select certain watchlist on the modal and save changes
     * Once changes are saved, watchlist will properly reflect recent changes
+
+#### Delete a stock to watchlist
+
+* As a logged in user, I want to be able to remove stocks from any of my watchlist on '/watchlist/:watchlistId' page
+  * When I'm on the '/watchlist/:watchlistId' page:
+    * I would like to have a "x" button next to each stock
+    * Once I click on the button, a modal will show up ask me to confirm if I want to delete this watchlist
+    * Once confirmed, watchlist will properly reflect recent changes
 
 ### Delete a watchlist
 

@@ -4,9 +4,9 @@
 
 * Users can sign up, log in, and log out.
 * Users can use a demo log in to try the site.
-* Users can't use certain features without logging in (like add friends, create expenses, view transaction history etc).
-* Logged in users are directed to their dashboard page which displays an overview of total balance, amount they owe, amount they are owed and corresponding details as well.
-* Logged out users are directed to a home page showing some features of the application.
+* Users can't use certain features without logging in (like access watchlist, buy/sell stock etc).
+* Logged in users are directed to their dashboard page which displays their watchlists.
+* Logged out users are directed to the home page.
 
 
 ## 1. Watchlist (full CRUD)
