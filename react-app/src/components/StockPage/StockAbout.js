@@ -23,7 +23,7 @@ function StockAbout() {
 
   return (
     <>
-      <h2>About</h2>
+      <h2 className='company-about-title'>About</h2>
       <div className='company-about-container'>
         <div className='company-description'>{stockInfo?.description}</div>
         <div className='company-about-bottom-container'>

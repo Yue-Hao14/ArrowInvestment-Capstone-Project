@@ -53,7 +53,7 @@ function StockPage() {
           <StockAbout />
         </div>
         <div className='stock-page-transactions-container'>
-          <h2>Transactions</h2>
+          <h2 className='transaction-title'>History</h2>
           {transactions.map(transaction => (
             <div className='transaction-details-container' key={transaction.id}>
               <div className='transaction-details-1st-row'>

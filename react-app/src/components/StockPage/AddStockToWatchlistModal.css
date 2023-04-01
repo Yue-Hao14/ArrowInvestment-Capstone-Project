@@ -50,3 +50,7 @@
 .add-stock-to-watchlist-modal-save-button:disabled {
   background-color: rgb(98,108,112);
 }
+
+.add-stock-to-watchlist-modal-save-button:hover {
+  background-color: rgba(38, 208, 43, 1);
+}
