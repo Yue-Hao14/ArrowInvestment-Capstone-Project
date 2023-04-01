@@ -1,9 +1,12 @@
-.watchlist-details-container {
+.watchlist-details-individual-container {
   display: flex;
   flex-direction: column;
 }
 
-.watchlist-details-container > a {
+.watchlist-details-individual-container:hover {
+  background-color: rgba(242, 242, 242, 1)
+}
+.watchlist-details-individual-container > a {
   text-decoration: none;
   display: flex;
   align-items: center;

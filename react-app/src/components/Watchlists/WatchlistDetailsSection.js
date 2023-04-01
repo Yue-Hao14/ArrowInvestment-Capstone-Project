@@ -32,8 +32,8 @@ function WatchlistDetails({ ticker }) {
   },[ticker])
 
   return (
-    <div className="watchlist-details-container">
-        <NavLink to={`/stocks/${ticker}`} className="watchlist-details-individual-container" key={ticker}>
+    <div className="watchlist-details-individual-container">
+        <NavLink to={`/stocks/${ticker}`} className="watchlist-details-navlink" key={ticker}>
           <div className="watchlist-details-ticker">{ticker}</div>
           <div className="watchlist-details-chart-container"><WatchlistStockChart labels={labels} prices={prices} priceChange={priceChange} /></div>
           <div className="watchlist-details-stock-price-percentage">

@@ -44,6 +44,9 @@
   flex-direction: row;
   padding: 10px 0px;
 }
+.watchlist-manage-page-stock-container:hover {
+  background-color: rgba(242, 242, 242, 1)
+}
 
 .watchlist-manage-page-stock-navlink {
   color: inherit;
