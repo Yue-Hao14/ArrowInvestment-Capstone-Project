@@ -18,7 +18,7 @@ function WatchlistDetails({ ticker }) {
   useEffect(()=> {
     async function fetchStockDataForChart() {
       const data = await fetchAggStockData(ticker, 1, "hour", 0);
-      // console.log(data)
+      console.log(data)
       setLabels(data.results.map(result => new Date(result.t).toLocaleString()));
       setPrices(data.results.map(result => result.c));
       setLatestPrice(data.results[data.results.length - 1].c) // latest closing price

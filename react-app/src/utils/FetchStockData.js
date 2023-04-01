@@ -51,14 +51,21 @@ const polygonApiKey = process.env.REACT_APP_POLYGON_API_KEY;
 // multiplier = 1, timeSpan = "minute" means each data point is 1 min difference
 // dateDuration = 0, today's data; dateDuration = 1, last 2 day's data
 export const fetchAggStockData = async (ticker, multiplier, timeSpan, dateDuration) => {
-  const dateTo = new Date(); // set dateTo as today in local time
-  const offset = dateTo.getTimezoneOffset() // get time zone diff w/ UTC timezone
-  dateTo.setTime(dateTo.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
+  const today = new Date(); // set today as today in local time
+  const dayOfWeek = today.getDay(); // 0 is Sunday
+  // move to and from to Fri on weekends
+  // if today is Sat, last business date should be Fri (-1)
+  // if today is Sun, last business date should be Fri (-2)
+  // the rest is good
+  const daysToSubtract = dayOfWeek === 6 ? 1
+    : dayOfWeek === 0 ? 2 : 0;
+  const offset = today.getTimezoneOffset() // get time zone diff w/ UTC timezone
+  today.setTime(today.getTime() - (offset*60*1000) - (daysToSubtract * 24 * 60 * 60 * 1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
 
   const dateFrom = new Date();
   dateFrom.setDate(dateFrom.getDate() - dateDuration); // set the starting date of stock data
-  dateFrom.setTime(dateFrom.getTime() - (offset*60*1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
-  const to = dateTo.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
+  dateFrom.setTime(dateFrom.getTime() - (offset*60*1000) - (daysToSubtract * 24 * 60 * 60 * 1000)) // align UTC time to local time, like 8pm EST show as 8pm UTC
+  const to = today.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
   const from = dateFrom.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
   // console.log("to and from", to, from)
 
@@ -76,19 +83,19 @@ export const fetchSnapshotsTicker = async (ticker) => {
   return data
 }
 
-// fetch all US tickers supported by polygon on T-1 to avoid market open/close data unavailability
+// fetch all US tickers supported by polygon on T-1 business day to avoid market open/close data unavailability
 export const fetchAllTickers = async () => {
   const today = new Date(); // set dateTo as today in local time
   const dayOfWeek = today.getDay(); // 0 is Sunday
-  // if today is Mon, date should be Fri (-3)
-  // if today is Sun, date should be Fri (-2)
-  // if today is Sat, date should be Fri (-1)
+  // if today is Mon, last business date should be Fri (-3)
+  // if today is Sun, last business date should be Fri (-2)
+  // if today is Sat, last business date should be Fri (-1)
   // the rest is simply -1
   const daysToSubtract = dayOfWeek === 1 ? 3
     : dayOfWeek === 0 ? 2 : dayOfWeek === 6 ? 1 : 1;
   const offset = today.getTimezoneOffset() // get time zone diff w/ UTC timezone
   // align UTC time to local time, like 8pm EST show as 8pm UTC and subtract to previous business day
-  today.setTime(today.getTime() - (offset * 60 * 1000) - daysToSubtract * 24 * 60 * 60 * 1000)
+  today.setTime(today.getTime() - (offset * 60 * 1000) - (daysToSubtract * 24 * 60 * 60 * 1000))
   const to = today.toISOString().slice(0,10); // takes just the "YYYY-MM-DD" portion
 
   const url = `https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/${to}?adjusted=true&apiKey=${polygonApiKey}`
