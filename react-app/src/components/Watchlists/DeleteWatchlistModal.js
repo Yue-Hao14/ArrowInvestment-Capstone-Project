@@ -8,7 +8,7 @@ function DeleteWatchlistModal({ watchlist }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const handleDeleteWatchlist = async (e)=> {
+  const handleDeleteWatchlist = async (e) => {
     e.preventDefault()
     const data = await dispatch(deleteWatchlistThunk(watchlist.id))
     if (data) {
@@ -19,31 +19,27 @@ function DeleteWatchlistModal({ watchlist }) {
   return (
     <div className='delete-watchlist-modal-container'>
       <div className='delete-watchlist-modal-title-container'>
-        <div className='delete-watchlist-modal-title'>
+        <h4 className='delete-watchlist-modal-title'>
           Are you sure you want to delete "{watchlist.list_name}"?
-        </div>
-        <div className='delete-watchlist-modal-close-button'>
+        </h4>
           <button
             type="button"
             onClick={closeModal}
-            className="add-stock-to-watchlist-modal-exit-button"
+            className="delete-watchlist-modal-exit-button"
           >
             <i className="fa-solid fa-xmark" />
           </button>
-        </div>
       </div>
       <div className='delete-watchlist-modal-warning'>
         If you delete this watchlist and its {watchlist.stocks.length} item, it’ll be gone forever!
       </div>
-      <div className='delete-watchlist-modal-delete-button'>
       <button
-            type="button"
-            onClick={e => handleDeleteWatchlist(e)}
-            className="delete-watchlist-modal-exit-button"
-          >
-            Delete {watchlist.list_name}
-          </button>
-      </div>
+        type="button"
+        onClick={e => handleDeleteWatchlist(e)}
+        className="delete-watchlist-modal-delete-button"
+      >
+        Delete {watchlist.list_name}
+      </button>
     </div>
   )
 }

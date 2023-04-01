@@ -1,9 +1,42 @@
+.modal-content {
+  border-radius: 4px;
+}
+
+.delete-watchlist-modal-container {
+  margin: 0px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
 .delete-watchlist-modal-title-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
+
 .delete-watchlist-modal-exit-button {
-  width: 100%
+  background: none;
+  border: none;
+}
+
+.delete-watchlist-modal-exit-button >i {
+  font-size: 25px;
+}
+
+.delete-watchlist-modal-delete-button {
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  border: none;
+  background: none;
+  border-radius: 44px;
+  background-color: rgb(255, 80, 0);
+  font-weight: bold;
+}
+
+
+.delete-watchlist-modal-delete-button:hover {
+  background-color: rgb(255, 106, 38, 1);
 }
