@@ -15,3 +15,5 @@
   border: 1px rgb(0,200,5) solid;
   border-radius: 5px;
   outline: none;
+* Modal:
+  Title: h4 tag

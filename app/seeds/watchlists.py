@@ -9,11 +9,11 @@ def seed_watchlists():
         user_id = 1
     )
     demo_faang_stocks = Watchlist(
-        list_name = 'FANNG Stocks',
+        list_name = 'FAANG Stocks',
         user_id = 1
     )
     faang_stocks = Watchlist(
-        list_name = 'FANNG Stocks',
+        list_name = 'FAANG Stocks',
         user_id = 2
     )
     bank_stocks = Watchlist(
