@@ -1,5 +1,52 @@
+.add-stock-to-watchlist-modal-container {
+  margin: 0px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
 .add-stock-to-watchlist-modal-top-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.add-stock-to-watchlist-modal-exit-button {
+  background: none;
+  border: none;
+}
+
+.add-stock-to-watchlist-modal-exit-button > i {
+  font-size: 25px;
+}
+
+.add-stock-to-watchlist-modal-checkbox {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.add-stock-to-watchlist-modal-checkbox >input {
+  width: 15px;
+}
+
+.add-stock-to-watchlist-modal-checkbox-text {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.add-stock-to-watchlist-modal-save-button {
+  margin-top: 10px;
+  background: none;
+  border:none;
+  width: 100%;
+  border-radius: 44px;
+  background-color: rgb(0,200,5);
+  font-weight: bold;
+  color: black;
+  height: 30px;
+  font-size: 12px;
+}
+
+.add-stock-to-watchlist-modal-save-button:disabled {
+  background-color: rgb(98,108,112);
 }

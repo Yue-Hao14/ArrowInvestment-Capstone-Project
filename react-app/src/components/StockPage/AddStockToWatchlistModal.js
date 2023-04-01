@@ -70,30 +70,26 @@ function AddStockToWatchlistModal({ ticker }) {
   return (
     <div className="add-stock-to-watchlist-modal-container">
       <div className="add-stock-to-watchlist-modal-top-container">
-        <div className="add-stock-to-watchlist-modal-title">Add {ticker} to Your Lists</div>
-        <div className="add-stock-to-watchlist-modal-exit-button-container">
-          <button
-            type="button"
-            onClick={closeModal}
-            className="add-stock-to-watchlist-modal-exit-button"
-          >
-            <i className="fa-solid fa-xmark" />
-          </button>
-        </div>
+        <h4 className="add-stock-to-watchlist-modal-title">Add {ticker} to Your Lists</h4>
+        <button
+          type="button"
+          onClick={closeModal}
+          className="add-stock-to-watchlist-modal-exit-button"
+        >
+          <i className="fa-solid fa-xmark" />
+        </button>
       </div>
 
       <form onSubmit={handleSubmit}>
         <div className="add-stock-to-watchlist-modal-watchlists-container">
           {watchlistsArr.map(watchlist => (
-            < div className="add-stock-to-watchlist-modal-watchlists-container" >
-              <label className='add-stock-to-watchlist-modal-checkbox'>
-                <input
-                  type='checkbox'
-                  onChange={e => handleCheckboxChange(e, watchlist)}
-                />
-                <div className='add-stock-to-watchlist-modal-checkbox-text'>{watchlist.list_name}</div>
-              </label>
-            </div>
+            <label className='add-stock-to-watchlist-modal-checkbox'>
+              <input
+                type='checkbox'
+                onChange={e => handleCheckboxChange(e, watchlist)}
+              />
+              <div className='add-stock-to-watchlist-modal-checkbox-text'>{watchlist.list_name}</div>
+            </label>
           ))
           }
         </div>
