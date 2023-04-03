@@ -2,6 +2,7 @@
 const GET_ALL_TRANSACTIONS = 'transactions/GET_ALL_TRANSACTIONS'
 const GET_ALL_TRANSACTIONS_BY_TICKER = 'transactions/GET_ALL_TRANSACTIONS_BY_TICKER'
 const ADD_TRANSACTION = 'transactions/ADD_TRANSACTION'
+const RESET = 'transactions/RESET'
 
 // action creators
 export const getAllTransactions = transactions => ({
@@ -12,6 +13,10 @@ export const getAllTransactions = transactions => ({
 export const getAllTransactionsByTicker = transactions => ({
   type: GET_ALL_TRANSACTIONS_BY_TICKER,
   payload: transactions
+})
+
+export const resetTransactions = () => ({
+  type: RESET
 })
 
 
@@ -95,6 +100,9 @@ export default function transactionReducer(state = initialState, action) {
       }
       newState.tickerTransactions = transactionsByTicker
       return newState;
+    }
+    case RESET: {
+      return initialState;
     }
     default:
       return state

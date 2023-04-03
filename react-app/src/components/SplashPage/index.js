@@ -13,7 +13,7 @@ function SplashPage() {
       <video
         autoPlay
         muted
-        playsInLine
+        playsInline
         preload="auto"
         className="splash-video">
         <source media="(min-width:1400px)" src="https://cdn.robinhood.com/assets/generated_assets/brand/_next/static/images/retirement-hero-hq__fd36683f19bdb708d711e355fd1ed28a.mp4" type="video/mp4" />

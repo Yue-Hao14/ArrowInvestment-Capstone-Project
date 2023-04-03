@@ -4,6 +4,7 @@ import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import { createPortfolioThunk } from "../../store/portfolio";
 import './SignupForm.css';
+import { resetWatchlist } from "../../store/watchlist";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -33,10 +34,10 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoaded(true)
-    console.log(errors)
+    // console.log(errors)
     if (errors.length === 0) {
       const data = await dispatch(signUp(username, firstName, lastName, email, password))
-      .then(() => dispatch(createPortfolioThunk()))
+      .then(() => dispatch(createPortfolioThunk()). then(() => dispatch(resetWatchlist())))
 
       if (data) {
         setErrors(data)

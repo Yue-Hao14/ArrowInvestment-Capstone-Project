@@ -1,4 +1,6 @@
 import { createPortfolioThunk } from "./portfolio";
+import { resetTransactions } from "./transaction";
+import { resetWatchlist } from "./watchlist";
 
 // constants
 const SET_USER = "session/SET_USER";
@@ -45,6 +47,7 @@ export const login = (email, password) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
+		dispatch(resetWatchlist())
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();
@@ -65,6 +68,8 @@ export const logout = () => async (dispatch) => {
 
 	if (response.ok) {
 		dispatch(removeUser());
+		dispatch(resetWatchlist());
+		dispatch(resetTransactions())
 	}
 };
 

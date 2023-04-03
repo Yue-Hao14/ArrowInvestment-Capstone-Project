@@ -32,7 +32,7 @@ export const deleteWatchlist = watchlistsStocks => ({
   payload: watchlistsStocks
 })
 
-export const resetStore = () => ({
+export const resetWatchlist = () => ({
   type: RESET
 })
 
@@ -105,7 +105,7 @@ export const removeStockFromWatchlistThunk = (watchlistId, ticker) => async (dis
 
   if (res.ok) {
     const data = await res.json();
-    dispatch(resetStore());
+    dispatch(resetWatchlist());
     dispatch(deleteStockFromWatchlist(data));
     return data
   } else if (res.status < 500) {
@@ -125,7 +125,7 @@ export const deleteWatchlistThunk = (watchlistId) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    dispatch(resetStore());
+    dispatch(resetWatchlist());
     dispatch(deleteWatchlist(data))
     return data
   } else if (res.status < 500) {

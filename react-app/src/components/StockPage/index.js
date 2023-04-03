@@ -34,7 +34,7 @@ function StockPage() {
 
   // function to calculate transaction cost
   const transactionCost = (price, quantity) => {
-    return Math.abs(price * quantity).toFixed(2)
+    return Math.abs(price * quantity).toFixed(2).toLocaleString()
   }
 
 

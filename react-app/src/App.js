@@ -33,9 +33,9 @@ function App() {
           <Route exact path="/"> <SplashPage /> </Route>
           <Route exact path="/login" > {isLoggedIn ? <Redirect to="/dashboard" /> : <LoginFormPage />} </Route>
           <Route exact path="/signup"> {isLoggedIn ? <Redirect to="/dashboard" /> : <SignupFormPage />} </Route>
-          <Route path="/dashboard"> {isLoggedIn ? <DashboardPage /> : <Redirect to="/" />}</Route>
-          <Route path="/watchlists/:watchlistId"> {isLoggedIn ? <WatchlistManagePage /> : <Redirect to="/" />} </Route>
-          <Route path="/stocks/:ticker"> {isLoggedIn ? <StockPage /> : <Redirect to="/" />} </Route>
+          <Route exact path="/dashboard"> {isLoggedIn ? <DashboardPage /> : <Redirect to="/" />}</Route>
+          <Route exact path="/watchlists/:watchlistId"> {isLoggedIn ? <WatchlistManagePage /> : <Redirect to="/" />} </Route>
+          <Route exact path="/stocks/:ticker"> {isLoggedIn ? <StockPage /> : <Redirect to="/" />} </Route>
         </Switch>
       )}
     </>
