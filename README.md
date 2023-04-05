@@ -2,6 +2,11 @@
 
 This is a clone of Robinhood trading website.
 
+## Wiki links:
+  * [Database schema](https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project/blob/main/Documentation/DB%20Schema.png)
+  * [Feature list](https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project/blob/main/Documentation/Feature%20List.md)
+  * [User Stories](https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project/blob/main/Documentation/User%20Stories.md)
+
 ## Getting started
 1. Clone this repository (only this branch)
 
