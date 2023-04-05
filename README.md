@@ -2,6 +2,8 @@
 
 This is a clone of Robinhood trading website.
 
+Link: [Arrow Investment](https://arrowinvestment.onrender.com/)
+
 ## Wiki links:
   * [Database schema](https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project/blob/main/Documentation/DB%20Schema.png)
   * [Feature list](https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project/blob/main/Documentation/Feature%20List.md)
