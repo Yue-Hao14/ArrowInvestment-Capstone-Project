@@ -45,7 +45,7 @@ This is a clone of Robinhood trading website.
 ![Screenshot 2023-04-05 at 2 39 40 PM](https://user-images.githubusercontent.com/105403119/230188564-401c0d1c-07e0-4955-912a-cbcc70c5bdcf.png)
 
 ## Stock Details Page
-![Screenshot 2023-04-05 at 2 50 50 PM](https://user-images.githubusercontent.com/105403119/230188666-de85e527-18b3-4548-a35d-30fb56344a2e.png)
+![Screenshot 2023-04-05 at 2 17 13 PM](https://user-images.githubusercontent.com/105403119/230189396-9b43be84-2a2c-4f7f-805e-db50234758ae.png)
 
 ## Future Implementation 
   * Portfolio value
