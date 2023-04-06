@@ -14,6 +14,7 @@ def get_all_cash_transfers():
     """
     return [cash_transfer.to_dict() for cash_transfer in current_user.cash_transfers]
 
+
 @cash_transfer_routes.route('/', methods=['POST'])
 @login_required
 def add_cash_transfer():
