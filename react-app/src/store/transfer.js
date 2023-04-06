@@ -5,7 +5,7 @@ const RESET = 'transfer/RESET'
 // action creators
 export const getCashTransfers = transfers => ({
   type: GET_CASH_TRANSFERS,
-  paylod: transfers
+  payload: transfers
 })
 
 export const resetTransfer = () => ({
@@ -14,7 +14,7 @@ export const resetTransfer = () => ({
 
 // thunks
 export const getCashTransfersThunk = () => async (dispatch) => {
-  const res = await fetch('/api/cash_transfers');
+  const res = await fetch('/api/cash_transfers/');
 
   if (res.ok) {
     const data = await res.json();
@@ -31,7 +31,7 @@ export const getCashTransfersThunk = () => async (dispatch) => {
 }
 
 export const addCashTransfersThunk = (cashTransfer) => async (dispatch) => {
-  const res = await fetch('/api/watchlists/', {
+  const res = await fetch('/api/cash_transfers/', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(cashTransfer)
