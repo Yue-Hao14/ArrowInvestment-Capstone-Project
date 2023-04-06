@@ -144,45 +144,45 @@ const initialState = {}
 export default function watchlistReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_WATCHLISTS_STOCKS: {
-      const newState = { ...state }
+      const newState = { ...state };
       // console.log("action.payload", action.payload)
       for (const watchlist of action.payload) {
-        newState[watchlist.id] = watchlist
+        newState[watchlist.id] = watchlist;
       }
       return newState
     }
     case ADD_WATCHLIST: {
-      const newState = { ...state }
+      const newState = { ...state };
       for (const watchlist of action.payload) {
-        newState[watchlist.id] = watchlist
+        newState[watchlist.id] = watchlist;
       }
       return newState
     }
     case ADD_STOCK_TO_WATCHLISTS: {
-      const newState = { ...state }
+      const newState = { ...state };
       for (const watchlist of action.payload) {
-        newState[watchlist.id] = watchlist
+        newState[watchlist.id] = watchlist;
       }
-      return newState
+      return newState;
     }
     case DELETE_STOCK_FROM_WATCHLIST: {
-      const newState = { ...state }
+      const newState = { ...state };
       for (const watchlist of action.payload) {
-        newState[watchlist.id] = watchlist
+        newState[watchlist.id] = watchlist;
       }
-      return newState
+      return newState;
     }
     case DELETE_WATCHLIST: {
-      const newState = { ...state }
+      const newState = { ...state };
       for (const watchlist of action.payload) {
-        newState[watchlist.id] = watchlist
+        newState[watchlist.id] = watchlist;
       }
-      return newState
+      return newState;
     }
     case RESET: {
       return initialState;
     }
     default:
-      return state
+      return state;
   }
 }
