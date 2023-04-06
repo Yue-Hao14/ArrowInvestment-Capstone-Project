@@ -1,7 +1,14 @@
 import Watchlists from "../Watchlists"
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import "./Dashboard.css"
 
 function DashboardPage() {
+  const sessionUser = useSelector(state => state.session.user)
+  
+  // if user has not logged in, back to landing page
+  if (!sessionUser) return <Redirect to="/" />;
+
   return (
 
     <div className="dashboard-page-container">

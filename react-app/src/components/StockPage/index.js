@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import OpenModalButton from '../OpenModalButton'
 import AddStockToWatchlistModal from './AddStockToWatchlistModal'
 import './stockPage.css'
@@ -12,6 +12,7 @@ import { fetchStockNews, fetchTickerDetails } from '../../utils/FetchStockData'
 import StockAbout from './StockAbout'
 
 function StockPage() {
+  const sessionUser = useSelector(state => state.session.user)
   let { ticker } = useParams();
   ticker = ticker.toUpperCase();
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ function StockPage() {
   useEffect(() => {
     dispatch(getAllTransactionsByTickerThunk(ticker));
   }, [dispatch,ticker])
+
+  // if user has not logged in, back to landing page
+  if (!sessionUser) return <Redirect to="/" />;
 
   // function to get latest stock price data from child component (StockChart)
   function getLatestPriceCallBack(latestPrice) {
