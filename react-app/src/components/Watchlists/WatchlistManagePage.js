@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useParams, Redirect } from "react-router-dom"
 import { getAllWatchlistStocksThunk } from "../../store/watchlist"
 import { removeStockFromWatchlistThunk } from "../../store/watchlist"
 import Watchlists from "."
@@ -9,6 +9,7 @@ import './WatchlistManagePage.css'
 
 // TO DO: need to add other stock info to each stock in stocksArr
 function WatchlistManagePage() {
+  const sessionUser = useSelector(state => state.session.user)
   const dispatch = useDispatch()
   let { watchlistId } = useParams()
   watchlistId = Number(watchlistId)
@@ -20,6 +21,8 @@ function WatchlistManagePage() {
     dispatch(getAllWatchlistStocksThunk())
   }, [dispatch])
 
+  // if user has not logged in, back to landing page
+  if (!sessionUser) return <Redirect to="/" />;
   if (!watchlist) return null
 
   return (

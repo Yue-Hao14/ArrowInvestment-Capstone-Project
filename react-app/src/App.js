@@ -15,7 +15,6 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation()
   const sessionUser = useSelector(state => state.session.user)
-  const isLoggedIn = Boolean(sessionUser)
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,11 +30,11 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/"> <SplashPage /> </Route>
-          <Route exact path="/login" > {isLoggedIn ? <Redirect to="/dashboard" /> : <LoginFormPage />} </Route>
-          <Route exact path="/signup"> {isLoggedIn ? <Redirect to="/dashboard" /> : <SignupFormPage />} </Route>
-          <Route exact path="/dashboard"> {isLoggedIn ? <DashboardPage /> : <Redirect to="/" />}</Route>
-          <Route exact path="/watchlists/:watchlistId"> {isLoggedIn ? <WatchlistManagePage /> : <Redirect to="/" />} </Route>
-          <Route exact path="/stocks/:ticker"> {isLoggedIn ? <StockPage /> : <Redirect to="/" />} </Route>
+          <Route exact path="/login" > <LoginFormPage /> </Route>
+          <Route exact path="/signup"> <SignupFormPage /> </Route>
+          <Route exact path="/dashboard"> <DashboardPage /> </Route>
+          <Route exact path="/watchlists/:watchlistId"> <WatchlistManagePage />  </Route>
+          <Route exact path="/stocks/:ticker"> <StockPage /> </Route>
         </Switch>
       )}
     </>

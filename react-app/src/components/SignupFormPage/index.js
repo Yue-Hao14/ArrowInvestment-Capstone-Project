@@ -18,9 +18,7 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false)
-
-  // if (sessionUser) return <Redirect to="/" />;
-
+  
   useEffect(()=> {
 
     // error handling (ideally this should be in an useEffect and monitor email and password state variables)
@@ -30,6 +28,8 @@ function SignupFormPage() {
     if (password !== confirmPassword) validationErrors.push('Confirm Password field must be the same as the Password field')
     setErrors(validationErrors)
   },[email, password, confirmPassword])
+
+  if (sessionUser) return <Redirect to="/dashboard" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +46,8 @@ function SignupFormPage() {
       }
     }
   };
+
+
 
   return (
     <div className="signup-page-container">
