@@ -29,6 +29,11 @@ function AccountButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handleTransfers = (e) => {
+    e.preventDefault();
+    history.push('/transfers')
+  }
+
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
@@ -45,6 +50,10 @@ function AccountButton({ user }) {
         {user && (
           <div className="account-dropdown-inner-container">
             <div className="username-row">{user.first_name} {user.last_name}</div>
+            <div className="transfers-row">
+            <i className="fa-solid fa-building-columns"></i>
+            <button onClick={handleTransfers} className="transfers-button">Transfers</button>
+            </div>
             <div className="logout-row">
               <i className="fa-solid fa-arrow-right-from-bracket"></i>
               <button onClick={handleLogout} className="logout-button">Log Out</button>

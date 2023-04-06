@@ -49,7 +49,6 @@
   margin-left: 15px;
 }
 
-
 .navigation-search-bar-inputs >input {
   background-color: white;
   border: none;
@@ -206,18 +205,16 @@
   font-weight: bold;
 }
 
-.logout-row {
+.logout-row, .transfers-row {
   padding: 10px;
 }
-.logout-row:hover {
+.logout-row:hover, .transfers-row:hover {
   background-color: rgba(242, 242, 242, 1)
 }
-
-.logout-button {
+.logout-button, .transfers-button {
   background: none;
   border: none;
   font-size: 15px;
   margin-left: 5px;
   color: black;
 }
-

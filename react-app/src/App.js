@@ -10,6 +10,7 @@ import StockPage from "./components/StockPage";
 import SplashPage from "./components/SplashPage";
 import WatchlistManagePage from "./components/Watchlists/WatchlistManagePage";
 import DashboardPage from "./components/Dashboard";
+import TransferPage from "./components/TransferPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,8 +34,9 @@ function App() {
           <Route exact path="/login" > <LoginFormPage /> </Route>
           <Route exact path="/signup"> <SignupFormPage /> </Route>
           <Route exact path="/dashboard"> <DashboardPage /> </Route>
-          <Route exact path="/watchlists/:watchlistId"> <WatchlistManagePage />  </Route>
+          <Route exact path="/watchlists/:watchlistId"> <WatchlistManagePage /> </Route>
           <Route exact path="/stocks/:ticker"> <StockPage /> </Route>
+          <Route exact path="/transfers"> <TransferPage /> </Route>
         </Switch>
       )}
     </>
