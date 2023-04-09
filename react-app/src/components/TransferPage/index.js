@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCashTransfersThunk } from '../../store/transfer';
 import { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { useModal } from '../../context/Modal';
 import { capitalizeFirstLetter } from '../../utils/StringFunctions';
 import { dbDateToDisplay } from '../../utils/DateFunctions'
 import OpenModalButton from '../OpenModalButton'
 import AddTransferModal from './AddTransferModal';
+import "./TransferPage.css"
 
 function TransferPage() {
   const sessionUser = useSelector(state => state.session.user)
@@ -25,10 +25,11 @@ function TransferPage() {
   return (
     <div className='transfer-page-container'>
       <div className='transfer-header-container'>
-        <div className='transfer-header-user'>{capitalizeFirstLetter(sessionUser.first_name)} {capitalizeFirstLetter(sessionUser.last_name)}</div>
+        <h3 className='transfer-header-user'>{capitalizeFirstLetter(sessionUser.first_name)} {capitalizeFirstLetter(sessionUser.last_name)}</h3>
         <OpenModalButton
           modalComponent={<AddTransferModal />}
           buttonText="Start a transfer"
+          className="transfer-button"
         />
       </div>
       <div className='transfer-history-container'>
@@ -41,7 +42,9 @@ function TransferPage() {
                 </div>
                 <div className='individual-transfer-date'>{dbDateToDisplay(transfer.date)}</div>
               </div>
-              <div className='individual-transfer-amount'>{transfer.amount}</div>
+              <div className={transfer.amount >0 ? "individual-transfer-amount green": "individual-transfer-amount red"}>
+                {transfer.amount > 0 ? `$${transfer.amount.toFixed(2)}` : `-$${Math.abs(transfer.amount).toFixed(2)}`}
+                </div>
             </div>
           ))
 

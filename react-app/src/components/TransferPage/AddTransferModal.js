@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { getPortfolioThunk } from '../../store/portfolio';
 import { addCashTransfersThunk } from '../../store/transfer';
+import "./TransferPage.css"
 
 function AddTransferModal() {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ function AddTransferModal() {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form className="add-transfer-form" onSubmit={handleSubmit}>
         <div className='add-transfer-type-row'>
           <label className='add-transfer-transfer-type'>Type</label>
           <select onChange={e => setType(e.target.value)}>
@@ -70,12 +71,14 @@ function AddTransferModal() {
         </div>
 
         <div className='add-transfer-amount-row'>
+          <div>
           <label>Amount</label>
           <input
             type="number"
             required
             onChange={e => setAmount(Number(e.target.value).toFixed(2))}
           />
+          </div>
           {errors.length > 0 &&
           <div className='add-transfer-amount-error'>{errors[0]}</div>}
         </div>
