@@ -29,7 +29,6 @@ def add_cash_transfer():
       portfolio_id = data['portfolioId'],
       type = data['type'],
       amount = data['amount'],
-      date = data['date'],
     )
     db.session.add(new_cash_transfer)
     db.session.commit()
