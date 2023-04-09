@@ -67,7 +67,8 @@
 }
 
 .add-transfer-type-row,
-.add-transfer-amount-row div {
+.add-transfer-amount-row div,
+.add-transfer-buying-power-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,9 +82,9 @@
 }
 
 .add-transfer-amount-row input {
-  width: 117px;
+  width: 122px;
   height: 23px;
-  padding-left: 16px;
+  padding-left: 10px;
   background-color: rgb(245, 248, 250);
   border: 1px white solid;
 }

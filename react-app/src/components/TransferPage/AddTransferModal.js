@@ -2,41 +2,47 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { getPortfolioThunk } from '../../store/portfolio';
-import { addCashTransfersThunk } from '../../store/transfer';
+import { addCashTransfersThunk, getCashTransfers, getCashTransfersThunk } from '../../store/transfer';
 import "./TransferPage.css"
+import { calculateBuyingPower } from '../../utils/CalculationFunctions';
 
 function AddTransferModal() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const sessionUserId = useSelector(state => state.session.user.id)
   const portfolioId = useSelector(state => state.portfolios.id)
+  const transfersArr = Object.values(useSelector(state => state.transfers))
+  const buyingPower = calculateBuyingPower(transfersArr)
 
   const [type, setType] = useState('deposit');
   let [amount, setAmount] = useState();
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   // hydrate redux store as soon as user open modal
   useEffect(() => {
     dispatch(getPortfolioThunk());
+    dispatch(getCashTransfersThunk());
   }, [dispatch])
 
   // error validations
   useEffect(() => {
-    let e = [];
-    if (amount <= 0) e.push('Amount must be a positive number.')
+    let e = {};
+    if (amount <= 0) e.emptyAmount = 'Amount must be a positive number.'
+    if (type === 'withdraw' && amount > buyingPower) e.notEnoughMoney = 'You cannot withdraw more than current buying power.'
     setErrors(e)
-  }, [amount])
+  }, [amount, type])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (errors.length === 0) {
+    if (Object.values(errors).length === 0) {
+      let formattedAmount = type === "deposit" ? amount : -amount
       const newTransfer = {
         userId: sessionUserId,
         portfolioId,
         type,
-        amount
+        amount: formattedAmount
       }
       console.log(newTransfer)
       const data = await dispatch(addCashTransfersThunk(newTransfer))
@@ -79,8 +85,14 @@ function AddTransferModal() {
             onChange={e => setAmount(Number(e.target.value).toFixed(2))}
           />
           </div>
-          {errors.length > 0 &&
-          <div className='add-transfer-amount-error'>{errors[0]}</div>}
+          {errors.emptyAmount &&
+          <div className='add-transfer-amount-error'>{errors.emptyAmount}</div>}
+          {errors.notEnoughMoney &&
+          <div className='add-transfer-amount-error'>{errors.notEnoughMoney}</div>}
+        </div>
+
+        <div className='add-transfer-buying-power-row'>
+            Current buying power <span>${buyingPower.toFixed(0)}</span>
         </div>
 
         <div className='add-transfer-button-row'>

@@ -11,10 +11,10 @@ function DashboardPage() {
   const sessionUser = useSelector(state => state.session.user)
   const transfersArr = Object.values(useSelector(state => state.transfers))
 
-  // hydrate redux store's cash trasnfers slice
+  // hydrate redux store's cash trasnfers slice as soon as user come to this page
   useEffect(()=> {
     dispatch(getCashTransfersThunk())
-  },[])
+  },[dispatch])
 
   // if user has not logged in, back to landing page
   if (!sessionUser) return <Redirect to="/" />;
