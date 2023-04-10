@@ -1,5 +1,6 @@
 .dashboard-left-container {
-  margin-left: 7%;
+  margin-left: 100px;
+  width: 60%
 }
 
 .dashboard-right-container {
@@ -9,9 +10,15 @@
 }
 
 .dashboard-header-pic {
-  width: 65%;
+  width: 100%;
 }
 
 .welcome-message {
   margin: 30px 0px;
+}
+
+.buying-power-container {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
 }

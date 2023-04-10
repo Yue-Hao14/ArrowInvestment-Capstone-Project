@@ -43,7 +43,7 @@ function TransferPage() {
                 <div className='individual-transfer-date'>{dbDateToDisplay(transfer.date)}</div>
               </div>
               <div className={transfer.amount >0 ? "individual-transfer-amount green": "individual-transfer-amount red"}>
-                {transfer.amount > 0 ? `$${transfer.amount.toFixed(2)}` : `-$${Math.abs(transfer.amount).toFixed(2)}`}
+                {transfer.amount > 0 ? `$${transfer.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : `-$${Math.abs(transfer.amount).toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
                 </div>
             </div>
           ))

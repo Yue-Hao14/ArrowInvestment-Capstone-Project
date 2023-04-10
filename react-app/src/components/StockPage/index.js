@@ -64,13 +64,13 @@ function StockPage() {
                 <div className='transaction-details-tikcer-type'>{`${ticker} ${transaction.type}`}</div>
                 <div className='transaction-details-cost'>
                   {transaction.type === "buy" ?
-                    `$${transactionCost(transaction.settled_price, transaction.quantity)}`
-                    : `-$${transactionCost(transaction.settled_price, transaction.quantity)}`}
+                    `$${transactionCost(transaction.settled_price, transaction.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+                    : `-$${transactionCost(transaction.settled_price, transaction.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
                 </div>
               </div>
               <div className='transaction-details-2nd-row'>
                 <div className='transaction-details-date'>{dbDateToDisplay(transaction.date)}</div>
-                <div className='transaction-details-quantity-price'>{`${Math.abs(transaction.quantity)} shares at $${transaction.settled_price}`}</div>
+                <div className='transaction-details-quantity-price'>{`${Math.abs(transaction.quantity)} shares at $${transaction.settled_price.toLocaleString(undefined, { minimumFractionDigits: 2 })}`}</div>
               </div>
             </div>
           ))

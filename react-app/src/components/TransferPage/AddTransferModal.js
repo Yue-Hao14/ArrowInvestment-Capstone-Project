@@ -53,7 +53,6 @@ function AddTransferModal() {
     return
   }
 
-
   return (
     <div className='add-transfer-container'>
       <div className='add-transfer-top-container'>
@@ -92,7 +91,7 @@ function AddTransferModal() {
         </div>
 
         <div className='add-transfer-buying-power-row'>
-            Current buying power <span>${buyingPower.toFixed(0)}</span>
+            Current buying power <span>${buyingPower}</span>
         </div>
 
         <div className='add-transfer-button-row'>
