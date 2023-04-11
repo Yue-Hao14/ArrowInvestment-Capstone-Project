@@ -26,7 +26,7 @@ function StockPage() {
   // hydrate redux store with tickerTransaction slice
   useEffect(() => {
     dispatch(getAllTransactionsByTickerThunk(ticker));
-  }, [dispatch,ticker])
+  }, [dispatch, ticker])
 
   // if user has not logged in, back to landing page
   if (!sessionUser) return <Redirect to="/" />;
@@ -50,7 +50,7 @@ function StockPage() {
         <div className='stock-page-upper-left-container'>
           <h1>{ticker}</h1>
           <div className='stock-page-line-chart-container'>
-            <StockChart getLatestPriceCallBack={getLatestPriceCallBack}/>
+            <StockChart getLatestPriceCallBack={getLatestPriceCallBack} />
           </div>
         </div>
         <div className='stock-page-company-about-container'>
@@ -58,22 +58,25 @@ function StockPage() {
         </div>
         <div className='stock-page-transactions-container'>
           <h2 className='transaction-title'>History</h2>
-          {transactions.map(transaction => (
-            <div className='transaction-details-container' key={transaction.id}>
-              <div className='transaction-details-1st-row'>
-                <div className='transaction-details-tikcer-type'>{`${ticker} ${transaction.type}`}</div>
-                <div className='transaction-details-cost'>
-                  {transaction.type === "buy" ?
-                    `$${transactionCost(transaction.settled_price, transaction.quantity)}`
-                    : `-$${transactionCost(transaction.settled_price, transaction.quantity)}`}
+          {transactions.length > 0 ?
+            transactions.map(transaction => (
+              <div className='transaction-details-container' key={transaction.id}>
+                <div className='transaction-details-1st-row'>
+                  <div className='transaction-details-tikcer-type'>{`${ticker} ${transaction.type}`}</div>
+                  <div className='transaction-details-cost'>
+                    {transaction.type === "buy" ?
+                      `$${transactionCost(transaction.settled_price, transaction.quantity)}`
+                      : `-$${transactionCost(transaction.settled_price, transaction.quantity)}`}
+                  </div>
+                </div>
+                <div className='transaction-details-2nd-row'>
+                  <div className='transaction-details-date'>{dbDateToDisplay(transaction.date)}</div>
+                  <div className='transaction-details-quantity-price'>{`${Math.abs(transaction.quantity)} shares at $${transaction.settled_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</div>
                 </div>
               </div>
-              <div className='transaction-details-2nd-row'>
-                <div className='transaction-details-date'>{dbDateToDisplay(transaction.date)}</div>
-                <div className='transaction-details-quantity-price'>{`${Math.abs(transaction.quantity)} shares at $${transaction.settled_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</div>
-              </div>
-            </div>
-          ))
+            ))
+            :
+            <div>You do not have transaction on current stock</div>
           }
         </div>
       </div>
