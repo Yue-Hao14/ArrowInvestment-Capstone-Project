@@ -38,7 +38,7 @@ function StockPage() {
 
   // function to calculate transaction cost
   const transactionCost = (price, quantity) => {
-    return Math.abs(price * quantity).toFixed(2).toLocaleString()
+    return Math.abs(price * quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })
   }
 
 
@@ -64,8 +64,8 @@ function StockPage() {
                 <div className='transaction-details-tikcer-type'>{`${ticker} ${transaction.type}`}</div>
                 <div className='transaction-details-cost'>
                   {transaction.type === "buy" ?
-                    `$${transactionCost(transaction.settled_price, transaction.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}`
-                    : `-$${transactionCost(transaction.settled_price, transaction.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
+                    `$${transactionCost(transaction.settled_price, transaction.quantity)}`
+                    : `-$${transactionCost(transaction.settled_price, transaction.quantity)}`}
                 </div>
               </div>
               <div className='transaction-details-2nd-row'>

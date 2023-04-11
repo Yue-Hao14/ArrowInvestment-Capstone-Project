@@ -76,3 +76,11 @@
   font-size: 10pt;
   font-weight: bold;
 }
+
+.stock-buy-sell-bottom-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
+  border-top: 1px solid #cccccc;
+  margin-top: -10px;
+}

@@ -1,8 +1,19 @@
 // calculate portfolio's buying power based on all the cash transfers
 export const calculateBuyingPower = (transfersArr) => {
-  let buyingPower = 0
+  let buyingPower = 0;
   for (const transfer of transfersArr) {
     buyingPower += transfer.amount
   }
-  return buyingPower.toLocaleString(undefined, { minimumFractionDigits: 2 })
+  return buyingPower
+}
+// .toLocaleString(undefined, { minimumFractionDigits: 2 })
+
+
+// calculate # of existing shares of a ticker
+export const calculateExistingShares = (transactionsArr) => {
+  let shares = 0;
+  for (const transaction of transactionsArr) {
+    shares += transaction.quantity
+  }
+  return shares
 }
