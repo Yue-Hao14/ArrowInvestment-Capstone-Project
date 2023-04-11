@@ -1,4 +1,4 @@
-import { useDebugValue, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTransactionThunk } from '../../store/transaction'
@@ -64,7 +64,6 @@ function StockBuySell({ closePrice, ticker }) {
       }
       setHasSubmitted(true)
       await dispatch(addTransactionThunk(request))
-
     }
   }
 
@@ -105,7 +104,7 @@ function StockBuySell({ closePrice, ticker }) {
           </button>
         </div>
         <div className='stock-buy-sell-bottom-container'>
-              {buySelected? `$${buyingPower.toLocaleString(undefined, { minimumFractionDigits: 2 })} buying power available` : `${existingShares} shares available`}
+              {buySelected? `$${buyingPower.toLocaleString(undefined, { maximumFractionDigits: 2 })} buying power available` : `${existingShares} shares available`}
         </div>
       </div>
     </>

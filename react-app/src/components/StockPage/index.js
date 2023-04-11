@@ -38,7 +38,7 @@ function StockPage() {
 
   // function to calculate transaction cost
   const transactionCost = (price, quantity) => {
-    return Math.abs(price * quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })
+    return Math.abs(price * quantity).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
   }
 
 
@@ -70,7 +70,7 @@ function StockPage() {
               </div>
               <div className='transaction-details-2nd-row'>
                 <div className='transaction-details-date'>{dbDateToDisplay(transaction.date)}</div>
-                <div className='transaction-details-quantity-price'>{`${Math.abs(transaction.quantity)} shares at $${transaction.settled_price.toLocaleString(undefined, { minimumFractionDigits: 2 })}`}</div>
+                <div className='transaction-details-quantity-price'>{`${Math.abs(transaction.quantity)} shares at $${transaction.settled_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</div>
               </div>
             </div>
           ))

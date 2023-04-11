@@ -33,7 +33,7 @@ function DashboardPage() {
         <h1 className="welcome-message">Welcome to Arrow Investment</h1>
         <div className="buying-power-container">
           <div className="buying-power-text">Buying Power</div>
-          <div className="buying-power-amount">${calculateBuyingPower(transfersArr, allTransactionsArr).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
+          <div className="buying-power-amount">${calculateBuyingPower(transfersArr, allTransactionsArr).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
         </div>
       </div>
 

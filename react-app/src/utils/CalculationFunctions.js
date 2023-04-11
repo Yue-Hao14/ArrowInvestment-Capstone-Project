@@ -13,7 +13,7 @@ export const calculateBuyingPower = (transfersArr, transactionsArr=[]) => {
   }
   return buyingPower
 }
-// .toLocaleString(undefined, { minimumFractionDigits: 2 })
+// .toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 
 // calculate # of existing shares of a ticker
