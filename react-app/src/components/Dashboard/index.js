@@ -5,15 +5,18 @@ import "./Dashboard.css"
 import { useEffect } from "react";
 import { getCashTransfersThunk } from "../../store/transfer";
 import { calculateBuyingPower } from "../../utils/CalculationFunctions";
+import { getAllTransactionsThunk } from "../../store/transaction";
 
 function DashboardPage() {
   const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user)
   const transfersArr = Object.values(useSelector(state => state.transfers))
+  const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
 
   // hydrate redux store's cash trasnfers slice as soon as user come to this page
   useEffect(() => {
     dispatch(getCashTransfersThunk())
+    dispatch(getAllTransactionsThunk())
   }, [dispatch])
 
   // if user has not logged in, back to landing page
@@ -30,7 +33,7 @@ function DashboardPage() {
         <h1 className="welcome-message">Welcome to Arrow Investment</h1>
         <div className="buying-power-container">
           <div className="buying-power-text">Buying Power</div>
-          <div className="buying-power-amount">${calculateBuyingPower(transfersArr).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
+          <div className="buying-power-amount">${calculateBuyingPower(transfersArr, allTransactionsArr).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
         </div>
       </div>
 

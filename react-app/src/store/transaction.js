@@ -63,6 +63,7 @@ export const addTransactionThunk = (request) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(getAllTransactionsByTicker(data));
+    dispatch(getAllTransactionsThunk());
     return data;
   } else if (res.status < 500) {
     const data = await res.json();

@@ -6,12 +6,14 @@ import './StockBuySell.css'
 import { getPortfolioThunk } from '../../store/portfolio'
 import { getCashTransfersThunk } from '../../store/transfer'
 import { calculateBuyingPower, calculateExistingShares } from '../../utils/CalculationFunctions'
+import { getAllTransactionsThunk } from '../../store/transaction'
 
 function StockBuySell({ closePrice, ticker }) {
   const dispatch = useDispatch();
   const portfolioId = useSelector(state => state.portfolios.id)
   const transfersArr = Object.values(useSelector(state => state.transfers))
-  const transactionsArr = Object.values(useSelector(state => state.transactions.tickerTransactions))
+  const tickerTransactionsArr = Object.values(useSelector(state => state.transactions.tickerTransactions))
+  const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
 
   const [share, setShare] = useState();
   const [errors, setErrors] = useState({});
@@ -19,14 +21,20 @@ function StockBuySell({ closePrice, ticker }) {
   const [buySelected, setBuySelected] = useState(true)
   const [estimatedCost, setEstimatedCost] = useState(0)
 
-  // hydrate portfolio and cash transfer slice of redux store
+  // hydrate portfolio, cash transfer, all transactions slice of redux store
   useEffect(() => {
     dispatch(getPortfolioThunk())
+    dispatch(getAllTransactionsThunk())
     dispatch(getCashTransfersThunk())
   }, [dispatch])
 
-  const buyingPower = calculateBuyingPower(transfersArr)
-  const existingShares = calculateExistingShares(transactionsArr)
+  // calculate buying power and existing shares when page first rendered and when buy/sell transaction completed
+  let buyingPower = calculateBuyingPower(transfersArr, allTransactionsArr)
+  let existingShares = calculateExistingShares(tickerTransactionsArr)
+  useEffect(() => {
+    buyingPower = calculateBuyingPower(transfersArr, allTransactionsArr)
+    existingShares = calculateExistingShares(tickerTransactionsArr)
+  },[hasSubmitted, allTransactionsArr])
 
   // error handling
   useEffect(() => {
@@ -55,8 +63,8 @@ function StockBuySell({ closePrice, ticker }) {
         type
       }
       setHasSubmitted(true)
-
       await dispatch(addTransactionThunk(request))
+
     }
   }
 
@@ -65,7 +73,10 @@ function StockBuySell({ closePrice, ticker }) {
       <div className='stock-buy-sell-container'>
         <div className='stock-buy-sell-toggle'>
           <div className={'buy-div' + (buySelected ? ' active-type' : '')} onClick={() => setBuySelected(true)}>Buy {ticker}</div>
+          {existingShares ?
           <div className={'sell-div' + (buySelected ? '' : ' active-type')} onClick={() => setBuySelected(false)}>Sell {ticker}</div>
+            : ""
+        }
         </div>
         <div className='stock-buy-sell-form-container'>
             {Object.values(errors).length > 0 && Object.values(errors).map(error=>(

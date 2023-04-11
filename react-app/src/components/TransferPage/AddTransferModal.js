@@ -96,7 +96,7 @@ function AddTransferModal() {
 
         <div className='add-transfer-button-row'>
           <button type="submit" className='add-transfer-transfer-button'>
-            Transfer {amount > 0? `$${amount}` : ""}
+            Transfer {amount > 0? `$${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : ""}
           </button>
         </div>
       </form>
