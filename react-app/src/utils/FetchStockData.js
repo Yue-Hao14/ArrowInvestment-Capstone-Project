@@ -29,6 +29,22 @@ export const fetchStockWeeklyAdjustedData = async (ticker) => {
   return data
 }
 
+
+// fetch overall news and news for a specific stock
+export const fetchNews = async (ticker="") => {
+  let url;
+  if (ticker) {
+    url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${ticker}&apikey=${alphaVantageApiKey}`
+  } else {
+    url = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&apikey=${alphaVantageApiKey}`
+  }
+
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+
 //
 export const stockOneDayChange = async (ticker) => {
   const data = await fetchStockDailyAdjustedData(ticker);
@@ -113,9 +129,14 @@ export const fetchTickerDetails = async (ticker) => {
 }
 
 
-// fetch specific stock's news
-export const fetchStockNews = async (ticker) => {
-  const url = `https://api.polygon.io/v2/reference/news?ticker=AAPL&apiKey=${polygonApiKey}`
+// fetch overall and specific stock's news
+export const fetchStockNews = async (ticker="") => {
+  let url;
+  if (ticker) {
+    url = `https://api.polygon.io/v2/reference/news?ticker=${ticker}&order=desc&limit=30&sort=published_utc&apiKey=${polygonApiKey}`
+  } else {
+    url = `https://api.polygon.io/v2/reference/news?order=desc&limit=30&sort=published_utc&apiKey=${polygonApiKey}`
+  }
   const response = await fetch(url);
   const data = await response.json();
   return data
