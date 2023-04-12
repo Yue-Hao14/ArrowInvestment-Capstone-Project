@@ -1,0 +1,20 @@
+.stocks-in-portfolio-container {
+  border: 1px solid #CCCCCC;
+  width: 280px;
+  height: 100%;
+  font-size: 16px;
+}
+
+.stock-in-portfolio-title {
+  padding: 20px 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.stock-in-portfolio-stocks-container {
+  padding: 12px 12px;
+}
+
+.stock-in-portfolio-stocks-container a {
+  color: inherit;
+}

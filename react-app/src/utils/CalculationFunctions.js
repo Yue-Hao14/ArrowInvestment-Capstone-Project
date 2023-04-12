@@ -1,13 +1,13 @@
 // calculate portfolio's buying power based on all the cash transfers
-export const calculateBuyingPower = (transfersArr, transactionsArr=[]) => {
+export const calculateBuyingPower = (transfersArr, allTransactionsArr=[]) => {
   let buyingPower = 0;
   // add cash deposit/withdraw to buying power
   for (const transfer of transfersArr) {
     buyingPower += transfer.amount
   }
   // add stock buy/sell to buying power
-  if (transactionsArr.length > 0) {
-    for (const transaction of transactionsArr) {
+  if (allTransactionsArr.length > 0) {
+    for (const transaction of allTransactionsArr) {
       buyingPower += (transaction.quantity * transaction.settled_price)*-1
     }
   }
@@ -23,4 +23,40 @@ export const calculateExistingShares = (transactionsArr) => {
     shares += transaction.quantity
   }
   return shares
+}
+
+
+// calculate # of share for each ticker in the portfolio and
+// return an object {ticker: # of shares}
+export const calculatePortfolioShareByTicker = (transactionsArr) => {
+  // if there is transactions, put ticker-quantity as KVP into an object
+  // if there is no transactions, then return an empty obj
+  if (transactionsArr.length > 0) {
+    let tickerShareObj = {}
+    transactionsArr.forEach(transaction => {
+      if (tickerShareObj[transaction.stock_ticker]) {
+        tickerShareObj[transaction.stock_ticker] += transaction.quantity
+      } else {
+        tickerShareObj[transaction.stock_ticker] = transaction.quantity
+      }
+    });
+    return tickerShareObj
+  } else return {}
+}
+
+
+
+
+
+// calculate portfolio value over time
+// portfolio value overtime takes in dateDuration, multiplier, timespan (5min, 1D, 7D etc.), transfersArr, allTransactionArr
+// and then fetch polygon for stock price for that time period for each stock
+// then pass the stock price to calculatePortfolioValueSnapshot helper function to calcuate portfolio value at point of time
+export const calculatePortfolioValueOverTime = (multiplier, timeSpan, dateDuration, transfersArr, allTransactionsArr=[]) => {
+  return null
+}
+
+// calculate portfolio value at time T = buying power T + sum(# share of A stock at T * stock price at T) for each stock
+export const calculatePortfolioValueSnapshot = (stockPriceArr, transfersArr, allTransactionsArr=[]) => {
+  return null
 }

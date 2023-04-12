@@ -10,11 +10,14 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 14px;
   justify-content: space-between;
   width: 100%;
 }
 
+.watchlist-details-ticker {
+  font-weight: bold;
+}
 
 .watchlist-line-chart-container  {
   width: 100px;

@@ -1,4 +1,5 @@
 import Watchlists from "../Watchlists"
+import PortfolioStock from "./PortfolioStock";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./Dashboard.css"
@@ -39,6 +40,7 @@ function DashboardPage() {
 
 
       <div className="dashboard-right-container">
+        <PortfolioStock />
         <Watchlists />
       </div>
     </div>
