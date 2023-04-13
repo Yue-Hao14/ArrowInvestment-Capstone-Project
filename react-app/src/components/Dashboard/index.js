@@ -1,7 +1,7 @@
 import Watchlists from "../Watchlists"
 import PortfolioStock from "./PortfolioStock";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./Dashboard.css"
 import { useEffect, useState } from "react";
 import { getCashTransfersThunk } from "../../store/transfer";
@@ -26,7 +26,7 @@ function DashboardPage() {
   useEffect(() => {
     async function fetchNewsForDashboard() {
       const data = await fetchStockNews()
-      console.log(data)
+      // console.log(data)
       setNewsArr(data.results)
     };
     fetchNewsForDashboard()
@@ -53,10 +53,10 @@ function DashboardPage() {
         </div>
 
         {/* financial news section */}
-        <h3 className="news-header">Read market news</h3>
+        <h3 className="news-header">Market News</h3>
           {newsArr.length > 0 &&
             newsArr.map(news => (
-              <Link key={news.id} to={news.article_url} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
+              <a key={news.id} href={news.article_url} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
                 <div className="news-container">
                   <div className="news-pulisher-time-container">
                     <div className="news-pulisher">{news.publisher.name}</div>
@@ -72,21 +72,16 @@ function DashboardPage() {
                     <img className="news-image" src={news.image_url} />
                   </div>
                 </div>
-              </Link>
-
+              </a>
             ))
           }
-
       </div>
-
 
       <div className="dashboard-right-container">
         <PortfolioStock />
         <Watchlists />
       </div>
     </div>
-
-
   )
 }
 
