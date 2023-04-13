@@ -1,6 +1,8 @@
 .watchlist-details-individual-container {
   display: flex;
   flex-direction: column;
+  height:50px;
+  justify-content: center;
 }
 
 .watchlist-details-individual-container:hover {
