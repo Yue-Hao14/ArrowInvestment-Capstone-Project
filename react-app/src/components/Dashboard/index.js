@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getCashTransfersThunk } from "../../store/transfer";
 import { calculateBuyingPower } from "../../utils/CalculationFunctions";
 import { getAllTransactionsThunk } from "../../store/transaction";
-import { fetchStockNews } from "../../utils/FetchStockData";
+import News from "./News";
 
 function DashboardPage() {
   const dispatch = useDispatch()
@@ -21,16 +21,6 @@ function DashboardPage() {
     dispatch(getCashTransfersThunk())
     dispatch(getAllTransactionsThunk())
   }, [dispatch])
-
-  // fetch news from polygon
-  useEffect(() => {
-    async function fetchNewsForDashboard() {
-      const data = await fetchStockNews()
-      // console.log(data)
-      setNewsArr(data.results)
-    };
-    fetchNewsForDashboard()
-  }, [])
 
   // if user has not logged in, back to landing page
   if (!sessionUser) return <Redirect to="/" />;
@@ -53,33 +43,12 @@ function DashboardPage() {
         </div>
 
         {/* financial news section */}
-        <h3 className="news-header">Market News</h3>
-          {newsArr.length > 0 &&
-            newsArr.map(news => (
-              <a key={news.id} href={news.article_url} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
-                <div className="news-container">
-                  <div className="news-pulisher-time-container">
-                    <div className="news-pulisher">{news.publisher.name}</div>
-                    <div className="news-time">
-                      {(Date.now() - Date.parse(news.published_utc)) > 3.6e+6 ?
-                        `${((Date.now() - Date.parse(news.published_utc)) / 3.6e+6).toFixed(0)}h`
-                        :
-                        `${((Date.now() - Date.parse(news.published_utc)) / 60000).toFixed(0)}m`}
-                    </div>
-                  </div>
-                  <div className="news-title-pic-container">
-                    <div className="news-title">{news.title}</div>
-                    <img className="news-image" src={news.image_url} />
-                  </div>
-                </div>
-              </a>
-            ))
-          }
-      </div>
+        <News ticker="" />
 
-      <div className="dashboard-right-container">
-        <PortfolioStock />
-        <Watchlists />
+        <div className="dashboard-right-container">
+          <PortfolioStock />
+          <Watchlists />
+        </div>
       </div>
     </div>
   )
