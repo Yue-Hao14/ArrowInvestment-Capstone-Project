@@ -7,7 +7,7 @@ function News({ ticker }) {
   // fetch news from polygon
   useEffect(() => {
     async function fetchNewsForDashboard() {
-      const data = await fetchStockNews()
+      const data = await fetchStockNews(ticker)
       // console.log(data)
       setNewsArr(data.results)
     };
@@ -16,7 +16,7 @@ function News({ ticker }) {
 
   return (
     <>
-      <h3 className="news-header">Market News</h3>
+      <h2 className="news-header">Market News</h2>
       {newsArr.length > 0 &&
         newsArr.map(news => (
           <a key={news.id} href={news.article_url} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
@@ -30,8 +30,11 @@ function News({ ticker }) {
                     `${((Date.now() - Date.parse(news.published_utc)) / 60000).toFixed(0)}m`}
                 </div>
               </div>
-              <div className="news-title-pic-container">
-                <div className="news-title">{news.title}</div>
+              <div className="news-title-tickers-pic-container">
+                <div className="news-title-tickers-container">
+                  <div className="news-title">{news.title}</div>
+                  <div className="news-tickers">{news.tickers.map(ticker => (<span>{ticker}</span>))}</div>
+                </div>
                 <img className="news-image" src={news.image_url} />
               </div>
             </div>

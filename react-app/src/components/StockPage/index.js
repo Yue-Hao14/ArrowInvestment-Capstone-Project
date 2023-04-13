@@ -10,6 +10,7 @@ import StockBuySell from './StockBuySell'
 import StockChart from './StockChart'
 import { fetchStockNews, fetchTickerDetails } from '../../utils/FetchStockData'
 import StockAbout from './StockAbout'
+import News from '../Dashboard/News'
 
 function StockPage() {
   const sessionUser = useSelector(state => state.session.user)
@@ -49,13 +50,19 @@ function StockPage() {
       <div className='stock-page-left-container'>
         <div className='stock-page-upper-left-container'>
           <h1>{ticker}</h1>
+
+          {/* Stock Line Chart */}
           <div className='stock-page-line-chart-container'>
             <StockChart getLatestPriceCallBack={getLatestPriceCallBack} />
           </div>
         </div>
+
+        {/* Stock about section */}
         <div className='stock-page-company-about-container'>
           <StockAbout />
         </div>
+
+        {/* Stock transactions section */}
         <div className='stock-page-transactions-container'>
           <h2 className='transaction-title'>History</h2>
           {transactions.length > 0 ?
@@ -79,7 +86,14 @@ function StockPage() {
             <div>You do not have transaction on current stock</div>
           }
         </div>
+
+        {/* Stock news section */}
+        <div className='stock-page-news-container'>
+          <News ticker={ticker} />
+        </div>
       </div>
+
+      {/* Stock buy/sell section */}
       <div className="stock-page-right-container">
         <div className='stock-page-right-stock-buy-sell-container'>
           <StockBuySell closePrice={closePrice} ticker={ticker} />

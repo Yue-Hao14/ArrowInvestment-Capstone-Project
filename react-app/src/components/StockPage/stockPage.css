@@ -69,6 +69,13 @@
  font-weight: bold;
 }
 
+.stock-page-news-container {
+  margin-top: 50px;
+}
+.stock-page-news-container a {
+  color: inherit;
+}
+
 .stock-page-right-container {
   position: fixed;
   right: 100px;
