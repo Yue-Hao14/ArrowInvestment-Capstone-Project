@@ -23,7 +23,7 @@ function WatchlistDetails({ ticker, shares }) {
         setLabels(data.results.map(result => new Date(result.t).toLocaleString()));
         setPrices(data.results.map(result => result.c));
         setLatestPrice(data.results[data.results?.length - 1].c) // latest closing price
-      } else return "market is closed"
+      }
     };
     async function fetchSnapshotData() {
       const data = await fetchSnapshotsTicker(ticker);

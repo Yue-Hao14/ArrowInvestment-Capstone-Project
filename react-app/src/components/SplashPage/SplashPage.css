@@ -15,7 +15,7 @@
   font-size: 72px;
 }
 
-.dark-green-area-learn-more-button{
+.dark-green-area-learn-more-button {
   border: none;
   background: rgb(195, 245, 60);
   padding: 0px 36px;
@@ -34,4 +34,112 @@
 
 .fa-circle-info {
   margin-right: 10px;
+}
+
+.free-money-container {
+  align-items: center;
+  background-image: linear-gradient(74.84deg, rgb(0, 200, 5) 18.12%, rgb(195, 245, 60) 81.46%);
+  background-size: cover;
+  display: flex;
+  font-size: 13px;
+  height: 62px;
+  justify-content: center;
+  text-align: center;
+}
+
+.free-money-container span {
+  text-decoration: underline;
+  margin-left: 2px;
+}
+
+.slider-container {
+  height: 900px;
+  background-color: rgb(240, 235, 230);
+  overflow-x: scroll;
+  padding-left: 5%;
+  margin-top: 0px;
+}
+
+.slider-title {
+  font-size: 72px;
+}
+
+.slider-title-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-position-buttons-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 50px 75px;
+}
+
+.slider-prev-button,
+.slider-next-button {
+  background-color: #000000;
+  border: #000000 solid 1px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  height: 50px;
+  font-size: 24px;
+  margin-left: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+}
+
+.slider-cards-container {
+  display: flex;
+  border-radius: 24px;
+  gap: 25px;
+  transition: transform 0.5s ease-out;
+}
+
+.slider-card {
+  border-radius: 24px;
+  background-color: white;
+}
+
+.slider-card-image {
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.slider-card-title-description-container {
+  background-color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  height: 320px;
+  padding: 20px 25px 25px;
+}
+
+.slider-card-title {
+  font-size: 35px;
+  width: 50%;
+}
+
+.slider-card-description-button-container {
+  width: 50%;
+  font-size: 18px;
+}
+
+.slider-card-learn-more-button {
+  border: none;
+  background: rgb(195, 245, 60);
+  padding: 0px 36px;
+  height: 48px;
+  border-radius: 24px;
+  font-weight: bold;
+  width: 180px;
+  font-size: 17px;
+  margin: 40px 0px 20px;
 }

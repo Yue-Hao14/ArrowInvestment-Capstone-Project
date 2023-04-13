@@ -25,11 +25,13 @@ function StockChart({ getLatestPriceCallBack }) {
     async function fetchChartData() {
       const data = await fetchAggStockData(ticker, multiplier, timeSpan, dateDuration);
       // console.log("data in StockChart",data)
-      const labels = data.results.map(result => new Date(result.t).toLocaleString());
-      const prices = data.results.map(result => result.c);
-
-      setPrice(prices[prices.length - 1]) // set default price to latest stock price
-      setLatestPrice(prices[prices.length - 1])
+      let labels, prices;
+      if (data.results) {
+        labels = data.results.map(result => new Date(result.t).toLocaleString());
+        prices = data.results.map(result => result.c);
+        setPrice(prices[prices.length - 1]) // set default price to latest stock price
+        setLatestPrice(prices[prices.length - 1])
+      }
 
       setChartData({
         labels,
@@ -143,7 +145,7 @@ function StockChart({ getLatestPriceCallBack }) {
   return (
     <div className="line-chart-section-container">
       <div className="line-chart-price">
-        {`$${Number(price).toFixed(2)}`}
+        {price ? `$${Number(price).toFixed(2)}` : "No pre or post market trades for this stock"}
       </div>
       <div className="line-chart-container">
         {chartData && (
