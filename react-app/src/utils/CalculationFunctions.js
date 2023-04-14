@@ -45,7 +45,17 @@ export const calculatePortfolioShareByTicker = (transactionsArr) => {
 }
 
 
-
+// sum numbers in array1 and array2 with same index
+export const sumNumSameIndex = (arr1, arr2) => {
+  let sumArr = [];
+  for (let index = 0; index < arr1.length; index++) {
+    const numArr1 = arr1[index];
+    const numArr2 = arr2[index];
+    const sumNum = numArr1 + numArr2
+    sumArr.push(sumNum)
+  }
+  return sumArr;
+}
 
 
 // calculate portfolio value over time

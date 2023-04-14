@@ -21,6 +21,8 @@
   display: flex;
   justify-content: space-between;
   font-weight: bold;
+  align-items: center;
+  border-bottom: 1px solid #cccccc;
 }
 
 .dashboard-left-container a {

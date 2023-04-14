@@ -91,12 +91,12 @@ function AddTransferModal() {
         </div>
 
         <div className='add-transfer-buying-power-row'>
-            Current buying power <span>${buyingPower}</span>
+            Current buying power <span>${buyingPower.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
         </div>
 
         <div className='add-transfer-button-row'>
           <button type="submit" className='add-transfer-transfer-button'>
-            Transfer {amount > 0? `$${amount.toLocaleString(undefined, { maximumFractionDigits: 2 })}` : ""}
+            Transfer {amount > 0? `$${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : ""}
           </button>
         </div>
       </form>

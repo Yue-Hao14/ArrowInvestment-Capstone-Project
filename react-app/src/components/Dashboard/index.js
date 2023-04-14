@@ -8,6 +8,7 @@ import { getCashTransfersThunk } from "../../store/transfer";
 import { calculateBuyingPower } from "../../utils/CalculationFunctions";
 import { getAllTransactionsThunk } from "../../store/transaction";
 import News from "./News";
+import PortfolioChart from "./PortfolioChart";
 
 function DashboardPage() {
   const dispatch = useDispatch()
@@ -34,6 +35,8 @@ function DashboardPage() {
           src="https://cdn.robinhood.com/assets/generated_assets/webapp/web-platform-prefetch-sdp/member/04a63fd4f116951d91ad9b6037b42ee1.svg"
           className="dashboard-header-pic"
         />
+
+        {/* <PortfolioChart /> */}
         <h1 className="welcome-message">Welcome to Arrow Investment</h1>
 
         {/* Buying power section */}
