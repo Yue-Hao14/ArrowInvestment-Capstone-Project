@@ -11,6 +11,9 @@ import SplashPage from "./components/SplashPage";
 import WatchlistManagePage from "./components/Watchlists/WatchlistManagePage";
 import DashboardPage from "./components/Dashboard";
 import TransferPage from "./components/TransferPage";
+import PageNotFount from "./components/404Page";
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +40,7 @@ function App() {
           <Route exact path="/watchlists/:watchlistId"> <WatchlistManagePage /> </Route>
           <Route exact path="/stocks/:ticker"> <StockPage /> </Route>
           <Route exact path="/transfers"> <TransferPage /> </Route>
+          <Route path="*"> <PageNotFount /></Route>
         </Switch>
       )}
     </>

@@ -1,0 +1,36 @@
+.pageNotFound {
+  margin-left: 30px;
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.pageNotFound-left-container {
+  margin-right: 10px;
+}
+
+.pageNotFound-left-container div {
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 60px;
+}
+.pageNotFound-left-container p {
+  font-size: 18px;
+}
+.pageNotFound-left-container button {
+  margin-top: 10px;
+  background: none;
+  border:none;
+  width:38%;
+  border-radius: 44px;
+  background-color: rgb(0,200,5);
+  font-weight: 700;
+  color: white;
+  height: 40px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.pageNotFound-right-container {
+  width:100%
+}
