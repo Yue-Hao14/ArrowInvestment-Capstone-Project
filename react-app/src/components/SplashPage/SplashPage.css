@@ -9,6 +9,30 @@
   width: 100%
 }
 
+.bottom-darkgreen-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: 500ms linear 0s 1 normal none running animation-1acbpvw, 1000ms ease 0s 1 normal none running animation-ayioqo;
+}
+@keyframes animation-1acbpvw {
+  0% {
+    opacity: 0;
+  };
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes animation-ayioqo {
+  0% {
+    translate: 0px 48px;
+  };
+  100% {
+    translate: 0px;
+  }
+}
+
 .dark-green-area-message {
   color: rgb(195, 245, 60);
   font-weight: 700;
