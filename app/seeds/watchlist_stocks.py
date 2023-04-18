@@ -4,7 +4,8 @@ from sqlalchemy.sql import text
 
 # seed watchlist_stocks table
 def seed_watchlist_stocks():
-    demo_watchlist = Watchlist.query.filter(Watchlist.user_id == 1).first()
+    demo_watchlist_1 = Watchlist.query.filter(Watchlist.user_id == 1).first()
+    demo_watchlist_2 = Watchlist.query.filter(Watchlist.user_id == 1, Watchlist.list_name == 'FAANG Stocks').first()
     john_watchlist = Watchlist.query.filter(Watchlist.user_id == 2).first()
     jane_watchlist = Watchlist.query.filter(Watchlist.user_id == 3).first()
     yue_watchlist = Watchlist.query.filter(Watchlist.user_id == 4).first()
@@ -30,7 +31,8 @@ def seed_watchlist_stocks():
     stock_8 = Stock.query.get('NVDA')
     stock_9 = Stock.query.get('BABA')
 
-    demo_watchlist.stocks.extend([stock_16, stock_17, stock_18])
+    demo_watchlist_1.stocks.extend([stock_16, stock_17, stock_18])
+    demo_watchlist_2.stocks.extend([stock_2, stock_1, stock_3,stock_4, stock_5])
     john_watchlist.stocks.extend([stock_2, stock_1, stock_3,stock_4, stock_5])
     jane_watchlist.stocks.extend([stock_23, stock_24, stock_26])
     yue_watchlist.stocks.extend([stock_6,stock_7,stock_8, stock_9])
