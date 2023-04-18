@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./SplashPage.css"
 import img1 from './img1.png'
 import img2 from './img2.png'
@@ -9,6 +9,7 @@ import img4 from './img4.png'
 import img5 from './img5.jpeg'
 import img6 from './img6.png'
 import img7 from './img7.png'
+import headshot from './headshot.png'
 
 
 function SplashPage() {
@@ -125,6 +126,32 @@ function SplashPage() {
       </div>
 
       {/* Footer section */}
+      <div className='footer-container'>
+          <div className='dev-info-title'>Arror Investment Developer</div>
+          <div className='dev-info-pic-name-bio-container'>
+            <div className='dev-info-pic'>
+              <img src={headshot} alt="headshot" className='dev-info-pic-image' />
+            </div>
+            <div className='dev-info-name-bio-container'>
+              <div className='dev-info-name'>Yue Hao</div>
+              <div className='dev-info-bio'>
+                <p>Full-stack Software Engineer based in Greater New York area.</p>
+                <p>Passionate about solving problems and building products to improve people's lives.</p>
+              </div>
+              <div className='dev-contact-title'>Follow me on:
+                <a href="https://www.linkedin.com/in/yue-hao/" className='dev-contact-link linkedin'>
+                  <i className="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/Yue-Hao14" className='dev-contact-link github'>
+                  <i className="fa-brands fa-github"></i>
+                </a>
+                <a href="https://wellfound.com/u/yue-hao" className='dev-contact-link angelist'>
+                  <i className="fa-brands fa-angellist"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+      </div>
 
     </div>
   )
