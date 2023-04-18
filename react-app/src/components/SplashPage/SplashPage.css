@@ -176,7 +176,7 @@
 .dev-info-title {
   font-size: 40px;
   font-weight: bold;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .dev-info-pic-name-bio-container {
@@ -185,6 +185,8 @@
   justify-content: center;
   align-items: center;
   margin: 20px 0px;
+  text-align: left;
+  padding-bottom: 40px;
 }
 .dev-info-pic-image {
   border-radius: 100%;
@@ -192,11 +194,6 @@
   height: 10em;
   vertical-align: middle;
   margin-right: 20px;
-  margin-bottom: 20px;
-}
-
-.dev-info-name-bio-container {
-  text-align: left;
 }
 
 .dev-info-name {
