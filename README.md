@@ -9,27 +9,22 @@ Link: [Arrow Investment](https://arrowinvestment.onrender.com/)
   * [Feature list](https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project/blob/main/Documentation/Feature%20List.md)
   * [User Stories](https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project/blob/main/Documentation/User%20Stories.md)
 
-## Technologies Used
-* Backend
-    * Python
-    * Flask
-    * SQLAlchemy
-    * Amazon Web Services (S3)
-    * Postgress (production)
-    * SQLite (development)
+## Tech Stack
+### Back-end:
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
-* Frontend
-    * Javascript
-    * HTML
-    * CSS
-    * React
-    * Redux
+### Front-end:
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
-* Hosting
-    * Render
-
-* Version Control
-    * Github
+### Hosting:
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 ## Landing Page
 ![Screenshot 2023-04-05 at 2 39 40 PM](https://user-images.githubusercontent.com/105403119/230188564-401c0d1c-07e0-4955-912a-cbcc70c5bdcf.png)
@@ -39,8 +34,6 @@ Link: [Arrow Investment](https://arrowinvestment.onrender.com/)
 
 ## Future Implementation 
   * Portfolio value
-  * Deposit/withdraw cash to and from portfolio
-  * Financial news
   * Chatbot
  
  ## Getting started
