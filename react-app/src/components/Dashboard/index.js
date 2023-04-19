@@ -17,7 +17,6 @@ function DashboardPage() {
   const transfersArr = Object.values(useSelector(state => state.transfers))
   const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
 
-  const [newsArr, setNewsArr] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
 
   // hydrate redux store's cash trasnfers slice as soon as user come to this page
