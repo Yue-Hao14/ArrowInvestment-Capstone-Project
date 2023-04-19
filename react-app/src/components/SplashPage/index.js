@@ -94,7 +94,7 @@ function SplashPage() {
 
       {/* free money section */}
       <div className='free-money-container'>
-        Get free money when you signup. <span>Limitations Apply.</span>
+        Get free money up to $1 million when you signup. <span>Limitations Apply.</span>
       </div>
 
       {/* slider section */}
