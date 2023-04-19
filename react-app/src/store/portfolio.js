@@ -1,3 +1,6 @@
+import { getRandomIntInclusive } from "../utils/CalculationFunctions";
+import { addCashTransfersThunk } from "./transfer";
+
 // actions
 const GET_PORTFOLIO = 'portfolios/GET_PORTFOLIO'
 
@@ -32,7 +35,13 @@ export const createPortfolioThunk = () => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
+    const newTransfer = {
+      portfolioId: data.id,
+      type: "deposit",
+      amount: getRandomIntInclusive(0,1000000)
+    }
     dispatch(getPortfolio(data));
+    dispatch(addCashTransfersThunk(newTransfer))
     return data;
   } else if (res.status < 500) {
     const data = await res.json();

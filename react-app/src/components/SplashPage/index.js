@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./SplashPage.css"
 import img1 from './img1.png'
 import img2 from './img2.png'

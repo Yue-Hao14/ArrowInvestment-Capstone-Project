@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import AccountButton from './AccountButton';
 import { fetchAllTickers } from '../../utils/FetchStockData';
@@ -58,7 +57,7 @@ function Navigation({ isLoaded }) {
 		<nav className='navigation-container'>
 			<NavLink exact to='/dashboard' className='navigation-logo'>
 				<div className={siteClassName}>Arrow Investment</div>
-				<img src="https://cdn-icons-png.flaticon.com/512/3458/3458992.png" className='navlogo' />
+				<img src="https://cdn-icons-png.flaticon.com/512/3458/3458992.png" className='navlogo' alt="logo" />
 			</NavLink>
 			{!sessionUser && (
 				<div className='navigation-right-container'>

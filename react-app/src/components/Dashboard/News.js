@@ -12,7 +12,7 @@ function News({ ticker }) {
       setNewsArr(data.results)
     };
     fetchNewsForDashboard()
-  }, [])
+  }, [ticker])
 
   return (
     <>
@@ -33,9 +33,9 @@ function News({ ticker }) {
               <div className="news-title-tickers-pic-container">
                 <div className="news-title-tickers-container">
                   <div className="news-title">{news.title}</div>
-                  <div className="news-tickers">{news.tickers.map(ticker => (<span>{ticker}</span>))}</div>
+                  <div className="news-tickers">{news.tickers.map((ticker) => (<span key={news.tickers.indexOf(ticker)} className={ticker}>{ticker}</span>))}</div>
                 </div>
-                <img className="news-image" src={news.image_url} />
+                <img className="news-image" src={news.image_url} alt="news" />
               </div>
             </div>
           </a>

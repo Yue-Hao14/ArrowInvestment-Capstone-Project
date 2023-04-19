@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { NavLink, useParams } from "react-router-dom"
-import { getAllWatchlistStocksThunk } from "../../store/watchlist"
+import { useDispatch } from "react-redux"
+import { NavLink } from "react-router-dom"
 import { removeStockFromWatchlistThunk } from "../../store/watchlist"
 import { fetchSnapshotsTicker, fetchTickerDetails } from "../../utils/FetchStockData"
 
@@ -48,7 +47,7 @@ function WatchlistDetailsStockRow({ ticker, watchlistId }) {
   const handleDeleteStockFromWatchlist = async (e, watchlistId, ticker) => {
     e.preventDefault();
     // remove stock from watchlist
-    const data = await dispatch(removeStockFromWatchlistThunk(watchlistId, ticker))
+    await dispatch(removeStockFromWatchlistThunk(watchlistId, ticker))
   }
 
   const arrowClassName = "fa-solid" + (today > 0 ? " fa-caret-up green" : " fa-caret-down red")

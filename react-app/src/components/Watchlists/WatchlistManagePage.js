@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Redirect } from "react-router-dom"
 import { getAllWatchlistStocksThunk } from "../../store/watchlist"
-import { removeStockFromWatchlistThunk } from "../../store/watchlist"
 import Watchlists from "."
 import WatchlistDetailsStockRow from "./WatchlistDetailsStockRow"
 import './WatchlistManagePage.css'
@@ -32,6 +31,7 @@ function WatchlistManagePage() {
           <div className='watchlist-manage-page-light-bulb-icon-container'>
             <img className='watchlist-manage-page-light-bulb-icon'
               src="https://cdn.robinhood.com/emoji/v0/128/1f4a1.png"
+              alt="lightbulb"
             />
           </div>
           <h2 className="watchlist-manage-page-header-list-name">

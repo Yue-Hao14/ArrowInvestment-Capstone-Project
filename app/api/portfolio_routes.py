@@ -1,11 +1,8 @@
-from flask import Blueprint, session, request
+from flask import Blueprint
 from app.models import User, db, Watchlist, Stock, Portfolio
 from flask_login import current_user, login_required
-from .auth_routes import validation_errors_to_error_messages
-
 
 portfolio_routes = Blueprint('portfolios', __name__)
-
 
 @portfolio_routes.route('/')
 @login_required

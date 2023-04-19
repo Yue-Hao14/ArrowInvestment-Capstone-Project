@@ -58,6 +58,15 @@ export const sumNumSameIndex = (arr1, arr2) => {
 }
 
 
+// get a random integer between two values, inclusive
+export const getRandomIntInclusive = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+}
+
+
+
 // calculate portfolio value over time
 // portfolio value overtime takes in dateDuration, multiplier, timespan (5min, 1D, 7D etc.), transfersArr, allTransactionArr
 // and then fetch polygon for stock price for that time period for each stock

@@ -73,7 +73,7 @@ function Watchlists() {
     // pass info as a request to backend
     if (listName.length > 0) {
       const newWatchlist = { listName, userId }
-      const data = await dispatch(addWatchlistThunk(newWatchlist))
+      await dispatch(addWatchlistThunk(newWatchlist))
       setShowAddList(false) // close add list section
     } else {
       setErrors("List name is required.")
@@ -111,6 +111,7 @@ function Watchlists() {
                   <div className='light-bulb-icon-container'>
                     <img className='light-bulb-icon'
                       src="https://cdn.robinhood.com/emoji/v0/128/1f4a1.png"
+                      alt="light bulb"
                     />
                   </div>
                   <input
@@ -145,6 +146,7 @@ function Watchlists() {
                       <div className='light-bulb-icon-container'>
                         <img className='light-bulb-icon'
                           src="https://cdn.robinhood.com/emoji/v0/128/1f4a1.png"
+                          alt="light bulb"
                         />
                       </div>
                       <NavLink

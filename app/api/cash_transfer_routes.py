@@ -1,8 +1,6 @@
-from flask import Blueprint, session, request
+from flask import Blueprint, request
 from app.models import User, db, Watchlist, Stock, CashTransfer
 from flask_login import current_user, login_required
-from .auth_routes import validation_errors_to_error_messages
-from app.forms import WatchlistForm, WatchlistStockForm
 
 cash_transfer_routes = Blueprint('cash_transfers', __name__)
 
@@ -25,7 +23,7 @@ def add_cash_transfer():
     data = request.get_json()
     # create a new instance of CashTransfer model
     new_cash_transfer = CashTransfer(
-      user_id = data['userId'],
+      user_id = current_user.id,
       portfolio_id = data['portfolioId'],
       type = data['type'],
       amount = data['amount'],

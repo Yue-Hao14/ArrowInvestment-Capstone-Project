@@ -1,4 +1,3 @@
-import { createPortfolioThunk } from "./portfolio";
 import { resetTransactions } from "./transaction";
 import { resetWatchlist } from "./watchlist";
 

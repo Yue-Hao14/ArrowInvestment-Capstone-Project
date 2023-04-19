@@ -41,7 +41,7 @@ function LoginFormPage() {
       <div className="login-pic-container">
         <img
           src="https://cdn.robinhood.com/assets/generated_assets/webapp/web-platform-prefetch-sdp/member/632fcb3e7ed928b2a960f3e003d10b44.jpg"
-          alt="login image" />
+          alt="login" />
       </div>
       <div className="'login-right-container">
         <div className="login-title">Log in to Arrow Investment</div>

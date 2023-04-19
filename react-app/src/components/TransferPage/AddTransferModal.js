@@ -44,9 +44,9 @@ function AddTransferModal() {
         type,
         amount: formattedAmount
       }
-      console.log(newTransfer)
+      // console.log(newTransfer)
       const data = await dispatch(addCashTransfersThunk(newTransfer))
-      console.log(data)
+      // console.log(data)
       if (data) closeModal()
     }
 
