@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTransactionThunk } from '../../store/transaction'
 import './StockBuySell.css'
@@ -19,7 +18,6 @@ function StockBuySell({ closePrice, ticker }) {
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [buySelected, setBuySelected] = useState(true)
-  const [estimatedCost, setEstimatedCost] = useState(0)
 
   // hydrate portfolio, cash transfer, all transactions slice of redux store
   useEffect(() => {

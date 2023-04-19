@@ -11,7 +11,6 @@ import "./TransferPage.css"
 function TransferPage() {
   const sessionUser = useSelector(state => state.session.user)
   const transfers = Object.values(useSelector(state => state.transfers))
-  console.log(sessionUser.first_name, sessionUser.last_name)
   const dispatch = useDispatch()
 
   // hydrate redux store with transfers slice
@@ -25,7 +24,7 @@ function TransferPage() {
   return (
     <div className='transfer-page-container'>
       <div className='transfer-header-container'>
-        <h3 className='transfer-header-user'>{capitalizeFirstLetter(sessionUser.firstName)} {capitalizeFirstLetter(sessionUser.lastName)}</h3>
+        <h3 className='transfer-header-user'>{capitalizeFirstLetter(sessionUser.first_name)} {capitalizeFirstLetter(sessionUser.last_name)}</h3>
         <OpenModalButton
           modalComponent={<AddTransferModal />}
           buttonText="Start a transfer"

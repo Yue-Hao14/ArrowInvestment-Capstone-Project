@@ -112,7 +112,7 @@ function SplashPage() {
           style={{ transform: `translateX(-${slidePosition * cardWidth}%)` }}>
           {cards.map(card => (
             <div className='slider-card' key={card.title}>
-              <img src={card.image} className='slider-card-image' />
+              <img src={card.image} className='slider-card-image' alt="card" />
               <div className='slider-card-title-description-container'>
                 <div className='slider-card-title'>{card.title}</div>
                 <div className='slider-card-description-button-container'>

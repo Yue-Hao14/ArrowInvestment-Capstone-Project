@@ -8,7 +8,6 @@ import { getAllTransactionsByTickerThunk } from '../../store/transaction'
 import { dbDateToDisplay } from '../../utils/DateFunctions'
 import StockBuySell from './StockBuySell'
 import StockChart from './StockChart'
-import { fetchStockNews, fetchTickerDetails } from '../../utils/FetchStockData'
 import StockAbout from './StockAbout'
 import News from '../Dashboard/News'
 
@@ -20,9 +19,7 @@ function StockPage() {
   let transactions = useSelector(state => state.transactions.tickerTransactions);
   transactions = Object.values(transactions);
 
-  const [chart, setChart] = useState("1D")
   const [closePrice, setClosePrice] = useState(0)
-  const [stockData, setStockData] = useState({})
 
   // hydrate redux store with tickerTransaction slice
   useEffect(() => {

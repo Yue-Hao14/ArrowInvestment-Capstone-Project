@@ -5,9 +5,6 @@ import { signUp } from "../../store/session";
 import { createPortfolioThunk } from "../../store/portfolio";
 import './SignupForm.css';
 import { resetWatchlist } from "../../store/watchlist";
-import { getRandomIntInclusive } from "../../utils/CalculationFunctions";
-import { addCashTransfersThunk } from "../../store/transfer";
-
 
 
 function SignupFormPage() {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { getPortfolioThunk } from '../../store/portfolio';
-import { addCashTransfersThunk, getCashTransfers, getCashTransfersThunk } from '../../store/transfer';
+import { addCashTransfersThunk,  getCashTransfersThunk } from '../../store/transfer';
 import "./TransferPage.css"
 import { calculateBuyingPower } from '../../utils/CalculationFunctions';
 
@@ -17,7 +17,6 @@ function AddTransferModal() {
   const [type, setType] = useState('deposit');
   let [amount, setAmount] = useState();
   const [errors, setErrors] = useState({});
-  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   // hydrate redux store as soon as user open modal
   useEffect(() => {
@@ -31,7 +30,7 @@ function AddTransferModal() {
     if (amount <= 0) e.emptyAmount = 'Amount must be a positive number.'
     if (type === 'withdraw' && amount > buyingPower) e.notEnoughMoney = 'You cannot withdraw more than current buying power.'
     setErrors(e)
-  }, [amount, type])
+  }, [amount, type, buyingPower])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
