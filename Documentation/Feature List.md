@@ -36,6 +36,7 @@
 * Logged in user can create a cash balance
 * Logged in user can view their cash balance on either their profile page or their portfolio/dashboard page
 * Logged in user can update their cash balance by deposit or withdraw their money
+* New user will be randomly given initial cash deposit up to $1M
 
 
 ## 5. Bonus: Asset/Stock Search (partial CRUD)
