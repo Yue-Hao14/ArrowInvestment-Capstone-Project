@@ -27,7 +27,13 @@
 .watchlist-setting-dropdown-row {
   margin: 10px 10px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.watchlist-edit-row i,
+.watchlist-delete-row i {
+  margin-right: 10px;
+  width: 12px;
 }
 
 .watchlist-container {

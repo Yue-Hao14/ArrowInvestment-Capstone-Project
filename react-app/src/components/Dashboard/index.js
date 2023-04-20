@@ -15,16 +15,18 @@ function DashboardPage() {
   const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user)
   const transfersArr = Object.values(useSelector(state => state.transfers))
+
   const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
 
   const [isLoaded, setIsLoaded] = useState(false)
-
+  // console.log("allTransactionsArr before useEffect in DashboardPage", allTransactionsArr)
   // hydrate redux store's cash trasnfers slice as soon as user come to this page
   useEffect(() => {
     dispatch(getCashTransfersThunk())
     dispatch(getAllTransactionsThunk())
     setIsLoaded(true)
   }, [dispatch])
+  console.log("allTransactionsArr after useEffect in DashboardPage", allTransactionsArr)
 
   // if user has not logged in, back to landing page
   if (!sessionUser) return <Redirect to="/" />;
@@ -40,7 +42,7 @@ function DashboardPage() {
               className="dashboard-header-pic"
             />
 
-            {/* <PortfolioChart /> */}
+            {/* <PortfolioChart allTransactionsArr={allTransactionsArr} /> */}
             < h1 className="welcome-message" > Welcome to Arrow Investment</h1 >
 
             {/* Buying power section */}

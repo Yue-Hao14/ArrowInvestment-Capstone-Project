@@ -2,6 +2,7 @@
 const GET_ALL_WATCHLISTS_STOCKS = 'watchlists/GET_ALL_WATCHLISTS_STOCKS'
 const ADD_WATCHLIST = 'watchlist/ADD_WATCHLIST'
 const ADD_STOCK_TO_WATCHLISTS = 'watchlist/ADD_STOCK_TO_WATCHLISTS'
+const EDIT_WATCHLIST = 'watchlist/EDIT_WATCHLIST'
 const DELETE_STOCK_FROM_WATCHLIST = 'watchlist/DELETE_STOCK_FROM_WATCHLIST'
 const DELETE_WATCHLIST = 'watchlist/DELETE_WATCHLIST'
 const RESET = 'watchlist/RESET'
@@ -19,6 +20,11 @@ export const addWatchlist = watchlistsStocks => ({
 
 export const addStockToWatchlists = watchlistsStocks => ({
   type: ADD_STOCK_TO_WATCHLISTS,
+  payload: watchlistsStocks
+})
+
+export const editWatchlist = watchlistsStocks => ({
+  type: EDIT_WATCHLIST,
   payload: watchlistsStocks
 })
 
@@ -98,6 +104,27 @@ export const addStocktoWatchlistThunk = (request) => async (dispatch) => {
   }
 }
 
+export const editWatchlistThunk = (watchlist) => async (dispatch) => {
+  const res = await fetch(`/api/watchlists/${watchlist.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(watchlist)
+  })
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(editWatchlist(data))
+    return data;
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors
+    }
+  } else {
+    return ["An Error occurred. Please try again later."]
+  }
+}
+
 export const removeStockFromWatchlistThunk = (watchlistId, ticker) => async (dispatch) => {
   const res = await fetch(`/api/watchlists/${watchlistId}/stock/${ticker}`, {
     method: "DELETE"
@@ -159,6 +186,13 @@ export default function watchlistReducer(state = initialState, action) {
       return newState
     }
     case ADD_STOCK_TO_WATCHLISTS: {
+      const newState = { ...state };
+      for (const watchlist of action.payload) {
+        newState[watchlist.id] = watchlist;
+      }
+      return newState;
+    }
+    case EDIT_WATCHLIST: {
       const newState = { ...state };
       for (const watchlist of action.payload) {
         newState[watchlist.id] = watchlist;

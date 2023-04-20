@@ -80,6 +80,24 @@ def add_stock_to_watchlist():
 
     return [watchlist.to_dict() for watchlist in current_user.watchlists]
 
+
+@watchlist_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_watchlist_list_name(id):
+    """
+    update list_name of the watchlist in db,
+    and return current user's entire watchlists
+    """
+
+    data = request.get_json()
+    # query watchlist from db
+    watchlist = Watchlist.query.get(id)
+    # update list_name
+    watchlist.list_name = data['listName']
+    db.session.commit()
+    return [watchlist.to_dict() for watchlist in current_user.watchlists]
+
+
 @watchlist_routes.route('/<int:id>/stock/<ticker>', methods=['DELETE'])
 @login_required
 def remove_stock_from_watchlist(id, ticker):

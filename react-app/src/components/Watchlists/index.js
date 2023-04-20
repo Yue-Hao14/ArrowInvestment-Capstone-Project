@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton'
 import './Watchlist.css'
 import { NavLink } from 'react-router-dom';
 import { addWatchlistThunk } from '../../store/watchlist';
+import EditWatchlistModal from './EditWatchlistModal';
 
 
 function Watchlists() {
@@ -178,13 +179,24 @@ function Watchlists() {
                     {showSettingId === watchlist.id &&
                       <div className={ulClassName} ref={ulRef}>
                         <div className='watchlist-setting-dropdown-row'>
-                          <i className="fa-solid fa-xmark" />
-                          <OpenModalButton
-                            buttonText="Delete watchlist"
-                            onItemClick={closeMenu}
-                            className="watchlist-delete-button"
-                            modalComponent={<DeleteWatchlistModal watchlist={watchlist} />}
-                          />
+                          <div className='watchlist-edit-row'>
+                            <i className="fa-solid fa-gear"></i>
+                            <OpenModalButton
+                              buttonText="Edit list"
+                              onItemClick={closeMenu}
+                              className="watchlist-edit-button"
+                              modalComponent={<EditWatchlistModal watchlist={watchlist} />}
+                            />
+                          </div>
+                          <div className='watchlist-delete-row'>
+                            <i className="fa-solid fa-xmark" />
+                            <OpenModalButton
+                              buttonText="Delete list"
+                              onItemClick={closeMenu}
+                              className="watchlist-delete-button"
+                              modalComponent={<DeleteWatchlistModal watchlist={watchlist} />}
+                            />
+                          </div>
                         </div>
                       </div>
                     }

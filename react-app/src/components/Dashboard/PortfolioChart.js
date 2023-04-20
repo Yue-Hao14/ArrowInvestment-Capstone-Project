@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2';
 import { fetchAggStockData } from '../../utils/FetchStockData';
 
-function PortfolioChart() {
+function PortfolioChart({ allTransactionsArr }) {
   const [tickersArr, setTickersArr] = useState([]);
   const [sharesArr, setSharesArr] = useState([]);
   const [chartData, setChartData] = useState(null);
@@ -14,18 +14,21 @@ function PortfolioChart() {
   const [labels, setLabels] = useState();
   const [value, setValue] = useState(); // current portfolio value
 
-  const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
-  const transactionsArr = Object.values(allTransactionsArr)
+  // const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
+  let transactionsArr, tickerShareObj, tickerShareArr
+  if (allTransactionsArr.length > 0) {
+    transactionsArr = Object.values(allTransactionsArr)
+    // calculate # of shares for each stock in the portfolio
+    tickerShareObj = calculatePortfolioShareByTicker(transactionsArr)
+    tickerShareArr = Object.entries(tickerShareObj)
+    setTickersArr(Object.keys(tickerShareObj)) // array of all the tickers in portfolio
+    setSharesArr(Object.values(tickerShareObj)) // array of # of shares of each ticker in portfolio
+  }
 
-  // calculate # of shares for each stock in the portfolio
-  const tickerShareObj = calculatePortfolioShareByTicker(transactionsArr)
-  const tickerShareArr = Object.entries(tickerShareObj)
-  setTickersArr(Object.keys(tickerShareObj)) // array of all the tickers in portfolio
-  setSharesArr(Object.values(tickerShareObj)) // array of # of shares of each ticker in portfolio
-
-  console.log(allTransactionsArr)
+  // console.log(allTransactionsArr, tickersArr,sharesArr)
 
   useEffect(() => {
+    console.log("tickersArr in PortfolioChart's useEffect",tickersArr)
     let labels, prices, values
     async function fetchStockPrices (ticker) {
       const data = await fetchAggStockData (ticker, multiplier, timeSpan, dateDuration)
@@ -41,7 +44,12 @@ function PortfolioChart() {
       }
     };
     // call the async function to fetch stock price for each ticker in the portfolio
-    tickersArr.forEach(ticker => fetchStockPrices(ticker))
+    if(tickersArr.length > 0) {
+      tickersArr.forEach(ticker => fetchStockPrices(ticker))
+    }
+    // fetchStockPrices(tickersArr[0])
+
+    // set the labels and values for the chart
 
     setChartData({
       labels,
@@ -62,7 +70,7 @@ function PortfolioChart() {
       }],
     });
 
-  },[tickersArr, sharesArr, multiplier, timeSpan, dateDuration])
+  },[multiplier, timeSpan, dateDuration])
 
   // function to extract the portfolio value where mouse hovers over
   // so we can display it above the chart
@@ -176,9 +184,6 @@ function PortfolioChart() {
       </div>
     </div>
   )
-
-
-
 }
 
 export default PortfolioChart

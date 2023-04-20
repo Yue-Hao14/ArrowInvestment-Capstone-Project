@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { deleteWatchlistThunk } from '../../store/watchlist';
-import './DeleteWatchlistModal.css'
+import './WatchlistModal.css'
 
 function DeleteWatchlistModal({ watchlist }) {
   const dispatch = useDispatch();
