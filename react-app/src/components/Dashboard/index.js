@@ -26,7 +26,7 @@ function DashboardPage() {
     dispatch(getAllTransactionsThunk())
     setIsLoaded(true)
   }, [dispatch])
-  console.log("allTransactionsArr after useEffect in DashboardPage", allTransactionsArr)
+  // console.log("allTransactionsArr after useEffect in DashboardPage", allTransactionsArr)
 
   // if user has not logged in, back to landing page
   if (!sessionUser) return <Redirect to="/" />;
