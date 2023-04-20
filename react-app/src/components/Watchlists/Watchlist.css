@@ -28,7 +28,17 @@
   margin: 10px 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+}
+.watchlist-edit-row,
+.watchlist-delete-row {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.watchlist-edit-row:hover,
+.watchlist-delete-row:hover {
+  background-color: rgba(242, 242, 242, 1)
 }
 
 .watchlist-edit-row i,
@@ -185,7 +195,7 @@
 
 .setting-dropdown button {
   text-decoration: underline;
-  background-color: white;
+  background: none;
   border: none;
   font-size: 14px
 }
