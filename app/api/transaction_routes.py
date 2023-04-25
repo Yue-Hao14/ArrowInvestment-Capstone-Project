@@ -35,6 +35,13 @@ def create_transaction():
     """
     data = request.get_json()
 
+    # check if stock already exists in db, if not, add it first
+    stock = Stock.query.get(data['ticker'])
+    if stock == None:
+        new_stock = Stock(ticker = data['ticker'], company_name="null")
+        db.session.add(new_stock)
+        db.session.commit()
+
     new_transaction = Transaction(
         user_id=current_user.id,
         stock_ticker=data['ticker'],

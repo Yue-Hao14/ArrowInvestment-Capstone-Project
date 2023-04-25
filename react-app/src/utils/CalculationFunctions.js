@@ -51,8 +51,10 @@ export const sumNumSameIndex = (arr1, arr2) => {
   for (let index = 0; index < arr1.length; index++) {
     const numArr1 = arr1[index];
     const numArr2 = arr2[index];
-    const sumNum = numArr1 + numArr2
-    sumArr.push(sumNum)
+    if (numArr1, numArr2) {
+      const sumNum = numArr1 + numArr2
+      sumArr.push(sumNum)
+    }
   }
   return sumArr;
 }
@@ -66,16 +68,7 @@ export const getRandomIntInclusive = (min, max) => {
 }
 
 
-
-// calculate portfolio value over time
-// portfolio value overtime takes in dateDuration, multiplier, timespan (5min, 1D, 7D etc.), transfersArr, allTransactionArr
-// and then fetch polygon for stock price for that time period for each stock
-// then pass the stock price to calculatePortfolioValueSnapshot helper function to calcuate portfolio value at point of time
-export const calculatePortfolioValueOverTime = (multiplier, timeSpan, dateDuration, transfersArr, allTransactionsArr=[]) => {
-  return null
-}
-
-// calculate portfolio value at time T = buying power T + sum(# share of A stock at T * stock price at T) for each stock
-export const calculatePortfolioValueSnapshot = (stockPriceArr, transfersArr, allTransactionsArr=[]) => {
-  return null
+// flatten stock's fetch result from Polygon Aggregates (Bars) for portfolio value calculation
+export const flattenStockFetchResult = (resultsArr) => {
+  
 }
