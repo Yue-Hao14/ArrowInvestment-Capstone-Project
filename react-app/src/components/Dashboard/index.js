@@ -26,7 +26,7 @@ function DashboardPage() {
     dispatch(getAllTransactionsThunk())
     setIsLoaded(true)
   }, [dispatch])
-  // console.log("allTransactionsArr after useEffect in DashboardPage", allTransactionsArr)
+  console.log("allTransactionsArr after useEffect in DashboardPage", allTransactionsArr)
 
   // if user has not logged in, back to landing page
   if (!sessionUser) return <Redirect to="/" />;
@@ -42,7 +42,7 @@ function DashboardPage() {
               className="dashboard-header-pic"
             />
 
-            {/* <PortfolioChart allTransactionsArr={allTransactionsArr} /> */}
+            <PortfolioChart allTransactionsArr={allTransactionsArr} />
             < h1 className="welcome-message" > Welcome to Arrow Investment</h1 >
 
             {/* Buying power section */}

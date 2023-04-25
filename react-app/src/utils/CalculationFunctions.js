@@ -51,8 +51,10 @@ export const sumNumSameIndex = (arr1, arr2) => {
   for (let index = 0; index < arr1.length; index++) {
     const numArr1 = arr1[index];
     const numArr2 = arr2[index];
-    const sumNum = numArr1 + numArr2
-    sumArr.push(sumNum)
+    if (numArr1, numArr2) {
+      const sumNum = numArr1 + numArr2
+      sumArr.push(sumNum)
+    }
   }
   return sumArr;
 }

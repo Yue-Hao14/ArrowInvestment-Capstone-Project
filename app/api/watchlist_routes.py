@@ -63,7 +63,7 @@ def add_stock_to_watchlist():
     # add stock to watchlist only if it doesn't already exists there
     for watchlist_id in watchlist_id_list:
         stock = Stock.query.get(ticker)
-        print("-------------stock--------------", stock)
+        # print("-------------stock--------------", stock)
         if stock == None:
             new_stock = Stock(ticker = ticker, company_name="null")
             db.session.add(new_stock)

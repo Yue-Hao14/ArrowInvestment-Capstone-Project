@@ -3,6 +3,7 @@ import { calculatePortfolioShareByTicker, sumNumSameIndex } from '../../utils/Ca
 import { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2';
 import { fetchAggStockData } from '../../utils/FetchStockData';
+import { useDispatch } from 'react-redux';
 
 function PortfolioChart({ allTransactionsArr }) {
   const [tickersArr, setTickersArr] = useState([]);
@@ -14,63 +15,62 @@ function PortfolioChart({ allTransactionsArr }) {
   const [labels, setLabels] = useState();
   const [value, setValue] = useState(); // current portfolio value
 
-  // const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
-  let transactionsArr, tickerShareObj, tickerShareArr
-  if (allTransactionsArr.length > 0) {
-    transactionsArr = Object.values(allTransactionsArr)
+  console.log("allTransactionsArr in PortfolioChart", allTransactionsArr)
+  useEffect(() => {
     // calculate # of shares for each stock in the portfolio
-    tickerShareObj = calculatePortfolioShareByTicker(transactionsArr)
-    tickerShareArr = Object.entries(tickerShareObj)
+    const transactionsArr = Object.values(allTransactionsArr)
+    const tickerShareObj = calculatePortfolioShareByTicker(transactionsArr)
+    const tickerShareArr = Object.entries(tickerShareObj)
     setTickersArr(Object.keys(tickerShareObj)) // array of all the tickers in portfolio
     setSharesArr(Object.values(tickerShareObj)) // array of # of shares of each ticker in portfolio
-  }
+    // console.log("-------",tickersArr)
+  }, [allTransactionsArr])
 
-  // console.log(allTransactionsArr, tickersArr,sharesArr)
-
+  // console.log("tickersArr in portfolioChart outside useEffect", tickersArr)
   useEffect(() => {
-    console.log("tickersArr in PortfolioChart's useEffect",tickersArr)
-    let labels, prices, values
-    async function fetchStockPrices (ticker) {
-      const data = await fetchAggStockData (ticker, multiplier, timeSpan, dateDuration)
-      if (data.results) {
-        labels = data.results.map(result => new Date(result.t).toLocaleString());
-        prices = data.results.map(result => result.c);
-        // add this stock's price over time to portfolio value over time
-        if (!values) {
-          values = prices
-        } else {
-          values = sumNumSameIndex(prices, values)
+    async function fetchStockPrices () {
+      let labels = [], values = [];
+      for (let i = 0; i < tickersArr.length; i++) {
+        const data = await fetchAggStockData(tickersArr[i], multiplier, timeSpan, dateDuration);
+        if (data.results) {
+          labels = data.results.map(result => new Date(result.t).toLocaleString());
+          const prices = data.results.map(result => result.c);
+          // add this stock's price over time to portfolio value over time
+          if (!values.length) {
+            values = prices;
+          } else {
+            values = sumNumSameIndex(prices, values);
+          }
         }
+        console.log("values", values)
+        setChartData({
+          labels, // ['4/24/23 7:00pm', '4/24/23 7:05pm']
+          datasets: [{
+            label: "Portfolio Value",
+            data: values,
+            backgroundColor: 'none',
+            borderColor: '#5AC53B',
+            borderWidth: 2,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+            pointHoverBackgroundColor: '#5AC53B',
+            pointHoverBorderColor: '#000000',
+            pointHoverBorderWidth: 4,
+            pointHoverRadius: 6,
+            tension: 0.0,
+            fill: false
+          }],
+        });
       }
-    };
-    // call the async function to fetch stock price for each ticker in the portfolio
-    if(tickersArr.length > 0) {
-      tickersArr.forEach(ticker => fetchStockPrices(ticker))
+
     }
-    // fetchStockPrices(tickersArr[0])
+    // call the async function to fetch stock price for each ticker in the portfolio
+    console.log("tickersArr in useEffect", tickersArr)
+    if (tickersArr.length > 0) {
+      fetchStockPrices();
+    }
+  }, [multiplier, timeSpan, dateDuration, tickersArr])
 
-    // set the labels and values for the chart
-
-    setChartData({
-      labels,
-      datasets: [{
-        label: "Portfolio Value",
-        data: values,
-        backgroundColor: 'none',
-        borderColor: '#5AC53B',
-        borderWidth: 2,
-        pointBorderColor: 'rgba(0, 0, 0, 0)',
-        pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-        pointHoverBackgroundColor: '#5AC53B',
-        pointHoverBorderColor: '#000000',
-        pointHoverBorderWidth: 4,
-        pointHoverRadius: 6,
-        tension: 0.0,
-        fill: false
-      }],
-    });
-
-  },[multiplier, timeSpan, dateDuration])
 
   // function to extract the portfolio value where mouse hovers over
   // so we can display it above the chart
@@ -160,20 +160,22 @@ function PortfolioChart({ allTransactionsArr }) {
   }
 
   return (
-    <div className="line-chart-section-container">
-      <div className="line-chart-price">
-        {value ? `$${Number(value).toFixed(2)}` : "No pre or post market trades for this stock"}
-      </div>
-      <div className="line-chart-container">
-        {chartData && (
-          <Line
-            data={chartData}
-            options={options}
-          />
-        )}
-      </div>
-      <div className='stock-page-line-chart-navbar-container'>
-        {/* Display buttons to change the range of data */}
+    <>
+      <div>Hello</div>
+      <div className="line-chart-section-container">
+        <div className="line-chart-price">
+          {value ? `$${Number(value).toFixed(2)}` : "No pre or post market trades for this stock"}
+        </div>
+        <div className="line-chart-container">
+          {chartData && (
+            <Line
+              data={chartData}
+              options={options}
+            />
+          )}
+        </div>
+        <div className='stock-page-line-chart-navbar-container'>
+          {/* Display buttons to change the range of data */}
           <button className="stock-page-line-chart-button" value='oneDay' onClick={handleClick}>1D</button>
           <button className="stock-page-line-chart-button" value='oneWeek' onClick={handleClick}>1W</button>
           <button className="stock-page-line-chart-button" value='oneMonth' onClick={handleClick}>1M</button>
@@ -181,8 +183,9 @@ function PortfolioChart({ allTransactionsArr }) {
           <button className="stock-page-line-chart-button" value='oneYear' onClick={handleClick}>1Y</button>
           <button className="stock-page-line-chart-button" value='fiveYear' onClick={handleClick}>5Y</button>
 
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

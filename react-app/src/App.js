@@ -11,6 +11,7 @@ import WatchlistManagePage from "./components/Watchlists/WatchlistManagePage";
 import DashboardPage from "./components/Dashboard";
 import TransferPage from "./components/TransferPage";
 import PageNotFount from "./components/404Page";
+import PortfolioChart from "./components/Dashboard/PortfolioChart";
 
 
 
@@ -39,6 +40,7 @@ function App() {
           <Route exact path="/watchlists/:watchlistId"> <WatchlistManagePage /> </Route>
           <Route exact path="/stocks/:ticker"> <StockPage /> </Route>
           <Route exact path="/transfers"> <TransferPage /> </Route>
+          <Route exact path="/portfolioChart"> <PortfolioChart allTransactionsArr={{1: 'AAPL'}}/> </Route>
           <Route path="*"> <PageNotFount /></Route>
         </Switch>
       )}
