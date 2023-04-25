@@ -26,7 +26,7 @@ function DashboardPage() {
     dispatch(getAllTransactionsThunk())
     setIsLoaded(true)
   }, [dispatch])
-  console.log("allTransactionsArr after useEffect in DashboardPage", allTransactionsArr)
+  // console.log("allTransactionsArr after useEffect in DashboardPage", allTransactionsArr)
 
   // if user has not logged in, back to landing page
   if (!sessionUser) return <Redirect to="/" />;
@@ -37,11 +37,10 @@ function DashboardPage() {
         <div className="dashboard-page-container">
           < div className="dashboard-left-container" >
             {/* portfolio chart section */}
-            < img
+            {/* < img
               src="https://cdn.robinhood.com/assets/generated_assets/webapp/web-platform-prefetch-sdp/member/04a63fd4f116951d91ad9b6037b42ee1.svg"
               className="dashboard-header-pic"
-            />
-
+            /> */}
             <PortfolioChart allTransactionsArr={allTransactionsArr} />
             < h1 className="welcome-message" > Welcome to Arrow Investment</h1 >
 

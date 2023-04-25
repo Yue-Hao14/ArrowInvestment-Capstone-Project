@@ -15,25 +15,38 @@ function PortfolioChart({ allTransactionsArr }) {
   const [labels, setLabels] = useState();
   const [value, setValue] = useState(); // current portfolio value
 
-  console.log("allTransactionsArr in PortfolioChart", allTransactionsArr)
+
+  // calculate # of shares for each stock in the portfolio
   useEffect(() => {
-    // calculate # of shares for each stock in the portfolio
     const transactionsArr = Object.values(allTransactionsArr)
     const tickerShareObj = calculatePortfolioShareByTicker(transactionsArr)
     const tickerShareArr = Object.entries(tickerShareObj)
     setTickersArr(Object.keys(tickerShareObj)) // array of all the tickers in portfolio
     setSharesArr(Object.values(tickerShareObj)) // array of # of shares of each ticker in portfolio
-    // console.log("-------",tickersArr)
   }, [allTransactionsArr])
 
-  // console.log("tickersArr in portfolioChart outside useEffect", tickersArr)
+
+  // fetch individual stock data
+  // calculate time series portfolio value
+  // set chartData
   useEffect(() => {
-    async function fetchStockPrices () {
-      let labels = [], values = [];
+    async function fetchStockPrices() {
+      // labels array contains time series date time,
+      // values arr is the corresponding portfolio value of that date time
+      // timePriceArr is a collection of each stock price and its time series (obj within this array) before adjusting to the shorted time series in the portfolio
+      let labels = [], values = [], timePriceArr = [];
       for (let i = 0; i < tickersArr.length; i++) {
         const data = await fetchAggStockData(tickersArr[i], multiplier, timeSpan, dateDuration);
         if (data.results) {
-          labels = data.results.map(result => new Date(result.t).toLocaleString());
+          // set labels array to the shortest time series of stock in the portfolio
+          // put datetime of stock price into an array
+          let stockTimeSeries = data.results.map(result => new Date(result.t).toLocaleString());
+          // compare current stock's datetime with existing one in labels array,
+          // if current one is shorter, replace labels array with current one
+          if (labels.length === 0 || stockTimeSeries.length < labels.length) {
+            labels = stockTimeSeries
+          }
+
           const prices = data.results.map(result => result.c);
           // add this stock's price over time to portfolio value over time
           if (!values.length) {
@@ -42,7 +55,7 @@ function PortfolioChart({ allTransactionsArr }) {
             values = sumNumSameIndex(prices, values);
           }
         }
-        console.log("values", values)
+        // console.log("labels", tickersArr[i],labels)
         setChartData({
           labels, // ['4/24/23 7:00pm', '4/24/23 7:05pm']
           datasets: [{
@@ -65,7 +78,7 @@ function PortfolioChart({ allTransactionsArr }) {
 
     }
     // call the async function to fetch stock price for each ticker in the portfolio
-    console.log("tickersArr in useEffect", tickersArr)
+    // console.log("tickersArr in useEffect", tickersArr)
     if (tickersArr.length > 0) {
       fetchStockPrices();
     }
@@ -161,7 +174,6 @@ function PortfolioChart({ allTransactionsArr }) {
 
   return (
     <>
-      <div>Hello</div>
       <div className="line-chart-section-container">
         <div className="line-chart-price">
           {value ? `$${Number(value).toFixed(2)}` : "No pre or post market trades for this stock"}
