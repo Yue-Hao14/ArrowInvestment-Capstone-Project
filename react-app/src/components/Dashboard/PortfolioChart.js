@@ -13,7 +13,6 @@ function PortfolioChart({ allTransactionsArr }) {
   const [multiplier, setMultiplier] = useState(5); // amount of interval; 1 min = 2 price is 1 min away
   const [timeSpan, setTimeSpan] = useState("minute"); // interval between data points
   const [dateDuration, setDateDuration] = useState(0) // duration between to and from dates
-  const [labels, setLabels] = useState();
   const [value, setValue] = useState(); // current portfolio value
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -196,7 +195,7 @@ function PortfolioChart({ allTransactionsArr }) {
       {isLoaded ?
         <div className="line-chart-section-container">
           <div className="line-chart-price">
-            {value ? `$${Number(value).toFixed(2)}` : "No pre or post market trades for this stock"}
+            {value ? `$${Number(value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "No pre or post market trades for this stock"}
           </div>
           <div className="line-chart-container">
             {chartData && (

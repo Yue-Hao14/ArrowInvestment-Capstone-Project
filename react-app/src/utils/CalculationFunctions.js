@@ -1,5 +1,5 @@
 // calculate portfolio's buying power based on all the cash transfers
-export const calculateBuyingPower = (transfersArr, allTransactionsArr=[]) => {
+export const calculateBuyingPower = (transfersArr, allTransactionsArr = []) => {
   let buyingPower = 0;
   // add cash deposit/withdraw to buying power
   for (const transfer of transfersArr) {
@@ -8,7 +8,7 @@ export const calculateBuyingPower = (transfersArr, allTransactionsArr=[]) => {
   // add stock buy/sell to buying power
   if (allTransactionsArr.length > 0) {
     for (const transaction of allTransactionsArr) {
-      buyingPower += (transaction.quantity * transaction.settled_price)*-1
+      buyingPower += (transaction.quantity * transaction.settled_price) * -1
     }
   }
   return buyingPower
@@ -29,19 +29,22 @@ export const calculateExistingShares = (transactionsArr) => {
 // calculate # of share for each ticker in the portfolio and
 // return an object {ticker: # of shares}
 export const calculatePortfolioShareByTicker = (transactionsArr) => {
-  // if there is transactions, put ticker-quantity as KVP into an object
-  // if there is no transactions, then return an empty obj
-  if (transactionsArr.length > 0) {
-    let tickerShareObj = {}
-    transactionsArr.forEach(transaction => {
-      if (tickerShareObj[transaction.stock_ticker]) {
-        tickerShareObj[transaction.stock_ticker] += transaction.quantity
-      } else {
-        tickerShareObj[transaction.stock_ticker] = transaction.quantity
-      }
-    });
-    return tickerShareObj
-  } else return {}
+  let tickerShareObj = {}
+  transactionsArr.forEach(transaction => {
+    // if there is transactions, put ticker-quantity as KVP into an object
+    // if there is no transactions, then return an empty obj
+    if (tickerShareObj[transaction.stock_ticker]) {
+      tickerShareObj[transaction.stock_ticker] += transaction.quantity
+    } else {
+      tickerShareObj[transaction.stock_ticker] = transaction.quantity
+    }
+  });
+
+  // remove 0 share stock from tickerShareObj
+  for (let key of Object.keys(tickerShareObj)) {
+    if (tickerShareObj[key] === 0) delete tickerShareObj[key];
+  }
+  return tickerShareObj
 }
 
 
@@ -99,7 +102,7 @@ export const filterArr = (benchmarkArr, unfilteredTimePriceArr) => {
 
 
 // multiple time/price pairs in timePriceArr with # of shares in the portfolio (sharesArr)
-export const calculateTimePortfolioValue = (sharesArr, timePriceArrFiltered={}) => {
+export const calculateTimePortfolioValue = (sharesArr, timePriceArrFiltered = {}) => {
   let portfolioTimeValueArr = [];
   // loop through both arrays
   for (let index = 0; index < sharesArr.length; index++) {
@@ -125,7 +128,7 @@ export const sumPortfolioValue = (portfolioTimeValueArr) => {
     if (portfolioValueArr.length === 0) {
       portfolioValueArr = tickerValueArr
     } else {
-      portfolioValueArr = sumNumSameIndex(tickerValueArr,portfolioValueArr)
+      portfolioValueArr = sumNumSameIndex(tickerValueArr, portfolioValueArr)
     }
   }
   return portfolioValueArr;
