@@ -31,6 +31,7 @@ function PortfolioChart({ allTransactionsArr }) {
   // calculate time series portfolio value
   // set chartData
   useEffect(() => {
+    setIsLoaded(false)
     async function fetchStockPrices() {
       // labels array contains time series date time,
       // values arr is the corresponding portfolio value of that date time
