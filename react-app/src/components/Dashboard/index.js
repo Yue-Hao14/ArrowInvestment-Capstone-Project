@@ -35,14 +35,13 @@ function DashboardPage() {
     <>
       {isLoaded ?
         <div className="dashboard-page-container">
-          < div className="dashboard-left-container" >
+          <div className="dashboard-left-container" >
             {/* portfolio chart section */}
             {/* < img
               src="https://cdn.robinhood.com/assets/generated_assets/webapp/web-platform-prefetch-sdp/member/04a63fd4f116951d91ad9b6037b42ee1.svg"
               className="dashboard-header-pic"
             /> */}
             <PortfolioChart allTransactionsArr={allTransactionsArr} />
-            < h1 className="welcome-message" > Welcome to Arrow Investment</h1 >
 
             {/* Buying power section */}
             < div className="buying-power-container" >
@@ -53,11 +52,11 @@ function DashboardPage() {
             {/* financial news section */}
             < News ticker="" />
 
-            <div className="dashboard-right-container">
-              <PortfolioStock />
-              <Watchlists />
-            </div>
           </div >
+          <div className="dashboard-right-container">
+            <PortfolioStock />
+            <Watchlists />
+          </div>
         </div >
         :
         <Loading />

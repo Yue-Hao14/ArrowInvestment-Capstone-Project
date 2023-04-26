@@ -1,6 +1,7 @@
 .dashboard-left-container {
   margin-left: 100px;
-  width: 60%
+  margin-top: 50px;
+  width: 60%;
 }
 
 .dashboard-right-container {
