@@ -39,21 +39,6 @@ function SignupFormPage() {
     if (errors.length === 0) {
       const data = await dispatch(signUp(username, firstName, lastName, email, password))
         .then(() => dispatch(createPortfolioThunk())
-          // .then(async (sessionUser,portfolioId) => {
-          //   console.log("sessionUser", sessionUser)
-          //   console.log("portfolioId", portfolioId)
-          //   console.log("sessionUser.id", sessionUser.id)
-
-          //   const newTransfer = {
-          //     userId: sessionUser.id,
-          //     portfolioId,
-          //     type: 'deposit',
-          //     amount: getRandomIntInclusive(0, 1000000)
-          //   }
-          //   console.log(newTransfer)
-          //   const data = await dispatch(addCashTransfersThunk(newTransfer))
-          //   console.log(data)
-          // })
           .then(() => dispatch(resetWatchlist())))
 
       if (data) {
@@ -64,19 +49,24 @@ function SignupFormPage() {
     }
   };
 
-
-
   return (
     <div className="signup-page-container">
       <div className="signup-left-container">
+        <div className="signup-left-top-container">
+          <div className="sign-up-sitename">
+            Arrow Investment
+            <img src="https://cdn-icons-png.flaticon.com/512/3458/3458992.png" className='navlogo' alt="logo" />
+          </div>
+          <div className="signup-title">Create your login</div>
+          <span className="signup-message">We'll need your email address, username, first name, last name and a unique password. You'll use this login to access Arrow Investment next time.</span>
+        </div>
         <img
           src="https://cdn.robinhood.com/app_assets/odyssey/rockets.png"
           alt="signup"
           className="signup-pic" />
       </div>
       <div className="signup-right-container">
-        <div className="signup-title">Sign Up with Arrow Investment</div>
-        <span className="signup-message">We'll need your email address, username, first name, last name and a unique password. You'll use this login to access Arrow Investment next time.</span>
+        <div className="signup-right-title">Enter your first and last name as they appear on your government ID.</div>
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="signup-error-messages-container">
             {isLoaded && errors?.map((error, idx) => <li key={idx}>{error}</li>)}

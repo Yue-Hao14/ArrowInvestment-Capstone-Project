@@ -1,17 +1,38 @@
 .signup-page-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
   height: 100%;
 }
 
 .signup-left-container {
   background-color: rgb(130, 200, 210);
-  width: 50%
+  width: 50%;
+  height:100vh;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid black;
+}
+
+.sign-up-sitename {
+  font-size: 30px;
+}
+.sign-up-sitename img {
+  margin-left: 10px;
+}
+
+.signup-title {
+  font-size: 64px;
+  margin: 100px 0px;
+}
+
+.signup-message {
+  margin: 20px 0px;
+  font-size: 18px;
 }
 
 .signup-pic {
-  height: 100%;
   object-fit: cover;
   width: 100%;
 }
@@ -19,16 +40,15 @@
 .signup-right-container {
   display: flex;
   flex-direction: column;
-  margin-left: 5%;
+  justify-content: flex-start;
+  width: 50%;
+  padding: 160px 80px 0px 80px;
 }
 
-.signup-title {
-  font-size: 30px;
-}
-
-.signup-message {
-  margin: 20px 0px;
-  width: 400px;
+.signup-right-title {
+  font-size: 21px;
+  font-weight: 500;
+  margin-bottom: 50px;
 }
 
 .signup-error-messages-container>li {
@@ -48,7 +68,7 @@
 }
 
 .signup-form>label>input {
-  width: 400px;
+  width: 100%;
   border: none;
   height: 30px;
   background-color: rgb(232, 240, 254);

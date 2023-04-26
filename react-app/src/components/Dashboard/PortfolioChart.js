@@ -71,7 +71,7 @@ function PortfolioChart({ allTransactionsArr }) {
       // console.log(labels)
 
       // set value to latest portfolio value
-      setValue(portfolioValueArr[portfolioTimeValueArr.length - 1])
+      setValue(portfolioValueArr[portfolioValueArr.length - 1])
 
       // set chart data
       setChartData({
@@ -196,7 +196,7 @@ function PortfolioChart({ allTransactionsArr }) {
       {isLoaded ?
         <div className="line-chart-section-container">
           <div className="line-chart-price">
-            {value ? `$${Number(value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "No pre or post market trades for this stock"}
+            {`$${Number(value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
           </div>
           <div className="line-chart-container">
             {chartData && (
