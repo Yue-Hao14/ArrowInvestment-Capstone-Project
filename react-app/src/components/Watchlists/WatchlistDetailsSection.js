@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import WatchlistStockChart from "./WatchlistStockChart";
 import { fetchAggStockData, fetchSnapshotsTicker } from '../../utils/FetchStockData';
 import { useState } from "react";
+import Loading from "../Loading";
 
 function WatchlistDetails({ ticker, shares }) {
   const [labels, setLabels] = useState();
   const [prices, setPrices] = useState();
   const [latestPrice, setLatestPrice] = useState(0)
   const [priceChange, setPriceChange] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
 
 
   // fetch stock data from polygon
@@ -30,29 +32,36 @@ function WatchlistDetails({ ticker, shares }) {
     };
     fetchStockDataForChart();
     fetchSnapshotData();
+    setIsLoaded(true)
   }, [ticker])
 
   return (
-    <div className="watchlist-details-individual-container">
-      <NavLink to={`/stocks/${ticker}`} className="watchlist-details-navlink" key={ticker}>
-        <div className="watchlist-details-ticker-share-container">
-          <div className="watchlist-details-ticker">{ticker}</div>
-          {shares &&
-            <div className="stock-in-portfolio-shares"> {shares === 1 ? `${shares} share` : `${shares} shares`}</div>
-          }
-        </div>
-        {labels ?
-          <>
-            <div className="watchlist-details-chart-container"><WatchlistStockChart labels={labels} prices={prices} priceChange={priceChange} /></div>
-            <div className="watchlist-details-stock-price-percentage">
-              <div className="watchlist-details-stock-price">${latestPrice.toFixed(2)}</div>
-              <div className={"watchlist-details-stock-price-change" + (priceChange >= 0 ? " green" : " red")}>{priceChange}%</div>
+    <>
+      {isLoaded ?
+        <div className="watchlist-details-individual-container">
+          <NavLink to={`/stocks/${ticker}`} className="watchlist-details-navlink" key={ticker}>
+            <div className="watchlist-details-ticker-share-container">
+              <div className="watchlist-details-ticker">{ticker}</div>
+              {shares &&
+                <div className="stock-in-portfolio-shares"> {shares === 1 ? `${shares} share` : `${shares} shares`}</div>
+              }
             </div>
-          </>
-          : <div>No pre or post market trades</div>}
+            {labels ?
+              <>
+                <div className="watchlist-details-chart-container"><WatchlistStockChart labels={labels} prices={prices} priceChange={priceChange} /></div>
+                <div className="watchlist-details-stock-price-percentage">
+                  <div className="watchlist-details-stock-price">${latestPrice.toFixed(2)}</div>
+                  <div className={"watchlist-details-stock-price-change" + (priceChange >= 0 ? " green" : " red")}>{priceChange}%</div>
+                </div>
+              </>
+              : <div>No pre or post market trades</div>}
 
-      </NavLink>
-    </div>
+          </NavLink>
+        </div>
+        :
+        <Loading />
+      }
+    </>
   )
 }
 export default WatchlistDetails

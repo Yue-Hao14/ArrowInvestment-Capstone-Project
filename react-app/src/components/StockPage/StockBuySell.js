@@ -14,17 +14,19 @@ function StockBuySell({ closePrice, ticker }) {
   const tickerTransactionsArr = Object.values(useSelector(state => state.transactions.tickerTransactions))
   const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
 
-  const [share, setShare] = useState(1);
+  const [share, setShare] = useState(0);
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [buySelected, setBuySelected] = useState(true)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   // hydrate portfolio, cash transfer, all transactions slice of redux store
   useEffect(() => {
-    setShare(1)
     dispatch(getPortfolioThunk())
-    dispatch(getAllTransactionsThunk())
-    dispatch(getCashTransfersThunk())
+    .then(() => dispatch(getAllTransactionsThunk()))
+    .then(() => dispatch(getCashTransfersThunk()))
+    .then(() => setIsLoaded(true))
+    .then(() => setShare(0))
   }, [dispatch, ticker])
 
   // calculate buying power and existing shares when page first rendered and when buy/sell transaction completed
@@ -62,6 +64,7 @@ function StockBuySell({ closePrice, ticker }) {
         type
       }
       setHasSubmitted(true)
+      setShare(0)
       await dispatch(addTransactionThunk(request))
     }
   }
@@ -88,7 +91,7 @@ function StockBuySell({ closePrice, ticker }) {
           </div>
           <div className='stock-buy-sell-form-2nd-row'>
             <div className='stock-buy-sell-form-quantity-label'>Shares</div>
-            <input className='stock-buy-sell-form-quantity' value={share} type="number" onChange={e => setShare(e.target.value)} />
+            <input className='stock-buy-sell-form-quantity' value={share} required type="number" onChange={e => setShare(e.target.value)} />
           </div>
           <div className='stock-buy-sell-form-3rd-row'>
             <div className='stock-buy-sell-form-price-label'>Price</div>
