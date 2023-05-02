@@ -150,7 +150,6 @@
   font-weight: bold;
 }
 
-.investing-button,
 .navigation-link {
   background: none;
   text-decoration: none;
@@ -163,7 +162,6 @@
   color:inherit
 }
 
-.investing-button:hover,
 .navigation-link:hover {
   color: #00c805;
 }
@@ -207,13 +205,19 @@
   font-weight: bold;
 }
 
-.logout-row, .transfers-row {
+.logout-row,
+.transfers-row,
+.investing-row {
   padding: 10px;
 }
-.logout-row:hover, .transfers-row:hover {
+.logout-row:hover,
+.transfers-row:hover,
+.investing-row:hover {
   background-color: rgba(242, 242, 242, 1)
 }
-.logout-button, .transfers-button {
+.logout-button,
+.transfers-button,
+.investing-button {
   background: none;
   border: none;
   font-size: 15px;

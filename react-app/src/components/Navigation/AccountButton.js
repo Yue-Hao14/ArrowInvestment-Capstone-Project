@@ -29,6 +29,11 @@ function AccountButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handleInvesting = (e) => {
+    e.preventDefault();
+    history.push('/dashboard')
+  }
+
   const handleTransfers = (e) => {
     e.preventDefault();
     history.push('/transfers')
@@ -49,6 +54,10 @@ function AccountButton({ user }) {
         {user && (
           <div className="account-dropdown-inner-container">
             <div className="username-row">{user.first_name} {user.last_name}</div>
+            <div className="investing-row">
+            <i className="fa-solid fa-suitcase"></i>
+            <button onClick={handleInvesting} className="investing-button">Investing</button>
+            </div>
             <div className="transfers-row">
             <i className="fa-solid fa-building-columns"></i>
             <button onClick={handleTransfers} className="transfers-button">Transfers</button>
