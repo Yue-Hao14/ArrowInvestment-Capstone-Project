@@ -100,11 +100,13 @@ function Navigation({ isLoaded }) {
 
 					</div>
 					<div className='navigation-right-container-logged-in'>
-						<button className='rewards button' onClick={comingSoon}>Rewards</button>
+						<a href="https://www.linkedin.com/in/yue-hao/" className="navigation-link">LinkedIn</a>
+						<a href="https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project" className="navigation-link">Github</a>
+						{/* <button className='rewards button' onClick={comingSoon}>Rewards</button> */}
 						<NavLink to="/dashboard" className="investing-button">Investing</NavLink>
-						<button className='spending button' onClick={comingSoon}>Spending</button>
+						{/* <button className='spending button' onClick={comingSoon}>Spending</button>
 						<button className='retirement button' onClick={comingSoon}>Retirement</button>
-						<button className='notification button' onClick={comingSoon}>Notification</button>
+						<button className='notification button' onClick={comingSoon}>Notification</button> */}
 						<AccountButton user={sessionUser} className="account-button" />
 					</div>
 				</>
