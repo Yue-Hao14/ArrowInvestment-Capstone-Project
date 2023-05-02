@@ -14,7 +14,7 @@ function StockBuySell({ closePrice, ticker }) {
   const tickerTransactionsArr = Object.values(useSelector(state => state.transactions.tickerTransactions))
   const allTransactionsArr = Object.values(useSelector(state => state.transactions.allTransactions))
 
-  const [share, setShare] = useState(" ");
+  const [share, setShare] = useState(0);
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [buySelected, setBuySelected] = useState(true)
@@ -26,7 +26,7 @@ function StockBuySell({ closePrice, ticker }) {
     .then(() => dispatch(getAllTransactionsThunk()))
     .then(() => dispatch(getCashTransfersThunk()))
     .then(() => setIsLoaded(true))
-    .then(() => setShare("  "))
+    .then(() => setShare(0))
   }, [dispatch, ticker])
 
   // calculate buying power and existing shares when page first rendered and when buy/sell transaction completed
@@ -41,7 +41,7 @@ function StockBuySell({ closePrice, ticker }) {
   useEffect(() => {
     let e = {}
     console.log(share.length)
-    if (share.length === 1 && share <= 0 ) e.invalidShare = 'You must enter a positive number of shares.'
+    if (share <= 0 ) e.invalidShare = 'You must enter a positive number of shares.'
     if (buySelected && (closePrice * share) > Number(buyingPower)) e.notEnoughMoney = "You don't have enough buying power to complete this transaction"
     if (!buySelected && share > existingShares) e.notEnoughStock = "You don't have enough stock to complete this transaction"
     setErrors(e)
@@ -49,6 +49,7 @@ function StockBuySell({ closePrice, ticker }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
 
     // only when there is no error, buy/sell stock can happen
     if (Object.values(errors).length === 0 && share.length !== 2) {
@@ -64,7 +65,6 @@ function StockBuySell({ closePrice, ticker }) {
         price: closePrice,
         type
       }
-      setHasSubmitted(true)
       setShare(0)
       await dispatch(addTransactionThunk(request))
     }
@@ -81,7 +81,7 @@ function StockBuySell({ closePrice, ticker }) {
         }
         </div>
         <div className='stock-buy-sell-form-container'>
-            {Object.values(errors).length > 0 && Object.values(errors).map(error=>(
+            {hasSubmitted && Object.values(errors).length > 0 && Object.values(errors).map(error=>(
               <div className='shares-error-message'>{error}</div>
             ))
 
