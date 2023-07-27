@@ -100,8 +100,8 @@ function Navigation({ isLoaded }) {
 
 					</div>
 					<div className='navigation-right-container-logged-in'>
-						<a href="https://www.linkedin.com/in/yue-hao/" className="navigation-link">LinkedIn</a>
-						<a href="https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project" className="navigation-link">Github</a>
+						<a href="https://www.linkedin.com/in/yue-hao/" className="navigation-link" target="_blank" rel="noreferrer">LinkedIn</a>
+						<a href="https://github.com/Yue-Hao14/ArrowInvestment-Capstone-Project" className="navigation-link" target="_blank" rel="noreferrer">Github</a>
 						{/* <button className='rewards button' onClick={comingSoon}>Rewards</button> */}
 						{/* <NavLink to="/dashboard" className="investing-button">Investing</NavLink> */}
 						{/* <button className='spending button' onClick={comingSoon}>Spending</button>
