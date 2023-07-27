@@ -33,9 +33,8 @@ Link: [Arrow Investment](https://arrowinvestment.onrender.com/)
 ![Screenshot 2023-04-05 at 2 17 13 PM](https://user-images.githubusercontent.com/105403119/230189396-9b43be84-2a2c-4f7f-805e-db50234758ae.png)
 
 ## Future Implementation 
-  * Portfolio value
   * Chatbot
- 
+
  ## Getting started
 1. Clone this repository (only this branch)
 
