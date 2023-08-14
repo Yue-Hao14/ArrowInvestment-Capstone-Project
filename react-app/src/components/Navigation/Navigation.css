@@ -17,7 +17,8 @@
 
 .navlogo {
   width: 30px;
-  margin-left: 0.5rem
+  margin-left: 0.5rem;
+  content: url(favicon.ico)
 }
 
 .navigation-logo {
